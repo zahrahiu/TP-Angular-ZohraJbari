@@ -18,8 +18,12 @@ export class CatalogComponent implements OnInit {
   constructor(private CartService: CartService) {}
 
   ngOnInit(): void {
-    this.products = this.CartService.getProducts();
+    this.CartService.getProducts().subscribe(data => {
+      this.products = data;
+    });
   }
+  
+
 
   toggleDetails(productId: number) {
     if (this.selectedProductId === productId) {

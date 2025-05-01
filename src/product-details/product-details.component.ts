@@ -19,7 +19,10 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.productId) {
-      this.product = this.CartService.getProductById(this.productId);
+      this.CartService.getProductById(this.productId).subscribe(product => {
+        this.product = product;
+      });
     }
   }
+  
 }

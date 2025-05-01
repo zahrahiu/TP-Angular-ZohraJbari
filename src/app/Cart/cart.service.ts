@@ -1,52 +1,42 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private products: Product[] = [
-    new Product(
-      1,
-      'Coco Chanel Mademoiselle',
-      'Un parfum élégant avec des notes florales et fruitées. Parfait pour une soirée chic.',
-      120.00,
-      15,
-      'assets/images/coco chanel.jpg'
-    ),
-    new Product(
-      2,
-      'Miss Dior Blooming Bouquet',
-      'Un parfum frais et floral, inspiré de la rose et du pivoine, parfait pour la journée.',
-      85.99,
-      20,
-      'assets/images/miss dior.jpg'
-    ),
-    new Product(
-      3,
-      'Prada Candy',
-      'Parfum sucré et oriental, avec des notes de caramel, vanille et musc.',
-      75.00,
-      10,
-      'assets/images/prada.jpg'
-    ),
-    new Product(
-      4,
-      'Kayali Vanilla 28',
-      'Un parfum chaud et doux avec des notes de vanille, musc et bois précieux.',
-      95.00,
-      8,
-      'assets/images/kayali vanilla 28.jpg'
-    ),
-  ];
+  private baseUrl = 'http://localhost:3000/api/products';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getProducts(): Product[] {
-    return this.products.filter(product => product.quantity > 0);
+  getProducts(): Observable<Product[]> {
+    return this.http.get<any[]>(this.baseUrl).pipe(
+      map(apiProducts => {
+        console.log('Produits reçus:', apiProducts);
+        return apiProducts.map(apiProduct => new Product(
+          apiProduct.productID,
+          apiProduct.productTitle,
+          apiProduct.productDescription,
+          parseFloat(apiProduct.productPrice.replace(' DH', '')),  
+          apiProduct.quantity,
+          apiProduct.productImage
+        ));
+      }),
+      catchError(error => {
+        console.error('Erreur lors de la récupération des produits:', error);
+        return of([]);
+      })
+    );
   }
+  
+  
 
-  getProductById(id: number): Product | undefined {
-    return this.products.find(product => product.id === id);
+  getProductById(id: number): Observable<Product | undefined> {
+    return this.getProducts().pipe(
+      map(products => products.find(product => product.id === id))
+    );
   }
 }
