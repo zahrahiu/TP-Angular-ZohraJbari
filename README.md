@@ -4,6 +4,8 @@ Zohra JBARI DCC0020/24
 ![image](https://github.com/user-attachments/assets/1af562ea-f345-4af8-894d-aaa24840a9de)
 # détails des produits,affichage de la quantité
 ![image](https://github.com/user-attachments/assets/6a767e9e-768c-4ea5-91c5-cd3d4d54139b)
+![image](https://github.com/user-attachments/assets/e8e9191e-84c1-4932-87e9-b8d6268c6cc8)
+
 
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
