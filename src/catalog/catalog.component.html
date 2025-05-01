@@ -1,0 +1,46 @@
+<div class="top-bar">
+  <div class="left-section">
+    <div class="menu">&#8942;</div>  
+    <h2 class="store-name">Perfums</h2>
+  </div>
+  <div class="search-container">
+    <input type="text" placeholder="🔍 Rechercher un parfum..." class="search-input" />
+  </div>
+  <div class="right-section">
+    <button title="Mon compte">👤</button>
+    <button title="Favoris">❤</button>
+    <button title="Panier">🛒</button>
+  </div>
+</div>
+
+
+<div class="catalog">
+  <h2>Liste des Produits</h2>
+  <div class="product-list">
+    @for (product of products; track product.id) {
+      <div class="product-container">
+        <div class="product-card" [class]="getQuantity(product)">
+          <img [src]="product.imageUrl || '/assets/images/default-product.png'"
+               [alt]="product.name"
+               class="product-image"
+               (error)="handleImageError($event)">
+          <div class="product-info">
+            <h3>{{product.name}}</h3>
+            <p class="price">{{product.price}} DH</p>
+            <div class="btn">
+              <button class="cta acheter-btn">Acheter</button>
+              <button class="cta detail-btn" (click)="toggleDetails(product.id)">Voir détails</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="popup-overlay" *ngIf="selectedProductId">
+  <div class="popup-content">
+    <app-product-details [productId]="selectedProductId"></app-product-details>
+    <button class="close-btn" (click)="selectedProductId = null">✖</button>
+  </div>
+</div>
