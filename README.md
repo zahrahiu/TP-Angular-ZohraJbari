@@ -5,7 +5,7 @@ Zohra JBARI DCC0020/24
 
 # détails des produits,affichage de la quantité
 ![image](https://github.com/user-attachments/assets/97a01c57-f8ad-4787-9d35-9ceb375185b5)
-
+![image](https://github.com/user-attachments/assets/dac15f9d-abaf-44c0-aece-0f6293faadd4)
 
 
 
