@@ -1,10 +1,11 @@
 # MyFirstProjectAngular
 Zohra JBARI DCC0020/24
 # liste des produits
-![image](https://github.com/user-attachments/assets/1af562ea-f345-4af8-894d-aaa24840a9de)
+![image](https://github.com/user-attachments/assets/dd124420-3eea-4cc1-8235-c76910444313)
+
 # détails des produits,affichage de la quantité
-![image](https://github.com/user-attachments/assets/6a767e9e-768c-4ea5-91c5-cd3d4d54139b)
-![image](https://github.com/user-attachments/assets/e8e9191e-84c1-4932-87e9-b8d6268c6cc8)
+![image](https://github.com/user-attachments/assets/97a01c57-f8ad-4787-9d35-9ceb375185b5)
+
 
 
 
