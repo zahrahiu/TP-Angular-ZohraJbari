@@ -7,7 +7,7 @@ import { CatalogComponent } from '../catalog/catalog.component';
   selector: 'app-root',
   
   standalone: true,
-  imports: [CommonModule, RouterOutlet, CatalogComponent],
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

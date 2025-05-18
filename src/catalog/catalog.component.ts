@@ -7,7 +7,7 @@ import { CartService } from '../app/Cart/cart.service';
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe, ProductDetailsComponent],
+  imports: [CommonModule, ProductDetailsComponent],
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })

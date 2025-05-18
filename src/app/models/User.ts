@@ -3,7 +3,13 @@ enum userType{
     Member,
     Guest
 }
-class User{
+
+export interface IUserCredentials {
+  email: string;
+  password: string;
+}
+
+export class User{
     private _id: number;
     public get id(): number {
         return this._id;

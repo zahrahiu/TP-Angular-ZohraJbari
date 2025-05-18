@@ -1,0 +1,38 @@
+<div class="login-page">
+  <form #signInForm="ngForm" class="login-form" (ngSubmit)="signIn()">
+    <img class="logo" src="assets/images/parfuma.jpg" alt="Parfum Logo" />
+    
+    <h2 i18n>Bienvenue</h2>
+    <p i18n>Connectez-vous pour gérer vos parfums</p>
+
+    <input 
+      name="email"
+      required
+      email
+      #email="ngModel"
+      [(ngModel)]="credentials.email"
+      placeholder="Adresse e-mail"
+      type="email"
+      i18n-placeholder="@@placeholderEmail" />
+
+    <em class="error" *ngIf="email.errors?.['required'] && email.touched" i18n>Email requis</em>
+    <em class="error" *ngIf="email.errors?.['email'] && email.touched" i18n>Format invalide</em>
+
+    <input 
+      name="password"
+      required
+      #password="ngModel"
+      [(ngModel)]="credentials.password"
+      placeholder="Mot de passe"
+      type="password"
+      i18n-placeholder="@@placeholderPassword" />
+
+    <em class="error" *ngIf="password.invalid && password.touched" i18n>Mot de passe requis</em>
+
+    <button type="submit" [disabled]="signInForm.form.invalid" i18n>Se connecter</button>
+
+    <div class="signInError" *ngIf="signInError" i18n>
+      ❌ Erreur lors de la connexion. Réessayez.
+    </div>
+  </form>
+</div>

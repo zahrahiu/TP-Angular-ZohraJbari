@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr-FR" target-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="welcome" datatype="html">
+        <source>Bienvenue</source>
+        <target>Welcome</target>
+      </trans-unit>
+      <trans-unit id="signInMessage" datatype="html">
+        <source>Connectez-vous pour gérer vos parfums</source>
+        <target>Log in to manage your perfumes</target>
+      </trans-unit>
+      <trans-unit id="placeholderEmail" datatype="html">
+        <source>Adresse e-mail</source>
+        <target>Email address</target>
+      </trans-unit>
+      <trans-unit id="emailRequired" datatype="html">
+        <source>Email requis</source>
+        <target>Email is required</target>
+      </trans-unit>
+      <trans-unit id="invalidFormat" datatype="html">
+        <source>Format invalide</source>
+        <target>Invalid format</target>
+      </trans-unit>
+      <trans-unit id="placeholderPassword" datatype="html">
+        <source>Mot de passe</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="passwordRequired" datatype="html">
+        <source>Mot de passe requis</source>
+        <target>Password is required</target>
+      </trans-unit>
+      <trans-unit id="signIn" datatype="html">
+        <source>Se connecter</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="signInError" datatype="html">
+        <source>❌ Erreur lors de la connexion. Réessayez.</source>
+        <target>❌ Error during sign-in. Please try again.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
