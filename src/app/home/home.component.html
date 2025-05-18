@@ -1,50 +1,80 @@
-<div class="home-hero">
-  <h1>Bienvenue chez <span class="brand-name">Perfums</span></h1>
-  <p>Découvrez la beauté invisible avec nos parfums exclusifs</p>
-  <button (click)="goToCatalog()">Explorez nos parfums</button>
-</div>
+<!-- home.component.html -->
+<!-- home.component.html -->
+<div class="parfum-container">
+  <!-- Navbar corrigée -->
+  <nav class="parfum-navbar">
+    <div class="nav-logo">PARFUMS LUXE</div>
+    <div class="nav-menu">
+      <a href="#">ABOUT</a>
+      <a href="#">COLLECTIONS</a>
+      <a href="#">SHOP</a>
+      <a href="#" class="contact-link">CONTACT</a>
+    </div>
+  </nav>
 
-<div class="quick-links">
-  <div class="card" (click)="goToCategory('new')">
-    <img src="assets/images/icone1.jpg" alt="New Arrivals" />
-    <h3>Nouveautés</h3>
-  </div>
-  <div class="card" (click)="goToCategory('best')">
-    <img src="assets/images/icone2.jpg" alt="Best Sellers" />
-    <h3>Meilleures ventes</h3>
-  </div>
-  <div class="card" (click)="goToOffers()">
-    <img src="assets/images/icone3.jpg" alt="Special Offers" />
-    <h3>Offres spéciales</h3>
-  </div>
-  <div class="card" (click)="goToSignin()">
-    <img src="assets/images/icone4.jpg" alt="My Account" />
-    <h3>Mon compte</h3>
-  </div>
-</div>
-
-<div class="featured-products">
-  <h2>Produits en vedette</h2>
-  <div class="products-slider">
-    <div class="product-card" *ngFor="let product of featuredProducts">
-      <img [src]="product.imageUrl" [alt]="product.name" />
-      <h4>{{product.name}}</h4>
-      <p>{{product.price}} DH</p>
-      <button (click)="viewDetails(product.id)">Détails</button>
+  <!-- Hero Section optimisée -->
+  <div class="parfum-hero">
+    <div class="hero-background">
+      <img src="assets/images/Home2.jpg" alt="Parfums de luxe" 
+           class="hero-image" loading="eager">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1>Des Fragrances<br>pour des Moments Mémorables</h1>
+      <p>Découvrez des parfums uniques qui captent l'essence de votre personnalité</p>
+      <button>EXPLORER</button>
     </div>
   </div>
-</div>
 
-<div class="why-choose-us">
-  <h2>Pourquoi choisir Perfums?</h2>
-  <ul>
-    <li>✅ Qualité et authenticité garantie</li>
-    <li>🚚 Livraison rapide et sécurisée</li>
-    <li>📞 Support client 24/7</li>
-  </ul>
-</div>
 
-<div class="testimonials">
-  <h2>Avis des clients</h2>
+
+
+  <!-- Services/Products -->
+  <div class="parfum-services">
+    <div class="service-card">
+      <img src="assets/images/icone1.jpg" alt="Parfum Florale">
+      <h3>Parfums Floraux</h3>
+      <p>Des notes délicates de fleurs fraîches pour une journée printanière</p>
+      <button>DÉCOUVRIR</button>
+    </div>
+
+    <div class="service-card">
+      <img src="assets/images/icone2.jpg" alt="Parfum Boisé">
+      <h3>Parfums Boisés</h3>
+      <p>Des essences chaudes et enveloppantes pour les soirées d'hiver</p>
+      <button>DÉCOUVRIR</button>
+    </div>
+
+    <div class="service-card">
+      <img src="assets/images/icone3.jpg" alt="Parfum Oriental">
+      <h3>Parfums Orientaux</h3>
+      <p>Des fragrances mystérieuses et sensuelles pour les occasions spéciales</p>
+      <button>DÉCOUVRIR</button>
+    </div>
+  </div>
+
+ 
+<div style="background-color: #787373; padding: 10px 10px;margin-bottom: 10px; display: flex; justify-content: center;">
   
+  <div class="parfum-about" style="max-width: 800px; text-align: center;">
+    <h2>FAITES BRILLER VOTRE PERSONNALITÉ</h2>
+    <h3>Choisissez Votre Signature Olfactive</h3>
+    <p>
+      Chaque parfum est une histoire que vous racontez au monde. Nos créations uniques sont conçues pour s'adapter à votre humeur, votre style et vos moments précieux.
+    </p>
+
+    <ul style="list-style-type: disc; text-align: left; margin: 0 auto; display: inline-block;">
+      <li>Des ingrédients naturels et de qualité supérieure</li>
+      <li>Des flacons élégants conçus par des artisans</li>
+      <li>Des fragrances qui évoluent avec vous tout au long de la journée</li>
+    </ul>
+  </div>
+</div>
+
+
+  <!-- Final CTA -->
+  <div class="parfum-cta">
+    <h2>FRAIS, ÉLÉGANT, INOUBLIABLE</h2>
+    <p>Parfumez votre journée</p>
+  </div>
 </div>

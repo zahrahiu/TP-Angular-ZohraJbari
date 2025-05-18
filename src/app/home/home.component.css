@@ -1,303 +1,329 @@
-/* ====== Global styles ====== */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f7f6;
-  color: #333;
+/* Import des polices */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+/* Reset et styles globaux */
+:root {
+  --rose: #d8a7b1;
+  --rose-fonce: #c4959f;
+  --gris-fonce: #333;
+  --gris-moyen: #555;
+  --gris-clair: #777;
+  --blanc: #ffffff;
+  --fond-clair: #f9f9f9;
+  --overlay: rgba(0, 0, 0, 0.3);
+}
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* ====== Hero Section ====== */
-.home-hero {
-  
-  height: 450px;
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--gris-fonce);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Navbar */
+.parfum-navbar {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
-  color: #fff;
-  padding: 0 20px;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.35);
+  padding: 15px 30px;
+  background-color: var(--blanc);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
-.home-hero h1 {
+.nav-logo {
   font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
   font-weight: 700;
+  color: var(--rose);
 }
 
-.home-hero .brand-name {
-  color: #d18a8a;
-}
-
-.home-hero p {
-  font-size: 1.3rem;
-  margin-bottom: 30px;
-  font-weight: 300;
-}
-
-.home-hero button {
-  background-color: #d18a8a;
-  border: none;
-  padding: 12px 30px;
-  font-size: 1.2rem;
-  color: white;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.home-hero button:hover {
-  background-color: #b67070;
-}
-
-/* ====== Quick Links ====== */
-.quick-links {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  margin: 40px 10px;
-  flex-wrap: wrap;
-}
-
-.quick-links .card {
-  background: white;
-  width: 160px;
-  height: 160px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  padding: 15px;
-}
-
-.quick-links .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(209,138,138,0.4);
-}
-
-.quick-links .card img {
-  width: 60px;
-  margin-bottom: 15px;
-}
-
-.quick-links .card h3 {
-  font-size: 1.1rem;
-  color: #d18a8a;
-}
-
-/* ====== Featured Products ====== */
-.featured-products {
-  max-width: 1200px;
-  margin: 50px auto;
-  padding: 0 15px;
-}
-
-.featured-products h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.8rem;
-  text-align: center;
-  color: #d18a8a;
-  margin-bottom: 30px;
-}
-
-.products-slider {
+.nav-menu {
   display: flex;
   gap: 20px;
-  overflow-x: auto;
-  padding-bottom: 15px;
-  scroll-behavior: smooth;
 }
 
-.product-card {
-  background: white;
-  width: 220px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  padding: 15px;
-  flex-shrink: 0;
+.nav-menu a {
+  text-decoration: none;
+  color: var(--gris-moyen);
+  font-weight: 500;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.nav-menu a:hover {
+  color: var(--rose);
+}
+
+/* Hero Section */
+.parfum-hero {
+  position: relative;
+  height: 100vh;
+  margin-top: 70px;
+}
+
+.hero-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.product-card:hover {
-  transform: translateY(-10px);
-}
-
-.product-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 15px;
-}
-
-.product-card h4 {
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #444;
-  text-align: center;
-}
-
-.product-card p {
-  font-weight: 700;
-  color: #d18a8a;
-  margin-bottom: 15px;
-}
-
-.product-card button {
-  background-color: #d18a8a;
-  border: none;
-  padding: 10px 18px;
-  color: white;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.product-card button:hover {
-  background-color: #b67070;
-}
-
-/* ====== Why Choose Us ====== */
-.why-choose-us {
-  background-color: #fff4f4;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.why-choose-us h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  color: #d18a8a;
-  margin-bottom: 25px;
-}
-
-.why-choose-us ul {
-  list-style: none;
-  padding: 0;
-  font-size: 1.2rem;
-  color: #555;
-  max-width: 700px;
+  justify-content: center;
+  padding: 0 100px;
+  color: var(--blanc);
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.why-choose-us ul li {
-  margin-bottom: 18px;
-  padding-left: 25px;
-  position: relative;
-  text-align: left;
+.hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 20px;
+  line-height: 1.2;
+  color: var(--rose);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
-.why-choose-us ul li::before {
-  content: '✔';
-  position: absolute;
-  left: 0;
-  color: #d18a8a;
-  font-weight: bold;
+.hero-content p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: 30px;
+  max-width: 500px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* ====== Testimonials ====== */
-.testimonials {
-  max-width: 900px;
-  margin: 60px auto 40px;
-  padding: 0 15px;
+.hero-content button {
+  background-color: transparent;
+  border: 2px solid var(--blanc);
+  color: var(--blanc);
+  padding: 12px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: fit-content;
+}
+
+.hero-content button:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* Services Section */
+.parfum-services {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 50px; 
+  margin-top: -90px; 
+  background-color: var(--fond-clair);
+}
+
+
+.service-card {
+  background: var(--blanc);
+  width: 100%;
+  max-width: 300px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+}
+
+.service-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--gris-moyen);
+  margin-bottom: 15px;
+}
+
+.service-card p {
+  color: var(--gris-clair);
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.service-card button {
+  background-color: var(--rose);
+  border: none;
+  color: var(--blanc);
+  padding: 10px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.service-card button:hover {
+  background-color: var(--rose-fonce);
+}
+
+/* About Section */
+.parfum-about {
+  padding: 80px 100px;
   text-align: center;
 }
 
-.testimonials h2 {
+.parfum-about h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  color: #d18a8a;
-  margin-bottom: 30px;
+  color: var(--rose);
+  font-size: 1.8rem;
+  margin-bottom: 15px;
 }
 
-.testimonial {
-  background: white;
-  padding: 25px 20px;
-  border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.07);
-  margin-bottom: 25px;
-  font-style: italic;
-  color: #555;
+.parfum-about h3 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: var(--gris-moyen);
 }
 
-.testimonial h5 {
-  margin-top: 15px;
-  font-weight: 700;
-  color: #d18a8a;
+.parfum-about p {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  color: var(--gris-clair);
+  line-height: 1.6;
 }
 
-/* ====== Responsive ====== */
+.parfum-about ul {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: left;
+}
+
+.parfum-about ul li {
+  margin-bottom: 15px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.parfum-about ul li::before {
+  content: "•";
+  color: var(--rose);
+  font-size: 1.5rem;
+  position: absolute;
+  left: 0;
+  top: -5px;
+}
+
+/* CTA Section */
+.parfum-cta {
+  background-color: #f0e6e8;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.parfum-cta h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--gris-moyen);
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.parfum-cta p {
+  color: var(--gris-clair);
+  font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .parfum-services {
+    flex-wrap: wrap;
+  }
+  
+  .service-card {
+    max-width: 45%;
+  }
+}
+
 @media (max-width: 768px) {
-  .home-hero h1 {
-    font-size: 2.3rem;
+  .parfum-navbar {
+    flex-direction: column;
+    padding: 15px;
   }
-
-  .featured-products h2, .why-choose-us h2, .testimonials h2 {
-    font-size: 2rem;
-  }
-
-  .quick-links {
+  
+  .nav-menu {
+    margin-top: 15px;
     gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-
-  .quick-links .card {
-    width: 130px;
-    height: 130px;
+  
+  .hero-content {
+    padding: 0 30px;
+    text-align: center;
+    align-items: center;
   }
-
-  .products-slider {
-    gap: 15px;
+  
+  .hero-content h1 {
+    text-align: center;
   }
-
-  .product-card {
-    width: 180px;
+  
+  .hero-content p {
+    text-align: center;
+  }
+  
+  .parfum-about {
+    padding: 60px 30px;
+  }
+  
+  .service-card {
+    max-width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .home-hero {
-    height: 300px;
+  .hero-content h1 {
+    font-size: 2rem;
   }
-
-  .home-hero h1 {
-    font-size: 1.8rem;
+  
+  .parfum-services, 
+  .parfum-about {
+    padding: 50px 20px;
   }
-
-  .home-hero p {
-    font-size: 1rem;
-  }
-
-  .quick-links {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .quick-links .card {
-    width: 90%;
-    max-width: 300px;
-    height: auto;
-    padding: 20px;
-  }
-
-  .products-slider {
-    overflow-x: scroll;
-  }
-
-  .product-card {
-    width: 90%;
-    max-width: 300px;
+  
+  .nav-menu a {
+    font-size: 0.9rem;
   }
 }
