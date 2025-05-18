@@ -32,6 +32,24 @@ export class CartService {
     );
   }
   
+  getFeaturedProducts(): Observable<Product[]> {
+    return this.http.get<any[]>(this.baseUrl + '/featured').pipe(
+      map(apiProducts => {
+        return apiProducts.map(apiProduct => new Product(
+          apiProduct.productID,
+          apiProduct.productTitle,
+          apiProduct.productDescription,
+          parseFloat(apiProduct.productPrice.replace(' DH', '')),
+          apiProduct.quantity,
+          apiProduct.productImage
+        ));
+      }),
+      catchError(error => {
+        console.error('Erreur lors de la récupération des produits en vedette:', error);
+        return of([]);
+      })
+    );
+  }
   
 
   getProductById(id: number): Observable<Product | undefined> {

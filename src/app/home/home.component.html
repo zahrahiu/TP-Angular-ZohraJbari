@@ -1,0 +1,50 @@
+<div class="home-hero">
+  <h1>Bienvenue chez <span class="brand-name">Perfums</span></h1>
+  <p>Découvrez la beauté invisible avec nos parfums exclusifs</p>
+  <button (click)="goToCatalog()">Explorez nos parfums</button>
+</div>
+
+<div class="quick-links">
+  <div class="card" (click)="goToCategory('new')">
+    <img src="assets/images/icone1.jpg" alt="New Arrivals" />
+    <h3>Nouveautés</h3>
+  </div>
+  <div class="card" (click)="goToCategory('best')">
+    <img src="assets/images/icone2.jpg" alt="Best Sellers" />
+    <h3>Meilleures ventes</h3>
+  </div>
+  <div class="card" (click)="goToOffers()">
+    <img src="assets/images/icone3.jpg" alt="Special Offers" />
+    <h3>Offres spéciales</h3>
+  </div>
+  <div class="card" (click)="goToSignin()">
+    <img src="assets/images/icone4.jpg" alt="My Account" />
+    <h3>Mon compte</h3>
+  </div>
+</div>
+
+<div class="featured-products">
+  <h2>Produits en vedette</h2>
+  <div class="products-slider">
+    <div class="product-card" *ngFor="let product of featuredProducts">
+      <img [src]="product.imageUrl" [alt]="product.name" />
+      <h4>{{product.name}}</h4>
+      <p>{{product.price}} DH</p>
+      <button (click)="viewDetails(product.id)">Détails</button>
+    </div>
+  </div>
+</div>
+
+<div class="why-choose-us">
+  <h2>Pourquoi choisir Perfums?</h2>
+  <ul>
+    <li>✅ Qualité et authenticité garantie</li>
+    <li>🚚 Livraison rapide et sécurisée</li>
+    <li>📞 Support client 24/7</li>
+  </ul>
+</div>
+
+<div class="testimonials">
+  <h2>Avis des clients</h2>
+  
+</div>
