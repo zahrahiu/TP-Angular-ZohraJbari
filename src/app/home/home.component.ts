@@ -1,5 +1,5 @@
-// home.component.ts
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';  // <-- importer Router
 
 @Component({
   selector: 'app-home',
@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  // Vous pouvez ajouter des fonctions de navigation si besoin
+
+  constructor(private router: Router) { }  // <-- injecter Router ici
+
+  goToSignin() {
+    this.router.navigate(['/signin']);
+  }
 }

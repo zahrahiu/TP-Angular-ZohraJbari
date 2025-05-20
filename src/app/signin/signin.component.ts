@@ -21,7 +21,7 @@ export class SigninComponent {
   constructor(private userService: UserService, private router: Router) { }
 
   signIn() {
-      console.log('Credentials envoyées:', this.credentials);  // <-- ajoute cette ligne
+      console.log('Credentials envoyées:', this.credentials);  
     this.signInError = false;
     this.userService.signIn(this.credentials).subscribe({
       next: () => this.router.navigate(['/catalog']),

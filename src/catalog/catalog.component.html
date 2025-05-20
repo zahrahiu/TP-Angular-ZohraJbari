@@ -16,11 +16,17 @@
 </div>
 
 <h2 class="slogan">La beauté invisible : votre parfum</h2>
+<div class="filters">
+  <button (click)="applyFilter('homme')" [class.active]="activeFilter === 'homme'" class="button">Homme</button>
+  <button (click)="applyFilter('femme')" [class.active]="activeFilter === 'femme'" class="button">Femme</button>
+  <button (click)="applyFilter('enfants')" [class.active]="activeFilter === 'enfants'" class="button">Enfants</button>
+  <button (click)="applyFilter('all')" [class.active]="activeFilter === 'all'" class="button">Tous</button>
+</div>
 <div class="catalog">
  
   <div class="product-list">
-    @for (product of products; track product.id) {
-      <div class="product-container">
+  @for (product of filteredProducts; track product.id) {
+    <div class="product-container">
         <div class="product-card" [class]="getQuantity(product)">
           <img [src]="product.imageUrl || '/assets/images/default-product.png'"
                [alt]="product.name"
@@ -46,3 +52,5 @@
     <button class="close-btn" (click)="selectedProductId = null">✖</button>
   </div>
 </div>
+
+

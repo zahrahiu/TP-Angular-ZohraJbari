@@ -5,10 +5,10 @@
   <nav class="parfum-navbar">
     <div class="nav-logo">PARFUMS LUXE</div>
     <div class="nav-menu">
-      <a href="#">ABOUT</a>
-      <a href="#">COLLECTIONS</a>
-      <a href="#">SHOP</a>
-      <a href="#" class="contact-link">CONTACT</a>
+      <a href="#about">ABOUT</a>
+      <a (click)="goToSignin()">COLLECTIONS</a>
+      <a (click)="goToSignin()" >SHOP</a>
+      <a (click)="goToSignin()" class="contact-link">CONTACT</a>
     </div>
   </nav>
 
@@ -22,7 +22,8 @@
     <div class="hero-content">
       <h1>Des Fragrances<br>pour des Moments Mémorables</h1>
       <p>Découvrez des parfums uniques qui captent l'essence de votre personnalité</p>
-      <button>EXPLORER</button>
+      <button (click)="goToSignin()">EXPLORER</button>
+
     </div>
   </div>
 
@@ -35,26 +36,26 @@
       <img src="assets/images/icone1.jpg" alt="Parfum Florale">
       <h3>Parfums Floraux</h3>
       <p>Des notes délicates de fleurs fraîches pour une journée printanière</p>
-      <button>DÉCOUVRIR</button>
+      <button (click)="goToSignin()" >DÉCOUVRIR</button>
     </div>
 
     <div class="service-card">
       <img src="assets/images/icone2.jpg" alt="Parfum Boisé">
       <h3>Parfums Boisés</h3>
       <p>Des essences chaudes et enveloppantes pour les soirées d'hiver</p>
-      <button>DÉCOUVRIR</button>
+      <button (click)="goToSignin()" >DÉCOUVRIR</button>
     </div>
 
     <div class="service-card">
       <img src="assets/images/icone3.jpg" alt="Parfum Oriental">
       <h3>Parfums Orientaux</h3>
       <p>Des fragrances mystérieuses et sensuelles pour les occasions spéciales</p>
-      <button>DÉCOUVRIR</button>
+      <button (click)="goToSignin()" >DÉCOUVRIR</button>
     </div>
   </div>
 
  
-<div style="background-color: #787373; padding: 10px 10px;margin-bottom: 10px; display: flex; justify-content: center;">
+<div id="about"  style="background-color: #787373; padding: 10px 10px;margin-bottom: 10px; display: flex; justify-content: center;">
   
   <div class="parfum-about" style="max-width: 800px; text-align: center;">
     <h2>FAITES BRILLER VOTRE PERSONNALITÉ</h2>

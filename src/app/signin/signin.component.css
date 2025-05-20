@@ -1,80 +1,228 @@
-body, html {
-  height: 100%;
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #fce4ec, #ffffff);
+/* login.component.css */
+:root {
+  --rose: #d8a7b1;
+  --rose-fonce: #c4959f;
+  --rose-clair: #f8e1e6;
+  --gris-fonce: #333;
+  --gris-moyen: #555;
+  --gris-clair: #777;
+  --blanc: #ffffff;
+  --error: #d32f2f;
 }
 
+/* Structure de base */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #fdf2f4 0%, #f8f8f8 100%);
+}
+
+/* Navbar */
+.parfum-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background-color: var(--blanc);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--rose);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--gris-moyen);
+  font-weight: 500;
+  transition: color 0.3s;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+.nav-menu a:hover {
+  color: var(--rose);
+}
+
+/* Page de connexion */
 .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  flex: 1;
+  padding: 2rem;
 }
 
 .login-form {
-  background: white;
-  padding: 40px 30px;
+  background: var(--blanc);
+  padding: 2.5rem;
   border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(216, 167, 177, 0.15);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   text-align: center;
+  border: 1px solid rgba(216, 167, 177, 0.2);
+}
+
+.logo-container {
+  margin-bottom: 1.5rem;
 }
 
 .logo {
-  width: 150px;
-  margin-bottom: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--rose-clair);
+  padding: 4px;
 }
 
 h2 {
-  color: #e91e63;
-  margin-bottom: 10px;
+  color: var(--rose);
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
 }
 
 p {
-  color: #666;
-  font-size: 15px;
-  margin-bottom: 30px;
+  color: var(--gris-clair);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
 }
 
-input {
+/* Champs de formulaire */
+.form-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.form-input {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  background-color: #fafafa;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #f8bbd0;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: background-color 0.3s ease;
+.form-input:focus {
+  outline: none;
+  border-color: var(--rose);
+  box-shadow: 0 0 0 2px rgba(216, 167, 177, 0.2);
 }
 
-button:hover {
-  background-color: #ec407a;
+.error-messages {
+  min-height: 20px;
+  margin-top: 4px;
 }
 
 .error {
-  color: red;
-  font-size: 12px;
+  color: var(--error);
+  font-size: 0.75rem;
   display: block;
-  text-align: left;
-  margin-top: -5px;
-  margin-bottom: 10px;
 }
 
+/* Bouton */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--rose);
+  border: none;
+  border-radius: 8px;
+  color: var(--blanc);
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.submit-btn:hover {
+  background-color: var(--rose-fonce);
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.arrow-icon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Message d'erreur */
 .signInError {
-  color: #d32f2f;
-  margin-top: 15px;
-  font-weight: bold;
+  color: var(--error);
+  margin-top: 1.5rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.error-icon {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .parfum-navbar {
+    flex-direction: column;
+    padding: 15px;
+  }
+  
+  .nav-menu {
+    margin-top: 15px;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .login-form {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: 1rem;
+  }
+  
+  .login-form {
+    padding: 1.5rem 1rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
 }
