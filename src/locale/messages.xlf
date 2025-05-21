@@ -2,32 +2,139 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="fr-FR" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="welcome" datatype="html">
-        <source>Bienvenue</source>
+      <trans-unit id="6498160973547574000" datatype="html">
+        <source>Des Fragrances<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/>pour des Moments Mémorables</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="signInMessage" datatype="html">
-        <source>Connectez-vous pour gérer vos parfums</source>
+      <trans-unit id="2946039097219309065" datatype="html">
+        <source>Découvrez des parfums uniques qui captent l&apos;essence de votre personnalité</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="placeholderEmail" datatype="html">
-        <source>Adresse e-mail</source>
+      <trans-unit id="944737834535752055" datatype="html">
+        <source>EXPLORER</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">25,26</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="emailRequired" datatype="html">
-        <source>Email requis</source>
+      <trans-unit id="9139827223203170781" datatype="html">
+        <source>Parfums Floraux</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="invalidFormat" datatype="html">
-        <source>Format invalide</source>
+      <trans-unit id="6989786992378401415" datatype="html">
+        <source>Des notes délicates de fleurs fraîches pour une journée printanière</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="placeholderPassword" datatype="html">
-        <source>Mot de passe</source>
+      <trans-unit id="1001573357508294422" datatype="html">
+        <source>DÉCOUVRIR</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="passwordRequired" datatype="html">
-        <source>Mot de passe requis</source>
+      <trans-unit id="4973304697457550649" datatype="html">
+        <source>Parfums Boisés</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="signIn" datatype="html">
-        <source>Se connecter</source>
+      <trans-unit id="9013122244098851643" datatype="html">
+        <source>Des essences chaudes et enveloppantes pour les soirées d&apos;hiver</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">45,46</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="signInError" datatype="html">
-        <source>❌ Erreur lors de la connexion. Réessayez.</source>
+      <trans-unit id="5215372628689113520" datatype="html">
+        <source>Parfums Orientaux</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3442049139967723321" datatype="html">
+        <source>Des fragrances mystérieuses et sensuelles pour les occasions spéciales</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="665235021054022478" datatype="html">
+        <source>FAITES BRILLER VOTRE PERSONNALITÉ</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">61,62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7013449506757326244" datatype="html">
+        <source>Choisissez Votre Signature Olfactive</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">62,63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6758718222399411863" datatype="html">
+        <source> Chaque parfum est une histoire que vous racontez au monde. Nos créations uniques sont conçues pour s&apos;adapter à votre humeur, votre style et vos moments précieux. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">64,65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="43749032302526463" datatype="html">
+        <source>Des ingrédients naturels et de qualité supérieure</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5488941256530755673" datatype="html">
+        <source>Des flacons élégants conçus par des artisans</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">69,70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1988727735443792403" datatype="html">
+        <source>Des fragrances qui évoluent avec vous tout au long de la journée</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">70,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1527286103535787741" datatype="html">
+        <source>FRAIS, ÉLÉGANT, INOUBLIABLE</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">78,79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7066173957195624709" datatype="html">
+        <source>Parfumez votre journée</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/home/home.component.html</context>
+          <context context-type="linenumber">79,80</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>

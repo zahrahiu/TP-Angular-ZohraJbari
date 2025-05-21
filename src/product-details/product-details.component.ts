@@ -32,7 +32,7 @@ export class ProductDetailsComponent implements OnInit {
 
  addToCart(product: Product) {
   this.cartService.addToCart(product);
-  // Redirection vers la page panier
+
   this.router.navigate(['/cart']);
 }
 

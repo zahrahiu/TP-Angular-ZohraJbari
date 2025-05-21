@@ -4,11 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "myFirstProjectAngular": {
-      "projectType": "application",
-      "schematics": {},
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
       "i18n": {
         "sourceLocale": "fr-FR",
         "locales": {
@@ -18,10 +13,16 @@
 }
         }
       },
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "localize":["en-US"],
             "outputPath": "dist/my-first-project-angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -49,7 +50,7 @@
           "configurations": {
             "production": {
               "localize": true,
-              "outputPath": "dist/${LOCALE}",
+              "outputPath": "dist/my-first-project-angular",
               "budgets": [
                 {
                   "type": "initial",
@@ -57,10 +58,11 @@
                   "maximumError": "1MB"
                 },
                 {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
+  "type": "anyComponentStyle",
+  "maximumWarning": "20kB",
+  "maximumError": "30kB"
+}
+
               ],
               "outputHashing": "all",
               "i18nMissingTranslation": "error"
@@ -69,12 +71,8 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
-            },
-            "en-US": {
-              "localize": ["en-US"],
-              "outputPath": "dist/en-US/",
-              "i18nMissingTranslation": "error"
             }
+          
           },
           "defaultConfiguration": "production"
         },

@@ -9,6 +9,7 @@ export class Product {
     public category?: string,
     public hoverImageUrl?: string
     
+    
   ) {}
 
   isLowQuantity(): boolean {

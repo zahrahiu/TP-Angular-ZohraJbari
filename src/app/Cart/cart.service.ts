@@ -38,22 +38,44 @@ export class CartService {
 }
 
 addToCart(product: Product, quantity: number = 1) {
-    const existingItem = this.items.find(item => item.product.id === product.id);
-    
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      this.items.push({product, quantity});
+  // Vérifier si stock kafi
+  if (product.quantity < quantity) {
+    alert('Stock insuffisant!');
+    return;
+  }
+
+  const existingItem = this.items.find(item => item.product.id === product.id);
+  if (existingItem) {
+    existingItem.quantity += quantity;
+  } else {
+    this.items.push({ product, quantity });
+  }
+
+  // Décrémente stock
+  product.quantity -= quantity;
+}
+
+
+  decreaseQuantity(productId: number) {
+  const item = this.items.find(i => i.product.id === productId);
+  if (item) {
+    item.quantity--;
+    if (item.quantity <= 0) {
+      this.removeItem(productId);
     }
   }
+}
+
+removeItem(productId: number) {
+  this.items = this.items.filter(item => item.product.id !== productId);
+}
+
 
   getItems() {
     return this.items;
   }
 
-  removeItem(index: number) {
-    this.items.splice(index, 1);
-  }
+  
 
   updateQuantity(index: number, newQuantity: number) {
     this.items[index].quantity = newQuantity;
