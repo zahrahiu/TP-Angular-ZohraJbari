@@ -9,6 +9,7 @@ import { Product } from '../models/product.model';
 })
 export class CartService {
   private baseUrl = 'http://localhost:3000/api/products';
+  private items: {product: Product, quantity: number}[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -35,6 +36,33 @@ export class CartService {
     })
   );
 }
+
+addToCart(product: Product, quantity: number = 1) {
+    const existingItem = this.items.find(item => item.product.id === product.id);
+    
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      this.items.push({product, quantity});
+    }
+  }
+
+  getItems() {
+    return this.items;
+  }
+
+  removeItem(index: number) {
+    this.items.splice(index, 1);
+  }
+
+  updateQuantity(index: number, newQuantity: number) {
+    this.items[index].quantity = newQuantity;
+  }
+
+  clearCart() {
+    this.items = [];
+    return this.items;
+  }
   
   getFeaturedProducts(): Observable<Product[]> {
     return this.http.get<any[]>(this.baseUrl + '/featured').pipe(

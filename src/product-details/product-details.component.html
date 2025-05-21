@@ -18,7 +18,11 @@
         <p class="quantity" [style.color]="product.isLowQuantity() ? 'red' : 'green'">
           Quantity: {{ product.quantity }}
         </p>
+        <button class="add-to-cart-btn" (click)="addToCart(product)">
+          Ajouter au panier
+        </button>
       </div>
+        
     </div>
   </div>
 }

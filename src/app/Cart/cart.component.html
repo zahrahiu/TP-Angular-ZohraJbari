@@ -1,1 +1,43 @@
-<p>cart works!</p>
+<nav class="parfum-navbar">
+  <div class="nav-logo">PARFUMS LUXE</div>
+  <div class="nav-menu">
+    
+  </div>
+</nav>
+
+
+<div class="cart-container">
+  <h2>🛒 Votre Panier</h2>
+
+  <div *ngIf="cartItems.length === 0" class="empty-cart">
+    Votre panier est vide 
+  </div>
+
+  <div *ngIf="cartItems.length > 0">
+    <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+      <img [src]="item.product.imageUrl || '/assets/images/default-product.jpg'" 
+           [alt]="item.product.name"
+           class="cart-item-image">
+
+      <div class="cart-item-details">
+        <h3>{{ item.product.name }}</h3>
+        <p>Prix: {{ item.product.price | currency:'MAD':'symbol':'1.2-2' }}</p>
+
+        <div class="quantity-control">
+          <button (click)="updateQuantity(i, item.quantity - 1)">-</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="updateQuantity(i, item.quantity + 1)">+</button>
+        </div>
+
+        <p>Total: {{ (item.product.price * item.quantity) | currency:'MAD':'symbol':'1.2-2' }}</p>
+      </div>
+
+      <button class="remove-btn" (click)="removeItem(i)">×</button>
+    </div>
+
+    <div class="cart-summary">
+      <h3>Total du panier: {{ total | currency:'MAD':'symbol':'1.2-2' }}</h3>
+      <button class="checkout-btn">Passer la commande</button>
+    </div>
+  </div>
+</div>

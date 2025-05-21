@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
 import { Product } from '../app/models/product.model';
 import { CartService } from '../app/Cart/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-details',
@@ -15,14 +16,25 @@ export class ProductDetailsComponent implements OnInit {
   @Input() productId!: number;
   product?: Product;
 
-  constructor(private CartService: CartService) {}
+  constructor(
+  private cartService: CartService,
+  private router: Router
+) {}
 
+ 
   ngOnInit(): void {
     if (this.productId) {
-      this.CartService.getProductById(this.productId).subscribe(product => {
+      this.cartService.getProductById(this.productId).subscribe(product => {
         this.product = product;
       });
     }
   }
+
+ addToCart(product: Product) {
+  this.cartService.addToCart(product);
+  // Redirection vers la page panier
+  this.router.navigate(['/cart']);
+}
+
   
 }

@@ -1,0 +1,148 @@
+/* Navbar */
+.parfum-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--blanc);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--rose);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--gris-moyen);
+  font-weight: 500;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.nav-menu a:hover {
+  color: var(--rose);
+}
+
+
+/* Container Panier */
+.cart-container {
+    
+  max-width: 900px;
+  margin: 5rem auto;
+  padding: 2rem;
+  background-color: #fdfdfd;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(180, 180, 180, 0.3);
+}
+
+.cart-container h2 {
+  color: #444;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Panier vide */
+.empty-cart {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #999;
+  padding: 2rem;
+}
+
+/* Item */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+.cart-item-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid #e3d5dd;
+}
+
+.cart-item-details h3 {
+  margin: 0;
+  color: #333;
+}
+
+.cart-item-details p {
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.quantity-control button {
+  background-color: #d16ba5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.quantity-control span {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Remove button */
+.remove-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #d16ba5;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Résumé panier */
+.cart-summary {
+  margin-top: 2rem;
+  text-align: center;
+  background-color: #f6f0f5;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.checkout-btn {
+  background-color: #d16ba5;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #c04b8b;
+}
