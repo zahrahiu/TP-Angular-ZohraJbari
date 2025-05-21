@@ -6,6 +6,13 @@ Zohra JBARI DCC0020/24
 ![image](https://github.com/user-attachments/assets/7bcce635-c910-488c-b888-ff37bdba499f)
 ![image](https://github.com/user-attachments/assets/04e1d8f3-875a-4b83-be1c-33d34369a170)
 
+# page d'Accueil en anglais
+![image](https://github.com/user-attachments/assets/b6f4d67b-ceef-4363-a837-b6ae5e9b205e)
+![image](https://github.com/user-attachments/assets/0627fc51-b8ab-490b-8880-d4998a041e4e)
+![image](https://github.com/user-attachments/assets/b73e1a56-fac3-4e3c-bb35-c9720abc234f)
+![image](https://github.com/user-attachments/assets/c9c660fc-79c7-4284-ab77-8facd4a6c312)
+
+
 # Page de connexion
 ![image](https://github.com/user-attachments/assets/04b45f74-75ef-4995-b9c9-9260ff4acced)
 
