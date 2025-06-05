@@ -19,6 +19,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 export class CatalogComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
+  hoveredProductId: number | null = null;
+
   selectedProductId: number | null = null;
   activeFilter: string = 'all';
 
@@ -77,4 +79,20 @@ export class CatalogComponent implements OnInit {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = '/assets/images/default-product.jpg';
   }
+
+  onMouseEnter(product: Product, event: Event) {
+    const target = event.target as HTMLImageElement;
+    if (product.hoverImageUrl) {
+      target.src = product.hoverImageUrl;
+    }
+  }
+
+  onMouseLeave(product: Product, event: Event) {
+    const target = event.target as HTMLImageElement;
+    if (product.imageUrl) {
+      target.src = product.imageUrl;
+    }
+  }
+
+  
 }

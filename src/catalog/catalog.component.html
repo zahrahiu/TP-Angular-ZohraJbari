@@ -28,10 +28,15 @@
   @for (product of filteredProducts; track product.id) {
     <div class="product-container">
         <div class="product-card" [class]="getQuantity(product)">
-          <img [src]="product.imageUrl || '/assets/images/default-product.png'"
-               [alt]="product.name"
-               class="product-image"
-               (error)="handleImageError($event)">
+          <img
+  [src]="hoveredProductId === product.id ? product.hoverImageUrl || product.imageUrl : product.imageUrl"
+  [alt]="product.name"
+  class="product-image"
+  (mouseenter)="hoveredProductId = product.id"
+  (mouseleave)="hoveredProductId = null"
+  (error)="handleImageError($event)"
+>
+
           <div class="product-info">
             <h3>{{product.name}}</h3>
             <p class="price">{{product.price}} DH</p>

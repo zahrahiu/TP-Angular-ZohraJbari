@@ -27,7 +27,8 @@ export class CartService {
           : apiProduct.price,
         apiProduct.quantity,
         apiProduct.imageUrl,
-        apiProduct.category?.toLowerCase().trim() // Normalise la catégorie
+        apiProduct.category?.toLowerCase().trim(), // Normalise la catégorie
+        apiProduct.hoverImageUrl
       ));
     }),
     catchError(error => {
