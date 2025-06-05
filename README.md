@@ -6,13 +6,25 @@ Zohra JBARI DCC0020/24
 ![image](https://github.com/user-attachments/assets/7bcce635-c910-488c-b888-ff37bdba499f)
 ![image](https://github.com/user-attachments/assets/04e1d8f3-875a-4b83-be1c-33d34369a170)
 
+# page d'Accueil en anglais
+![image](https://github.com/user-attachments/assets/b6f4d67b-ceef-4363-a837-b6ae5e9b205e)
+![image](https://github.com/user-attachments/assets/0627fc51-b8ab-490b-8880-d4998a041e4e)
+![image](https://github.com/user-attachments/assets/b73e1a56-fac3-4e3c-bb35-c9720abc234f)
+![image](https://github.com/user-attachments/assets/c9c660fc-79c7-4284-ab77-8facd4a6c312)
+
+
 # Page de connexion
 ![image](https://github.com/user-attachments/assets/04b45f74-75ef-4995-b9c9-9260ff4acced)
 
 
+# Page des listes des produits 
+![image](https://github.com/user-attachments/assets/c2a01ca6-ce8a-4068-b3dd-84f860e61308)
+![image](https://github.com/user-attachments/assets/e2b719ec-2283-46e3-b3d3-05f09478563e)
+![image](https://github.com/user-attachments/assets/e61d47e3-d236-4a86-8bbe-bd07e93a238e)
+
 # détails des produits,affichage de la quantité
-![image](https://github.com/user-attachments/assets/97a01c57-f8ad-4787-9d35-9ceb375185b5)
-![image](https://github.com/user-attachments/assets/dac15f9d-abaf-44c0-aece-0f6293faadd4)
+![image](https://github.com/user-attachments/assets/df9cfd2c-946b-4415-ac9e-362100c8be5d)
+
 
 # Page de panier
 ![image](https://github.com/user-attachments/assets/f7f5e01e-d0fc-44f7-a796-7fae883983ae)
