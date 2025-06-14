@@ -146,3 +146,135 @@
 .checkout-btn:hover {
   background-color: #c04b8b;
 }
+
+/* Fond semi-transparent qui couvre toute la page */
+.confirm-order-form {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* noir semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* devant tout le reste */
+}
+
+/* Contenu de la fenêtre modale */
+.confirm-order-form form {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  width: 350px;
+  max-width: 90%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.confirm-order-form h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.confirm-order-form label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+.confirm-order-form input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 5px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.confirm-order-form input[type="text"]:focus {
+  border-color: #c0392b;
+  outline: none;
+}
+
+.confirm-order-form button {
+  padding: 10px 15px;
+  margin-top: 15px;
+  margin-right: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-order-form button[type="submit"] {
+  background-color: #c0392b;
+  color: white;
+}
+
+.confirm-order-form button[type="submit"]:disabled {
+  background-color: #e0a9a4;
+  cursor: not-allowed;
+}
+
+.confirm-order-form button[type="submit"]:hover:not(:disabled) {
+  background-color: #a92b21;
+}
+
+.confirm-order-form button[type="button"] {
+  background-color: #bdc3c7;
+  color: #333;
+}
+
+.confirm-order-form button[type="button"]:hover {
+  background-color: #95a5a6;
+}
+
+.payment-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+.payment-methods button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #e67e22;
+  color: white;
+  font-weight: bold;
+}
+
+.payment-methods button:hover {
+  background-color: #d35400;
+}
+
+.close-btn {
+  margin-top: 15px;
+  background-color: #95a5a6;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

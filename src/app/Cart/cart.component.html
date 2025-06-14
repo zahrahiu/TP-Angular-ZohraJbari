@@ -1,10 +1,7 @@
 <nav class="parfum-navbar">
   <div class="nav-logo">PARFUMS LUXE</div>
-  <div class="nav-menu">
-    
-  </div>
+  <div class="nav-menu"></div>
 </nav>
-
 
 <div class="cart-container">
   <h2>🛒 Votre Panier</h2>
@@ -26,10 +23,13 @@
         <div class="quantity-control">
           <button (click)="updateQuantity(i, item.quantity - 1)">-</button>
           <span>{{ item.quantity }}</span>
-          <button (click)="updateQuantity(i, item.quantity + 1)">+</button>
+          <button 
+            (click)="updateQuantity(i, item.quantity + 1)" 
+            [disabled]="item.product.quantity === 0">+
+          </button>
         </div>
 
-        <p>Total: {{ (item.product.price * item.quantity) | currency:'MAD':'symbol':'1.2-2' }}</p>
+        <p>Quantité restante en stock: {{ item.product.quantity }}</p>
       </div>
 
       <button class="remove-btn" (click)="removeItem(i)">×</button>
@@ -37,7 +37,46 @@
 
     <div class="cart-summary">
       <h3>Total du panier: {{ total | currency:'MAD':'symbol':'1.2-2' }}</h3>
-      <button class="checkout-btn">Passer la commande</button>
+      <button class="checkout-btn" (click)="showConfirmForm = true">Passer la commande</button>
     </div>
+  </div>
+</div>
+
+<!-- Formulaire confirmation -->
+<div *ngIf="showConfirmForm" class="confirm-order-form">
+  <h3>Confirmer la commande</h3>
+  
+  <form (ngSubmit)="confirmerCommande()" #orderForm="ngForm">
+    <label>
+      Nom d'utilisateur:
+      <input type="text" [(ngModel)]="userName" name="userName" required />
+    </label>
+    <br/>
+    <label>
+      Numéro d'utilisateur:
+      <input type="text" [(ngModel)]="userNumber" name="userNumber" required />
+    </label>
+    <br/>
+    <label>
+      Total:
+      <input type="text" [value]="total | currency:'MAD':'symbol':'1.2-2'" readonly />
+    </label>
+    <br/>
+    <button type="submit" [disabled]="orderForm.invalid">Confirmer la commande</button>
+    <button type="button" (click)="showConfirmForm = false">Annuler</button>
+  </form>
+</div>
+<!-- Modal de paiement -->
+<div *ngIf="showPaymentOptions" class="payment-modal">
+  <div class="payment-content">
+    <h3>Choisissez une méthode de paiement</h3>
+
+    <div class="payment-methods">
+      <button (click)="payerAvec('paypal')">💳 PayPal</button>
+      <button (click)="payerAvec('carte')">💳 Carte Bancaire</button>
+      <button (click)="payerAvec('espece')">💵 Paiement à la livraison</button>
+    </div>
+
+    <button class="close-btn" (click)="showPaymentOptions = false">Annuler</button>
   </div>
 </div>

@@ -10,17 +10,20 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { CartComponent } from './Cart/cart.component'; 
 import { HomeComponent } from './home/home.component'; 
 import { SigninComponent } from './signin/signin.component';
-
+import { SignupComponent } from './signup/signup.component';
 import { CartService } from './Cart/cart.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
+    HttpClientModule,
     AppComponent,
     CatalogComponent,
     ProductDetailsComponent,
     CartComponent,      
     HomeComponent,       
-    SigninComponent    
+    SigninComponent,
+     SignupComponent  
   ],
   imports: [
     BrowserModule,

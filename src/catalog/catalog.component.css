@@ -105,29 +105,35 @@ body {
   border-color: #7d6b71;
 }
 
-/* Catalogue */
-.catalog {
-  max-width: 1200px;
-  margin: 0 auto 40px;
-  padding: 0 15px;
-}
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 colonnes */
-  gap: 25px;
-  justify-items: center;
+
+
+/* غلاف العنوان */
+.title {
+  text-align: center;
+  font-size: 24px;
+  color: #b2929e;
+  margin-bottom: 30px;
 }
 
-/* Card produit */
+/* القائمة ديال المنتجات */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* الكارت ديال المنتج - نسخة صغيرة */
 .product-container {
   width: 100%;
-  max-width: 250px;
+  max-width: 180px;
   perspective: 800px;
 }
+
 .product-card {
   background-color: #fff;
-  border-radius: 15px;
-  box-shadow: 0 6px 12px rgba(179, 142, 150, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(179, 142, 150, 0.3);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
@@ -135,83 +141,65 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
 .product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 20px rgba(179, 142, 150, 0.6);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 16px rgba(179, 142, 150, 0.5);
 }
+
 .product-image {
-  width: 100%;
-  height: 220px;
+  width: 110px;
+  height: 140px;
   object-fit: cover;
   border-bottom: 1px solid #ddd;
   transition: 0.3s ease-in-out;
 }
+
 .product-info {
-  padding: 15px 20px;
+  padding: 10px 15px;
   width: 100%;
   text-align: center;
 }
+
 .product-info h3 {
-  margin: 10px 0 5px;
+  margin: 8px 0 4px;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
   color: #b2929e;
 }
+
 .price {
   color: #ad7e89;
   font-weight: 600;
-  margin-bottom: 15px;
-  font-size: 18px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* الزر ديال الإضافة */
+.cta {
+  background-color: #b2929e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 .btn {
   display: flex;
   justify-content: center;
-  gap: 10px;
-}
-.cta {
-  background-color: #b2929e;
-  border: none;
-  color: white;
-  padding: 8px 18px;
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-family: 'Playfair Display', serif;
-}
-.cta:hover {
-  background-color: #d2a7b2;
-}
-.detail-btn {
-  background-color: #e7d5d8;
-  color: #7d5f65;
-}
-.detail-btn:hover {
-  background-color: #c8aeb3;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
 }
 
-/* Responsive */
-@media (max-width: 1200px) {
-  .product-list {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.btn .cta {
+  flex: 1 1 auto;
+  max-width: 100px;
+  white-space: nowrap;
 }
-@media (max-width: 992px) {
-  .product-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (max-width: 600px) {
-  .product-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .product-container {
-    max-width: 100%;
-  }
-}
-@media (max-width: 400px) {
-  .product-list {
-    grid-template-columns: 1fr;
-  }
+
+.cta:hover {
+  background-color: #a07080;
 }

@@ -79,8 +79,26 @@ removeItem(productId: number) {
   
 
   updateQuantity(index: number, newQuantity: number) {
-    this.items[index].quantity = newQuantity;
+  const cartItem = this.items[index];
+  const product = cartItem.product;
+
+  const diff = newQuantity - cartItem.quantity;
+
+  if (diff > 0) {
+    // Katjrb tzid
+    if (product.quantity >= diff) {
+      cartItem.quantity = newQuantity;
+      product.quantity -= diff;
+    } else {
+      alert('Stock insuffisant !');
+    }
+  } else if (diff < 0) {
+    // Katna9ss
+    cartItem.quantity = newQuantity;
+    product.quantity += Math.abs(diff);
   }
+}
+
 
   clearCart() {
     this.items = [];
