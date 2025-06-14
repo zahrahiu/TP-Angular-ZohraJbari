@@ -6,7 +6,14 @@
     <h2 class="store-name">Perfums</h2>
   </div>
   <div class="search-container">
-    <input type="text" placeholder="🔍 Rechercher un parfum..." class="search-input" />
+    <input 
+  type="text" 
+  placeholder="🔍 Rechercher un parfum..." 
+  class="search-input" 
+  [(ngModel)]="searchTerm" 
+  (input)="filterProducts()" 
+/>
+
   </div>
   <div class="right-section">
     <button title="Mon compte">👤</button>

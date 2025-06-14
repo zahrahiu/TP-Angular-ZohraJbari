@@ -4,12 +4,13 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { Product } from '../app/models/product.model';
 import { CartService } from '../app/Cart/cart.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-catalog',
   standalone: true,
   imports: [
     CommonModule, 
+    FormsModule,
     ProductDetailsComponent,
     RouterModule 
   ],
@@ -125,6 +126,15 @@ loadFavorites() {
   });
 }
 
+
+  searchTerm: string = '';
+
+  filterProducts() {
+    const term = this.searchTerm.toLowerCase().trim();
+    this.filteredProducts = this.products.filter(product =>
+      product.name.toLowerCase().includes(term)
+    );
+  }
 
   
 }
