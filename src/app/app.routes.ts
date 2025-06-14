@@ -15,7 +15,9 @@ export const routes: Routes = [
     {path : 'signin', component : SigninComponent, title: 'My signin page'},
         {path : 'signup', component : SignupComponent, title: 'My signup page'},
     {path : '', redirectTo : '/home', pathMatch : 'full'},
-    
+    { path: 'favoris',loadComponent: () => import('./favorites/favorites.component').then(m => m.FavoritesComponent)
+}
+
     
     
 

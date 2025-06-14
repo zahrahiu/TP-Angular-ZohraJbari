@@ -7,8 +7,8 @@ export class Product {
     public quantity: number,
     public imageUrl?: string,
     public category?: string,
-    public hoverImageUrl?: string
-    
+    public hoverImageUrl?: string,
+    public isFavorite: boolean = false
     
   ) {}
 

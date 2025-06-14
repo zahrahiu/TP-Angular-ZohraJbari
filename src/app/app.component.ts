@@ -13,4 +13,17 @@ import { CatalogComponent } from '../catalog/catalog.component';
 })
 export class AppComponent {
   title = 'tpAngular';
+  favoriteProductIds: Set<number> = new Set();
+
+  isFavorite(productId: number): boolean {
+    return this.favoriteProductIds.has(productId);
+  }
+
+  toggleFavorite(product: any): void {
+    if (this.isFavorite(product.id)) {
+      this.favoriteProductIds.delete(product.id);
+    } else {
+      this.favoriteProductIds.add(product.id);
+    }
+  }
 }

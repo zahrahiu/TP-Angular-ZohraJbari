@@ -100,6 +100,7 @@ removeItem(productId: number) {
 }
 
 
+
   clearCart() {
     this.items = [];
     return this.items;

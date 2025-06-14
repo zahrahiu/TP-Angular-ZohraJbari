@@ -1,0 +1,22 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+
+<h2 class="title">Mes Produits Favoris</h2>
+
+<div *ngIf="favoriteProducts.length === 0" class="empty-message">
+  <p>Aucun produit en favoris.</p>
+</div>
+
+<div class="product-list">
+  <div *ngFor="let product of favoriteProducts" class="product-container">
+    <div class="product-card">
+      <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p class="price">{{ product.price }} DH</p>
+        <div class="btn">
+          <button class="cta btn-remove" (click)="removeFromFavorites(product)">Supprimer des favoris</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -43,6 +43,8 @@ export class CatalogComponent implements OnInit {
       ));
       this.filteredProducts = [...this.products];
     });
+    this.loadFavorites();
+
 
     // Écoute les changements de paramètres d'URL
     this.route.queryParams.subscribe(params => {
@@ -93,6 +95,36 @@ export class CatalogComponent implements OnInit {
       target.src = product.imageUrl;
     }
   }
+  toggleFavorite(product: Product) {
+  const favorites: number[] = JSON.parse(localStorage.getItem('favorites') || '[]');
+  const index = favorites.indexOf(product.id);
+  
+  if (index > -1) {
+    favorites.splice(index, 1);
+  } else {
+    favorites.push(product.id);
+  }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+isFavorite(productId: number): boolean {
+  const favorites: number[] = JSON.parse(localStorage.getItem('favorites') || '[]');
+  return favorites.includes(productId);
+}
+
+saveFavorites() {
+  const favoriteIds = this.products.filter(p => p.isFavorite).map(p => p.id);
+  localStorage.setItem('favorites', JSON.stringify(favoriteIds));
+}
+
+loadFavorites() {
+  const favoriteIds = JSON.parse(localStorage.getItem('favorites') || '[]');
+  this.products.forEach(p => {
+    p.isFavorite = favoriteIds.includes(p.id);
+  });
+}
+
 
   
 }

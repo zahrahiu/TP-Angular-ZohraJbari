@@ -10,7 +10,7 @@
   </div>
   <div class="right-section">
     <button title="Mon compte">👤</button>
-    <button title="Favoris">❤</button>
+<button title="Favoris" [routerLink]="['/favoris']">❤</button>
     <button title="Panier">🛒</button>
   </div>
 </div>
@@ -41,7 +41,10 @@
             <h3>{{product.name}}</h3>
             <p class="price">{{product.price}} DH</p>
             <div class="btn">
-              <button class="cta acheter-btn">Acheter</button>
+<button class="cta acheter-btn" (click)="toggleFavorite(product)">
+  {{ isFavorite(product.id) ? '♥' : '♡' }}
+</button>
+
               <button class="cta detail-btn" (click)="toggleDetails(product.id)">Voir détails</button>
             </div>
           </div>
