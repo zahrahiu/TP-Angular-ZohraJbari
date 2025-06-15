@@ -94,12 +94,24 @@ ngOnDestroy() {
     return product.id;
   }
 
-  applyFilter(filter: string): void {
-    this.activeFilter = filter;
-    this.filteredProducts = filter === 'all'
-      ? [...this.products]
-      : this.products.filter(p => p.category === filter);
+ applyFilter(filter: string): void {
+  this.activeFilter = filter;
+
+  switch (filter) {
+    case 'all':
+      this.filteredProducts = [...this.products];
+      break;
+
+    case 'promo':
+      this.filteredProducts = this.products.filter(p => p.isOnSale());
+      break;
+
+    default:
+      this.filteredProducts = this.products.filter(p => p.category === filter);
   }
+}
+
+
 
   toggleDetails(id: string): void {
     this.selectedProductId = this.selectedProductId === id ? null : id;

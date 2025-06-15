@@ -23,6 +23,11 @@
 
 <h2 class="slogan">La beauté invisible : votre parfum</h2>
 <div class="filters">
+<button (click)="applyFilter('promo')"
+        [class.active]="activeFilter === 'promo'"
+        class="button">
+  🔥 Promo
+</button>
   <button (click)="applyFilter('homme')" [class.active]="activeFilter === 'homme'" class="button">Homme</button>
   <button (click)="applyFilter('femme')" [class.active]="activeFilter === 'femme'" class="button">Femme</button>
   <button (click)="applyFilter('enfants')" [class.active]="activeFilter === 'enfants'" class="button">Enfants</button>

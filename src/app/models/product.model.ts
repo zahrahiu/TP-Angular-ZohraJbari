@@ -16,9 +16,10 @@ export class Product {
   ) {this.offerEndsAt = offerEndsAt;}
 
  isOnSale(): boolean {
-    return this.discountPercentage > 0 &&
-           (!this.offerEndsAt || this.offerEndsAt.getTime() > Date.now());
-  }
+  return this.discountPercentage! > 0 &&
+         (!this.offerEndsAt || this.offerEndsAt.getTime() > Date.now());
+}
+
 
   getDiscountedPrice(): number {
     return this.isOnSale() 
