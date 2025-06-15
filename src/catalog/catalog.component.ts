@@ -6,6 +6,7 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { CartService } from '../app/Cart/cart.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Product } from '../app/models/product.model';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-catalog',
@@ -20,8 +21,8 @@ export class CatalogComponent implements OnInit {
   hoveredProductId: string | null = null;
   selectedProductId: string | null = null;
   activeFilter = 'all';
-  countdowns: { [id: string]: number } = {};
-  searchTerm = '';
+ countdowns: { [id: string]: string } = {};
+  private timerSub?: Subscription;  searchTerm = '';
   private isBrowser: boolean;
 
   constructor(
@@ -38,7 +39,7 @@ export class CatalogComponent implements OnInit {
       
       this.filteredProducts = [...this.products];
       this.loadFavorites();
-      
+      this.startCountdown(); 
       
 
       
@@ -49,6 +50,30 @@ export class CatalogComponent implements OnInit {
     });
   }
 
+  private startCountdown() {
+    this.timerSub = interval(1000).subscribe(() => {
+      const now = Date.now();
+      this.products.forEach(p => {
+        if (p.offerEndsAt && p.offerEndsAt.getTime() > now) {
+          const diff = p.offerEndsAt.getTime() - now;
+          const h = Math.floor(diff / 3600000);
+          const m = Math.floor((diff % 3600000) / 60000);
+          const s = Math.floor((diff % 60000) / 1000);
+          this.countdowns[p.id] =
+            `${h.toString().padStart(2, '0')}:` +
+            `${m.toString().padStart(2, '0')}:` +
+            `${s.toString().padStart(2, '0')}`;
+        } else {
+          // offre salat
+          p.discountPercentage = 0;
+          delete this.countdowns[p.id];
+        }
+      });
+    });}
+
+ngOnDestroy() {
+    this.timerSub?.unsubscribe();
+  }
   
 
   private getFavorites(): string[] {

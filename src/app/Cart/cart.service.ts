@@ -28,7 +28,10 @@ export class CartService {
           apiProduct.category?.toLowerCase().trim(),
           apiProduct.hoverImageUrl,
            false,
-  Number(apiProduct.discountPercentage) || 0
+  Number(apiProduct.discountPercentage) || 0,
+  apiProduct.offerEndsInSeconds                   // <— men API
+    ? new Date(Date.now() + apiProduct.offerEndsInSeconds * 1000)
+    : undefined
         ));
       }),
       catchError(error => {

@@ -1,4 +1,5 @@
 export class Product {
+  public offerEndsAt?: Date;  
   constructor(
     public id: string,
     public name: string,
@@ -9,12 +10,14 @@ export class Product {
     public category?: string,
     public hoverImageUrl?: string,
     public isFavorite: boolean = false,
-    public discountPercentage?: number,
+    public discountPercentage: number=0,
+    offerEndsAt?: Date
     
-  ) {}
+  ) {this.offerEndsAt = offerEndsAt;}
 
-  isOnSale(): boolean {
-    return !!this.discountPercentage && this.discountPercentage > 0;
+ isOnSale(): boolean {
+    return this.discountPercentage > 0 &&
+           (!this.offerEndsAt || this.offerEndsAt.getTime() > Date.now());
   }
 
   getDiscountedPrice(): number {

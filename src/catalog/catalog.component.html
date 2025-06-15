@@ -45,6 +45,9 @@
  <div *ngIf="product.isOnSale()" class="offer-badge">
           -{{product.discountPercentage}}%
         </div>
+        <div *ngIf="countdowns[product.id]" class="offer-timer">
+    ⏳ Reste {{ countdowns[product.id] }}
+  </div>
               </div>
 
         <div class="product-info">
