@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  @Input() productId!: number;
+  @Input() productId: string = '';
   product?: Product;
 
   constructor(

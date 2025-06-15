@@ -7,17 +7,16 @@
   </div>
   <div class="search-container">
     <input 
-  type="text" 
-  placeholder="🔍 Rechercher un parfum..." 
-  class="search-input" 
-  [(ngModel)]="searchTerm" 
-  (input)="filterProducts()" 
-/>
-
+      type="text" 
+      placeholder="🔍 Rechercher un parfum..." 
+      class="search-input" 
+      [(ngModel)]="searchTerm" 
+      (input)="filterProducts()" 
+    />
   </div>
   <div class="right-section">
     <button title="Mon compte">👤</button>
-<button title="Favoris" [routerLink]="['/favoris']">❤</button>
+    <button title="Favoris" [routerLink]="['/favoris']">❤</button>
     <button title="Panier">🛒</button>
   </div>
 </div>
@@ -29,35 +28,45 @@
   <button (click)="applyFilter('enfants')" [class.active]="activeFilter === 'enfants'" class="button">Enfants</button>
   <button (click)="applyFilter('all')" [class.active]="activeFilter === 'all'" class="button">Tous</button>
 </div>
+
 <div class="catalog">
- 
   <div class="product-list">
-  @for (product of filteredProducts; track product.id) {
-    <div class="product-container">
-        <div class="product-card" [class]="getQuantity(product)">
+    <div class="product-container" *ngFor="let product of filteredProducts; trackBy: trackByProductId">
+      <div class="product-card">
+        <div class="image-wrapper">
           <img
-  [src]="hoveredProductId === product.id ? product.hoverImageUrl || product.imageUrl : product.imageUrl"
-  [alt]="product.name"
-  class="product-image"
-  (mouseenter)="hoveredProductId = product.id"
-  (mouseleave)="hoveredProductId = null"
-  (error)="handleImageError($event)"
->
+            [src]="hoveredProductId === product.id ? product.hoverImageUrl || product.imageUrl : product.imageUrl"
+            [alt]="product.name"
+            class="product-image"
+            (mouseenter)="hoveredProductId = product.id"
+            (mouseleave)="hoveredProductId = null"
+            (error)="handleImageError($event)"
+          />
+ <div *ngIf="product.isOnSale()" class="offer-badge">
+          -{{product.discountPercentage}}%
+        </div>
+              </div>
 
-          <div class="product-info">
-            <h3>{{product.name}}</h3>
-            <p class="price">{{product.price}} DH</p>
-            <div class="btn">
-<button class="cta acheter-btn" (click)="toggleFavorite(product)">
-  {{ isFavorite(product.id) ? '♥' : '♡' }}
-</button>
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          
+         
 
-              <button class="cta detail-btn" (click)="toggleDetails(product.id)">Voir détails</button>
-            </div>
+         <div class="price">
+          <span class="new-price">{{ product.getDiscountedPrice() }} DH</span>
+          <span *ngIf="product.isOnSale()" class="old-price">
+            {{ product.price }} DH
+          </span>
+        </div>
+          <div class="btn">
+            <button class="cta acheter-btn" (click)="toggleFavorite(product)">
+              {{ isFavorite(product.id) ? '♥' : '♡' }}
+            </button>
+            <button class="cta detail-btn" (click)="toggleDetails(product.id)">Voir détails</button>
           </div>
         </div>
       </div>
-    }
+    </div>
   </div>
 </div>
 
@@ -67,5 +76,3 @@
     <button class="close-btn" (click)="selectedProductId = null">✖</button>
   </div>
 </div>
-
-

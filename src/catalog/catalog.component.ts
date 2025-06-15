@@ -1,140 +1,117 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
-import { Product } from '../app/models/product.model';
 import { CartService } from '../app/Cart/cart.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { Product } from '../app/models/product.model';
+
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [
-    CommonModule, 
-    FormsModule,
-    ProductDetailsComponent,
-    RouterModule 
-  ],
+  imports: [CommonModule, FormsModule, ProductDetailsComponent, RouterModule],
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
-  hoveredProductId: number | null = null;
-
-  selectedProductId: number | null = null;
-  activeFilter: string = 'all';
+  hoveredProductId: string | null = null;
+  selectedProductId: string | null = null;
+  activeFilter = 'all';
+  countdowns: { [id: string]: number } = {};
+  searchTerm = '';
+  private isBrowser: boolean;
 
   constructor(
-    private CartService: CartService,
-    private route: ActivatedRoute
-  ) {}
+    private cartService: CartService,
+    private route: ActivatedRoute,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
-    this.CartService.getProducts().subscribe(data => {
-      this.products = data.map(item => new Product(
-        item.id,
-        item.name,
-        item.description,
-        item.price,
-        item.quantity,
-        item.imageUrl,
-        item.category,
-        item.hoverImageUrl
-      ));
+    this.cartService.getProducts().subscribe(data => {
+      this.products = data;
+      
       this.filteredProducts = [...this.products];
+      this.loadFavorites();
+      
+      
+
+      
     });
-    this.loadFavorites();
 
-
-    // Écoute les changements de paramètres d'URL
     this.route.queryParams.subscribe(params => {
-      this.activeFilter = params['filter'] || 'all';
-      this.applyFilter(this.activeFilter);
+      this.applyFilter(params['filter'] || 'all');
     });
   }
 
-  applyFilter(filter: string) {
-  this.activeFilter = filter;
-  if (filter === 'all') {
-    this.filteredProducts = [...this.products];
-  } else {
-    this.filteredProducts = this.products.filter(product => 
-      product.category?.toLowerCase() === filter.toLowerCase()
-    );
+  
+
+  private getFavorites(): string[] {
+    if (!this.isBrowser) return [];
+    const favorites = localStorage.getItem('favorites');
+    return favorites ? JSON.parse(favorites) : [];
   }
-}
 
+  private saveFavorites(favorites: string[]): void {
+    if (this.isBrowser) {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+  }
 
-  toggleDetails(productId: number) {
-    if (this.selectedProductId === productId) {
-      this.selectedProductId = null;
+ 
+
+  trackByProductId(index: number, product: Product): string {
+    return product.id;
+  }
+
+  applyFilter(filter: string): void {
+    this.activeFilter = filter;
+    this.filteredProducts = filter === 'all'
+      ? [...this.products]
+      : this.products.filter(p => p.category === filter);
+  }
+
+  toggleDetails(id: string): void {
+    this.selectedProductId = this.selectedProductId === id ? null : id;
+  }
+
+  toggleFavorite(product: Product): void {
+    const fav = this.getFavorites();
+    const idx = fav.indexOf(product.id);
+    if (idx > -1) {
+      fav.splice(idx, 1);
+      product.isFavorite = false;
     } else {
-      this.selectedProductId = productId;
+      fav.push(product.id);
+      product.isFavorite = true;
     }
+    this.saveFavorites(fav);
   }
 
-  getQuantity(product: Product): string {
-    return product.isLowQuantity() ? 'low-quantity' : '';
+  isFavorite(id: string): boolean {
+    if (!this.isBrowser) return false;
+    return this.getFavorites().includes(id);
   }
 
-  handleImageError(event: Event) {
-    const imgElement = event.target as HTMLImageElement;
-    imgElement.src = '/assets/images/default-product.jpg';
+  loadFavorites(): void {
+    const fav = this.getFavorites();
+    this.products.forEach(p => p.isFavorite = fav.includes(p.id));
   }
 
-  onMouseEnter(product: Product, event: Event) {
-    const target = event.target as HTMLImageElement;
-    if (product.hoverImageUrl) {
-      target.src = product.hoverImageUrl;
-    }
-  }
-
-  onMouseLeave(product: Product, event: Event) {
-    const target = event.target as HTMLImageElement;
-    if (product.imageUrl) {
-      target.src = product.imageUrl;
-    }
-  }
-  toggleFavorite(product: Product) {
-  const favorites: number[] = JSON.parse(localStorage.getItem('favorites') || '[]');
-  const index = favorites.indexOf(product.id);
-  
-  if (index > -1) {
-    favorites.splice(index, 1);
-  } else {
-    favorites.push(product.id);
-  }
-
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-}
-
-isFavorite(productId: number): boolean {
-  const favorites: number[] = JSON.parse(localStorage.getItem('favorites') || '[]');
-  return favorites.includes(productId);
-}
-
-saveFavorites() {
-  const favoriteIds = this.products.filter(p => p.isFavorite).map(p => p.id);
-  localStorage.setItem('favorites', JSON.stringify(favoriteIds));
-}
-
-loadFavorites() {
-  const favoriteIds = JSON.parse(localStorage.getItem('favorites') || '[]');
-  this.products.forEach(p => {
-    p.isFavorite = favoriteIds.includes(p.id);
-  });
-}
-
-
-  searchTerm: string = '';
-
-  filterProducts() {
-    const term = this.searchTerm.toLowerCase().trim();
-    this.filteredProducts = this.products.filter(product =>
-      product.name.toLowerCase().includes(term)
+  filterProducts(): void {
+    const term = this.searchTerm.trim().toLowerCase();
+    this.filteredProducts = this.products.filter(p =>
+      p.name.toLowerCase().includes(term)
     );
   }
 
-  
+  handleImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = '/assets/images/default-product.jpg';
+  }
 }

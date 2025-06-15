@@ -14,119 +14,81 @@ export class CartService {
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-  return this.http.get<any[]>(this.baseUrl).pipe(
-    map(apiProducts => {
-      console.log('Produits reçus:', apiProducts);
-      return apiProducts.map(apiProduct => new Product(
-        apiProduct.id,
-        apiProduct.name,
-        apiProduct.description,
-        // Supprimez le .replace() si le prix est déjà un nombre
-        typeof apiProduct.price === 'string' 
-          ? parseFloat(apiProduct.price.replace(' DH', '').trim())
-          : apiProduct.price,
-        apiProduct.quantity,
-        apiProduct.imageUrl,
-        apiProduct.category?.toLowerCase().trim(), // Normalise la catégorie
-        apiProduct.hoverImageUrl
-      ));
-    }),
-    catchError(error => {
-      console.error('Erreur:', error);
-      return of([]);
-    })
-  );
-}
-
-addToCart(product: Product, quantity: number = 1) {
-  // Vérifier si stock kafi
-  if (product.quantity < quantity) {
-    alert('Stock insuffisant!');
-    return;
+    return this.http.get<any[]>(this.baseUrl).pipe(
+      map(apiProducts => {
+        return apiProducts.map(apiProduct => new Product(
+          apiProduct.id.toString(),
+          apiProduct.name,
+          apiProduct.description,
+          typeof apiProduct.price === 'string' 
+            ? parseFloat(apiProduct.price.replace(' DH', '').trim())
+            : apiProduct.price,
+          apiProduct.quantity,
+          apiProduct.imageUrl,
+          apiProduct.category?.toLowerCase().trim(),
+          apiProduct.hoverImageUrl,
+           false,
+  Number(apiProduct.discountPercentage) || 0
+        ));
+      }),
+      catchError(error => {
+        console.error('Erreur:', error);
+        return of([]);
+      })
+    );
   }
 
-  const existingItem = this.items.find(item => item.product.id === product.id);
-  if (existingItem) {
-    existingItem.quantity += quantity;
-  } else {
-    this.items.push({ product, quantity });
+  addToCart(product: Product, quantity: number = 1) {
+    const existingItem = this.items.find(item => item.product.id === product.id);
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      this.items.push({ product, quantity });
+    }
+    product.quantity -= quantity;
   }
 
-  // Décrémente stock
-  product.quantity -= quantity;
-}
-
-
-  decreaseQuantity(productId: number) {
-  const item = this.items.find(i => i.product.id === productId);
-  if (item) {
-    item.quantity--;
-    if (item.quantity <= 0) {
-      this.removeItem(productId);
+  decreaseQuantity(productId: string) {
+    const item = this.items.find(i => i.product.id === productId);
+    if (item) {
+      item.quantity--;
+      if (item.quantity <= 0) {
+        this.removeItem(productId);
+      }
     }
   }
-}
 
-removeItem(productId: number) {
-  this.items = this.items.filter(item => item.product.id !== productId);
-}
-
+  removeItem(productId: string) {
+    this.items = this.items.filter(item => item.product.id !== productId);
+  }
 
   getItems() {
     return this.items;
   }
 
-  
-
   updateQuantity(index: number, newQuantity: number) {
-  const cartItem = this.items[index];
-  const product = cartItem.product;
-
-  const diff = newQuantity - cartItem.quantity;
-
-  if (diff > 0) {
-    // Katjrb tzid
-    if (product.quantity >= diff) {
+    const cartItem = this.items[index];
+    const product = cartItem.product;
+    const diff = newQuantity - cartItem.quantity;
+    if (diff > 0) {
+      if (product.quantity >= diff) {
+        cartItem.quantity = newQuantity;
+        product.quantity -= diff;
+      } else {
+        alert('Stock insuffisant !');
+      }
+    } else if (diff < 0) {
       cartItem.quantity = newQuantity;
-      product.quantity -= diff;
-    } else {
-      alert('Stock insuffisant !');
+      product.quantity += Math.abs(diff);
     }
-  } else if (diff < 0) {
-    // Katna9ss
-    cartItem.quantity = newQuantity;
-    product.quantity += Math.abs(diff);
   }
-}
-
-
 
   clearCart() {
     this.items = [];
     return this.items;
   }
-  
-  getFeaturedProducts(): Observable<Product[]> {
-    return this.http.get<any[]>(this.baseUrl + '/featured').pipe(
-      map(apiProducts => {
-        return apiProducts.map(apiProduct => new Product(
-          apiProduct.productID,
-          apiProduct.productTitle,
-          apiProduct.productDescription,
-          parseFloat(apiProduct.productPrice.replace(' DH', '')),
-          apiProduct.quantity,
-          apiProduct.productImage
-        ));
-      }),
-      catchError(error => {
-        console.error('Erreur lors de la récupération des produits en vedette:', error);
-        return of([]);
-      })
-    );
-  }
-  
 
-  getProductById(id: number): Observable<Product | undefined> {
+  getProductById(id: string): Observable<Product | undefined> {
     return this.getProducts().pipe(
       map(products => products.find(product => product.id === id))
     );
