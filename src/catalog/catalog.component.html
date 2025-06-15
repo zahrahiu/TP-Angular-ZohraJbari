@@ -70,7 +70,7 @@
             <button class="cta acheter-btn" (click)="toggleFavorite(product)">
               {{ isFavorite(product.id) ? '♥' : '♡' }}
             </button>
-            <button class="cta detail-btn" (click)="toggleDetails(product.id)">Voir détails</button>
+<button class="cta detail-btn" [routerLink]="['/product', product.id]">Voir détails</button>
           </div>
         </div>
       </div>

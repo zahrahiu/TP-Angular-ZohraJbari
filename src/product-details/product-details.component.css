@@ -1,30 +1,35 @@
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+/* Container details */
+.product-details-container {
+  animation: fadeIn 0.4s ease forwards;
+  font-family: 'Playfair Display', serif;
+  padding: 20px;
+  color: #4a4a4a; /* رمادي دافئ */
+  background-color: #f0f1f3; /* رمادي فاتح بارد */
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(100, 100, 110, 0.12);
 }
 
-
-
-.product-details-container h2 {
-  color: #2c3e50;
+/* Title */
+.product-title {
   font-size: 1.9rem;
   margin-bottom: 2rem;
   text-align: center;
+  font-weight: 700;
+  color: #7d6f8a; /* وردي بارد */
   position: relative;
-  font-weight: bold;
 }
 
-.product-details-container h2::after {
+.product-title::after {
   content: '';
   display: block;
   width: 80px;
   height: 4px;
-  background: #764787;
+  background: #a89cb5; /* وردي بارد فاتح */
   margin: 0.8rem auto 0;
   border-radius: 4px;
 }
 
-
+/* Layout */
 .product-details-split {
   display: flex;
   flex-direction: column;
@@ -37,37 +42,31 @@
   }
 }
 
-
+/* Image */
 .product-image .image {
   width: 200px;
   max-width: 200px;
-  height: auto;
   border-radius: 12px;
   object-fit: cover;
   transition: transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(125, 111, 138, 0.3); /* ظل وردي بارد */
 }
 
 .product-image .image:hover {
   transform: scale(1.05);
 }
 
-/* Informations à droite */
+/* Info */
 .product-info {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.product-info h3 {
-  font-size: 1.8rem;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-weight: bold;
+  color: #575757; /* رمادي دافئ */
 }
 
 .description {
-  color: #7f8c8d;
+  color: #6b6b6b;
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 1.2rem;
@@ -75,35 +74,39 @@
 
 .price {
   font-size: 1.4rem;
-  font-weight: bold;
-  color: #e74c3c;
+  font-weight: 700;
+  color: #b187aa; /* وردي بارد */
   margin-bottom: 0.8rem;
 }
 
 .quantity {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #27ae60;
 }
 
 .quantity.red {
-  color: red;
+  color: #cc5757; /* أحمر دافئ */
 }
 
 .quantity.noir {
-  color: #2c3e50;
+  color: #4a4a4a; /* رمادي دافئ */
 }
+
+/* Button */
 .add-to-cart-btn {
   padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #a89cb5; /* وردي بارد فاتح */
+  color: #3f3f3f;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
   margin-top: 10px;
+  box-shadow: 0 3px 10px rgba(168, 156, 181, 0.5);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .add-to-cart-btn:hover {
-  background-color: #45a049;
+  background-color: #7d6f8a; /* وردي بارد غامق */
+  color: #fff;
 }

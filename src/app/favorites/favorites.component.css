@@ -112,3 +112,82 @@ body {
 .btn-remove {
   width: 100%;
 }
+
+.image-wrapper {
+  position: relative;
+}
+
+.countdown-overlay {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  user-select: none;
+}
+
+
+.product-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+
+
+
+
+.price {
+  font-weight: 600;
+}
+
+
+
+
+/* Styles pour les offres promotionnelles */
+.offer-timer {
+  color: #e53935;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 5px 0;
+  background-color: #fff9c4;
+  padding: 3px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.offer-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #e53935;
+  color: #fff;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.new-price {
+  margin-right: 8px;
+}
+
+.old-price {
+  color: #888;
+  text-decoration: line-through;
+}
+.offer-timer {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, .65);
+  color: #fff;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}

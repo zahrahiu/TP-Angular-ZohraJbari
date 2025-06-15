@@ -1,20 +1,64 @@
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+  rel="stylesheet"
+/>
 
-<h2 class="title">Mes Produits Favoris</h2>
+<h2 class="title">Mes Produits Favoris</h2>
 
 <div *ngIf="favoriteProducts.length === 0" class="empty-message">
-  <p>Aucun produit en favoris.</p>
+  Aucun produit en favoris.
 </div>
 
-<div class="product-list">
-  <div *ngFor="let product of favoriteProducts" class="product-container">
-    <div class="product-card">
-      <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
-      <div class="product-info">
-        <h3>{{ product.name }}</h3>
-        <p class="price">{{ product.price }} DH</p>
-        <div class="btn">
-          <button class="cta btn-remove" (click)="removeFromFavorites(product)">Supprimer des favoris</button>
+<div class="catalog" *ngIf="favoriteProducts.length">
+  <div class="product-list">
+    <div
+      class="product-container"
+      *ngFor="let product of favoriteProducts; trackBy: trackByProductId"
+    >
+      <div class="product-card">
+        <!-- image + badge + timer -->
+        <div class="image-wrapper">
+          <img
+            [src]="hoveredProductId === product.id
+              ? product.hoverImageUrl || product.imageUrl
+              : product.imageUrl"
+            [alt]="product.name"
+            class="product-image"
+            (mouseenter)="hoveredProductId = product.id"
+            (mouseleave)="hoveredProductId = null"
+            (error)="handleImageError($event)"
+          />
+
+          <!-- badge % -->
+          <div *ngIf="product.isOnSale()" class="offer-badge">
+            -{{ product.discountPercentage }}%
+          </div>
+
+          <!-- timer -->
+          <div *ngIf="countdowns[product.id]" class="offer-timer">
+            ⏳ Reste {{ countdowns[product.id] }}
+          </div>
+        </div>
+
+        <!-- infos -->
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+
+          <div class="price">
+            <span class="new-price">{{ product.getDiscountedPrice() }} DH</span>
+            <span *ngIf="product.isOnSale()" class="old-price">
+              {{ product.price }} DH
+            </span>
+          </div>
+
+          <div class="btn">
+            <button
+              class="cta btn-remove"
+              (click)="removeFromFavorites(product)"
+            >
+              Supprimer
+            </button>
+          </div>
         </div>
       </div>
     </div>

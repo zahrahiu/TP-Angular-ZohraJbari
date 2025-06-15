@@ -4,6 +4,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Product } from '../app/models/product.model';
 import { CartService } from '../app/Cart/cart.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-details',
@@ -18,16 +19,20 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
   private cartService: CartService,
-  private router: Router
+  private router: Router,
+  private route: ActivatedRoute
 ) {}
 
  
   ngOnInit(): void {
-    if (this.productId) {
-      this.cartService.getProductById(this.productId).subscribe(product => {
-        this.product = product;
-      });
-    }
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.cartService.getProductById(id).subscribe(product => {
+          this.product = product;
+        });
+      }
+    });
   }
 
  addToCart(product: Product) {

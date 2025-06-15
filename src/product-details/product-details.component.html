@@ -1,28 +1,29 @@
-@if (product) {
+<div *ngIf="product; else loading">
+  <h2 class="product-title">{{ product.name }}</h2>
+
   <div class="product-details-container">
+    <div class="product-image">
+      <img 
+        [src]="product.imageUrl || '/assets/images/default-product.jpg'" 
+        [alt]="product.name"
+        class="image"
+      />
+    </div>
 
-    <h2 class="product-title">{{ product.name }}</h2>
-
-  
-    <div class="product-details-split">
-     
-      <div class="product-image">
-        <img [src]="product.imageUrl || '/assets/images/default-product.jpg'" 
-             [alt]="product.name"
-             class="image">
-      </div>
-
-      <div class="product-info">
-        <p class="description">{{ product.description }}</p>
-        <p class="price">Price: {{ product.price | currency:'MAD':'symbol':'1.2-2' }}</p>
-        <p class="quantity" [style.color]="product.isLowQuantity() ? 'red' : 'green'">
+    <div class="product-info">
+      <p class="description">{{ product.description }}</p>
+      <p class="price"><strong>Prix :</strong> {{ product.price | currency:'MAD':'symbol':'1.2-2' }}</p>
+      <p class="quantity" [style.color]="product.isLowQuantity() ? 'red' : 'green'">
           Quantity: {{ product.quantity }}
         </p>
-        <button class="add-to-cart-btn" (click)="addToCart(product)">
-          Ajouter au panier
-        </button>
-      </div>
-        
+      
+      <button class="add-to-cart-btn" (click)="addToCart(product)">
+        Ajouter au panier
+      </button>
     </div>
   </div>
-}
+</div>
+
+<ng-template #loading>
+  <p>Chargement des détails du produit...</p>
+</ng-template>
