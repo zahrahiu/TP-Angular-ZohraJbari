@@ -1,5 +1,6 @@
 export class Product {
   public offerEndsAt?: Date;  
+  public volumes?: { label: string; price: number; imageUrl?: string }[];
   constructor(
     public id: string,
     public name: string,
@@ -13,8 +14,13 @@ export class Product {
     public discountPercentage: number=0,
     offerEndsAt?: Date,
     public genre?: string,  
-    public marque?: string
-  ) {this.offerEndsAt = offerEndsAt;}
+    public marque?: string,
+     volumes?: { label: string; price: number; imageUrl?: string }[]   // <-- nouveau
+
+  ) {
+    this.offerEndsAt = offerEndsAt;
+    this.volumes = volumes;
+  }
 
  isOnSale(): boolean {
   return this.discountPercentage! > 0 &&

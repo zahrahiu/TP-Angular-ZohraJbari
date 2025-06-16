@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgIf, NgFor,  CurrencyPipe } from '@angular/common';
+import { NgIf, NgFor, CurrencyPipe } from '@angular/common';
 
 import { Product } from '../app/models/product.model';
 import { CartService } from '../app/Cart/cart.service';
@@ -18,11 +18,12 @@ export class ProductDetailsComponent implements OnInit {
 
   product?: Product;
   similarByMarque: Product[] = [];
-  similarByGenre:  Product[] = [];
+  similarByGenre: Product[] = [];
 
-  stars          = Array(5);
-  currentRating  = 0;
-  clickedIndex: number | null = null;  
+  stars = Array(5);
+  currentRating = 0;
+  clickedIndex: number | null = null;
+  selectedVolumeIndex = 0;
 
   constructor(
     private cartService: CartService,
@@ -40,10 +41,8 @@ export class ProductDetailsComponent implements OnInit {
         this.product = prod;
         if (!prod) return;
 
-       
         this.currentRating = this.ratingSvc.get(prod.id);
 
-        
         this.cartService.getProducts().subscribe(all => {
           this.similarByMarque = all
             .filter(p => p.id !== prod.id && p.marque === prod.marque)
@@ -62,7 +61,11 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(p: Product) {
-    this.cartService.addToCart(p);
+    if (!this.selectedVolume) {
+      this.cartService.addToCart(p, 1);
+    } else {
+      this.cartService.addToCartWithVolume(p, this.selectedVolume, 1);
+    }
     this.router.navigate(['/cart']);
   }
 
@@ -70,11 +73,18 @@ export class ProductDetailsComponent implements OnInit {
     this.router.navigate(['/products', p.id]);
   }
 
+  get selectedVolume() {
+    if (!this.product || !this.product.volumes || this.product.volumes.length === 0) {
+      return null;
+    }
+    return this.product.volumes[this.selectedVolumeIndex];
+  }
+
   rateProduct(stars: number) {
     if (!this.product) return;
 
     this.currentRating = stars;
-    this.clickedIndex  = stars - 1;           
+    this.clickedIndex = stars - 1;
     setTimeout(() => (this.clickedIndex = null), 400);
 
     this.ratingSvc.set(this.product.id, stars);

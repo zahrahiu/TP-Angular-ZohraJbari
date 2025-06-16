@@ -2,35 +2,56 @@
   <h2 class="product-title">{{ product.name }}</h2>
 
   <!-- Bloc Étoiles -->
-<div class="rating">
-  <span
-    *ngFor="let _ of stars; let i = index"
-    class="star"
-    (click)="rateProduct(i + 1)"
-    [class.filled]="i < currentRating"
-    [class.pop]="clickedIndex === i">
-    ★
-  </span>
-</div>
-
+  <div class="rating">
+    <span
+      *ngFor="let _ of stars; let i = index"
+      class="star"
+      (click)="rateProduct(i + 1)"
+      [class.filled]="i < currentRating"
+      [class.pop]="clickedIndex === i">
+      ★
+    </span>
+  </div>
 
   <!-- Infos produit -->
   <div class="product-details-container">
     <div class="product-image">
-      <img [src]="product.imageUrl || '/assets/images/default-product.jpg'"
-           [alt]="product.name" class="image" />
+      <img 
+        [src]="selectedVolume?.imageUrl || product.imageUrl || '/assets/images/default-product.jpg'"
+        [alt]="product.name" 
+        class="image" />
     </div>
+
+    <div *ngIf="product?.volumes?.length">
+  <label>Choisir le volume :</label>
+  <div class="volume-options">
+    <button 
+      *ngFor="let vol of product.volumes; let i = index"
+      (click)="selectedVolumeIndex = i"
+      [class.selected]="selectedVolumeIndex === i"
+      type="button"
+    >
+      <img 
+        *ngIf="vol.imageUrl" 
+        [src]="vol.imageUrl" 
+        alt="{{ vol.label }}" 
+        class="volume-img"
+      />
+      {{ vol.label }}
+    </button>
+  </div>
+</div>
+
 
     <div class="product-info">
       <p class="description">{{ product.description }}</p>
 
       <p class="price">
         <strong>Prix&nbsp;:</strong>
-        {{ product.price | currency:'MAD':'symbol':'1.2-2' }}
+        {{ selectedVolume?.price || product.price | currency:'MAD':'symbol':'1.2-2' }}
       </p>
 
-      <p class="quantity"
-         [style.color]="product.quantity < 10 ? 'red' : 'green'">
+      <p class="quantity" [style.color]="product.quantity < 10 ? 'red' : 'green'">
         Quantité&nbsp;: {{ product.quantity }}
       </p>
 
@@ -44,11 +65,8 @@
   <section *ngIf="similarByMarque.length" class="similar">
     <h3>Produits de la même marque ({{ product.marque }})</h3>
     <div class="similar-list">
-      <div class="sim-card"
-           *ngFor="let p of similarByMarque"
-           (click)="goTo(p)">
-        <img [src]="p.imageUrl || '/assets/images/default-product.jpg'"
-             [alt]="p.name" />
+      <div class="sim-card" *ngFor="let p of similarByMarque" (click)="goTo(p)">
+        <img [src]="p.imageUrl || '/assets/images/default-product.jpg'" [alt]="p.name" />
         <span>{{ p.name }}</span>
       </div>
     </div>
@@ -58,11 +76,8 @@
   <section *ngIf="similarByGenre.length" class="similar">
     <h3>Parfums avec un style similaire ({{ product.genre }})</h3>
     <div class="similar-list">
-      <div class="sim-card"
-           *ngFor="let p of similarByGenre"
-           (click)="goTo(p)">
-        <img [src]="p.imageUrl || '/assets/images/default-product.jpg'"
-             [alt]="p.name" />
+      <div class="sim-card" *ngFor="let p of similarByGenre" (click)="goTo(p)">
+        <img [src]="p.imageUrl || '/assets/images/default-product.jpg'" [alt]="p.name" />
         <span>{{ p.name }}</span>
       </div>
     </div>

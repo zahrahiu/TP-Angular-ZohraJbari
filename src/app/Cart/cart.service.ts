@@ -9,7 +9,13 @@ import { Product } from '../models/product.model';
 })
 export class CartService {
   private baseUrl = 'http://localhost:3000/api/products';
-  private items: {product: Product, quantity: number}[] = [];
+
+  // تعديل: كل عنصر فيه حجم (volume) اختياري
+  private items: {
+    product: Product;
+    volume?: { label: string; price: number; imageUrl?: string };
+    quantity: number;
+  }[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -20,20 +26,21 @@ export class CartService {
           apiProduct.id.toString(),
           apiProduct.name,
           apiProduct.description,
-          typeof apiProduct.price === 'string' 
+          typeof apiProduct.price === 'string'
             ? parseFloat(apiProduct.price.replace(' DH', '').trim())
             : apiProduct.price,
           apiProduct.quantity,
           apiProduct.imageUrl,
           apiProduct.category?.toLowerCase().trim(),
           apiProduct.hoverImageUrl,
-           false,
-  Number(apiProduct.discountPercentage) || 0,
-  apiProduct.offerEndsInSeconds                   
-    ? new Date(Date.now() + apiProduct.offerEndsInSeconds * 1000)
-    : undefined,
-    apiProduct.genre,
-    apiProduct.marque
+          false,
+          Number(apiProduct.discountPercentage) || 0,
+          apiProduct.offerEndsInSeconds
+            ? new Date(Date.now() + apiProduct.offerEndsInSeconds * 1000)
+            : undefined,
+          apiProduct.genre,
+          apiProduct.marque,
+          apiProduct.volumes // volumes ici
         ));
       }),
       catchError(error => {
@@ -42,7 +49,6 @@ export class CartService {
       })
     );
   }
-
 
   getSimilarProducts(ref: Product, max = 8): Observable<Product[]> {
     return this.getProducts().pipe(
@@ -53,14 +59,27 @@ export class CartService {
             (p.genre === ref.genre || p.marque === ref.marque))
           .slice(0, max)
       )
-    );}
+    );
+  }
 
   addToCart(product: Product, quantity: number = 1) {
-    const existingItem = this.items.find(item => item.product.id === product.id);
+    const existingItem = this.items.find(item => item.product.id === product.id && !item.volume);
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
       this.items.push({ product, quantity });
+    }
+    product.quantity -= quantity;
+  }
+
+  addToCartWithVolume(product: Product, volume: { label: string; price: number; imageUrl?: string }, quantity: number = 1) {
+    const existingItem = this.items.find(item =>
+      item.product.id === product.id && item.volume?.label === volume.label
+    );
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      this.items.push({ product, volume, quantity });
     }
     product.quantity -= quantity;
   }

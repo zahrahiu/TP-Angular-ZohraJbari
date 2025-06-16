@@ -153,3 +153,40 @@
   50%  { transform: scale(1.5); }
   100% { transform: scale(1);   }
 }
+
+.volume-options button {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* مسافة بين الصورة والنص */
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.volume-options button.selected {
+  border-color: #007bff;
+  background-color: #e7f1ff;
+}
+
+.volume-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+
+
+.add-to-cart-btn {
+  margin-top: 10px;
+  background-color: #e91e63;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #c2185b;
+}
