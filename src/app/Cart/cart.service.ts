@@ -29,9 +29,11 @@ export class CartService {
           apiProduct.hoverImageUrl,
            false,
   Number(apiProduct.discountPercentage) || 0,
-  apiProduct.offerEndsInSeconds                   // <— men API
+  apiProduct.offerEndsInSeconds                   
     ? new Date(Date.now() + apiProduct.offerEndsInSeconds * 1000)
-    : undefined
+    : undefined,
+    apiProduct.genre,
+    apiProduct.marque
         ));
       }),
       catchError(error => {
@@ -40,6 +42,18 @@ export class CartService {
       })
     );
   }
+
+
+  getSimilarProducts(ref: Product, max = 8): Observable<Product[]> {
+    return this.getProducts().pipe(
+      map(list =>
+        list
+          .filter(p =>
+            p.id !== ref.id &&
+            (p.genre === ref.genre || p.marque === ref.marque))
+          .slice(0, max)
+      )
+    );}
 
   addToCart(product: Product, quantity: number = 1) {
     const existingItem = this.items.find(item => item.product.id === product.id);

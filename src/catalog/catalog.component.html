@@ -17,7 +17,7 @@
   <div class="right-section">
     <button title="Mon compte">👤</button>
     <button title="Favoris" [routerLink]="['/favoris']">❤</button>
-    <button title="Panier">🛒</button>
+    <button title="Panier"  [routerLink]="['/cart']">🛒</button>
   </div>
 </div>
 
@@ -56,6 +56,13 @@
               </div>
 
         <div class="product-info">
+          <div class="rating-mini">
+  <span *ngFor="let s of stars; let i = index"
+        [class.filled]="i < getRating(product.id)">
+    &#9733;     <!-- entité Unicode de l’étoile -->
+  </span>
+</div>
+
           <h3>{{ product.name }}</h3>
           
          

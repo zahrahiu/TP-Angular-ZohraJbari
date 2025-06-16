@@ -11,8 +11,9 @@ export class Product {
     public hoverImageUrl?: string,
     public isFavorite: boolean = false,
     public discountPercentage: number=0,
-    offerEndsAt?: Date
-    
+    offerEndsAt?: Date,
+    public genre?: string,  
+    public marque?: string
   ) {this.offerEndsAt = offerEndsAt;}
 
  isOnSale(): boolean {

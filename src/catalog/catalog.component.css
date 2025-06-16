@@ -327,6 +327,16 @@ body {
   color: #bca7c0;
 }
 
+.rating-mini {
+  font-family: "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  margin: 4px 0;
+  font-size: 1.2rem;
+  color: #ccc;
+}
+.rating-mini .filled {
+  color: #ffc107;
+}
+
 
 
 

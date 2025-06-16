@@ -110,3 +110,46 @@
   background-color: #7d6f8a; /* وردي بارد غامق */
   color: #fff;
 }
+.similar        { margin-top: 2.5rem; }
+.similar-list   { display: flex; gap: 1rem; overflow-x: auto; }
+.sim-card       { width: 120px; cursor: pointer; text-align: center; }
+.sim-card img   { width: 100%; height: 120px; object-fit: cover;
+                  border-radius: 8px; transition: transform .2s; }
+.sim-card:hover img { transform: scale(1.05); }
+.sim-card span  { font-size: 0.8rem; display: block; margin-top: .4rem; }
+
+/* ===== Animations des étoiles ===== */
+.rating {
+  margin-bottom: .8rem;
+  user-select: none;
+}
+
+.star {
+  display: inline-block;
+  font-size: 2rem;
+  color: #ccc;              /* étoile vide */
+  cursor: pointer;
+  transition: transform .2s, color .3s;
+}
+
+/* Hover – aperçu avant clic */
+.star:hover {
+  transform: scale(1.25);
+  color: #ffcc00;
+}
+
+/* Étoiles sélectionnées */
+.filled {
+  color: #ffc107;
+}
+
+/* Animation pop sur la dernière cliquée */
+.pop {
+  animation: pop .3s ease;
+}
+
+@keyframes pop {
+  0%   { transform: scale(1);   }
+  50%  { transform: scale(1.5); }
+  100% { transform: scale(1);   }
+}

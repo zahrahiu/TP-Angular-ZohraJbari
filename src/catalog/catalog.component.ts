@@ -7,7 +7,7 @@ import { CartService } from '../app/Cart/cart.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Product } from '../app/models/product.model';
 import { interval, Subscription } from 'rxjs';
-
+import { RatingService } from '../app/rating.service';
 @Component({
   selector: 'app-catalog',
   standalone: true,
@@ -24,14 +24,23 @@ export class CatalogComponent implements OnInit {
  countdowns: { [id: string]: string } = {};
   private timerSub?: Subscription;  searchTerm = '';
   private isBrowser: boolean;
-
+  stars = Array(5);
   constructor(
     private cartService: CartService,
     private route: ActivatedRoute,
+    private ratingSvc: RatingService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
+  getRating(id: string): number {
+    return this.ratingSvc.get(id);         // 0 → 5
+  }
+
+  private sortByRating(arr: Product[]): Product[] {
+    return arr.sort((a, b) => this.getRating(b.id) - this.getRating(a.id));
+  }
+
 
   ngOnInit(): void {
     this.cartService.getProducts().subscribe(data => {
@@ -40,7 +49,8 @@ export class CatalogComponent implements OnInit {
       this.filteredProducts = [...this.products];
       this.loadFavorites();
       this.startCountdown(); 
-      
+      this.filteredProducts = this.sortByRating([...this.products]); // tri initial
+
 
       
     });
@@ -64,7 +74,6 @@ export class CatalogComponent implements OnInit {
             `${m.toString().padStart(2, '0')}:` +
             `${s.toString().padStart(2, '0')}`;
         } else {
-          // offre salat
           p.discountPercentage = 0;
           delete this.countdowns[p.id];
         }
@@ -109,6 +118,7 @@ ngOnDestroy() {
     default:
       this.filteredProducts = this.products.filter(p => p.category === filter);
   }
+  this.filteredProducts = this.sortByRating(this.filteredProducts);
 }
 
 
@@ -140,10 +150,10 @@ ngOnDestroy() {
     this.products.forEach(p => p.isFavorite = fav.includes(p.id));
   }
 
-  filterProducts(): void {
+   filterProducts(): void {
     const term = this.searchTerm.trim().toLowerCase();
-    this.filteredProducts = this.products.filter(p =>
-      p.name.toLowerCase().includes(term)
+    this.filteredProducts = this.sortByRating(
+      this.products.filter(p => p.name.toLowerCase().includes(term))
     );
   }
 

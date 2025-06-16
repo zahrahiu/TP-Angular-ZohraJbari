@@ -1,45 +1,82 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CurrencyPipe } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgIf, NgFor,  CurrencyPipe } from '@angular/common';
+
 import { Product } from '../app/models/product.model';
 import { CartService } from '../app/Cart/cart.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { RatingService } from '../app/rating.service';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe],
+  imports: [NgIf, NgFor, CurrencyPipe],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
   @Input() productId: string = '';
+
   product?: Product;
+  similarByMarque: Product[] = [];
+  similarByGenre:  Product[] = [];
+
+  stars          = Array(5);
+  currentRating  = 0;
+  clickedIndex: number | null = null;  
 
   constructor(
-  private cartService: CartService,
-  private router: Router,
-  private route: ActivatedRoute
-) {}
+    private cartService: CartService,
+    private ratingSvc: RatingService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
- 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      if (id) {
-        this.cartService.getProductById(id).subscribe(product => {
-          this.product = product;
+      if (!id) return;
+
+      this.cartService.getProductById(id).subscribe(prod => {
+        this.product = prod;
+        if (!prod) return;
+
+       
+        this.currentRating = this.ratingSvc.get(prod.id);
+
+        
+        this.cartService.getProducts().subscribe(all => {
+          this.similarByMarque = all
+            .filter(p => p.id !== prod.id && p.marque === prod.marque)
+            .slice(0, 8);
+
+          this.similarByGenre = all
+            .filter(p =>
+              p.id !== prod.id &&
+              p.genre === prod.genre &&
+              p.marque !== prod.marque
+            )
+            .slice(0, 8);
         });
-      }
+      });
     });
   }
 
- addToCart(product: Product) {
-  this.cartService.addToCart(product);
+  addToCart(p: Product) {
+    this.cartService.addToCart(p);
+    this.router.navigate(['/cart']);
+  }
 
-  this.router.navigate(['/cart']);
-}
+  goTo(p: Product) {
+    this.router.navigate(['/products', p.id]);
+  }
 
-  
+  rateProduct(stars: number) {
+    if (!this.product) return;
+
+    this.currentRating = stars;
+    this.clickedIndex  = stars - 1;           
+    setTimeout(() => (this.clickedIndex = null), 400);
+
+    this.ratingSvc.set(this.product.id, stars);
+  }
 }
