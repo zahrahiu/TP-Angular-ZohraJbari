@@ -1,6 +1,15 @@
+// src/app/models/product.model.ts
+export interface Volume {
+  label: string;
+  price: number;
+  imageUrl?: string;
+}
+
 export class Product {
-  public offerEndsAt?: Date;  
-  public volumes?: { label: string; price: number; imageUrl?: string }[];
+  /** التاريخ النهائي للعرض (قد يكون string من الـ backend) */
+  public offerEndsAt?: Date;
+  public volumes?: Volume[];
+
   constructor(
     public id: string,
     public name: string,
@@ -11,32 +20,38 @@ export class Product {
     public category?: string,
     public hoverImageUrl?: string,
     public isFavorite: boolean = false,
-    public discountPercentage: number=0,
-    offerEndsAt?: Date,
-    public genre?: string,  
+    /** نسبة التخفيض – 0 إذا ما كاينش */
+    public discountPercentage: number = 0,
+    offerEndsAt?: Date | string,
+    public genre?: string,
     public marque?: string,
-     volumes?: { label: string; price: number; imageUrl?: string }[] ,  // <-- nouveau
+    volumes?: Volume[],
     public ingredientsImageUrl?: string
   ) {
-    this.offerEndsAt = offerEndsAt;
+    // حوّل offerEndsAt لـ Date إلا كانت string
+    this.offerEndsAt =
+      typeof offerEndsAt === 'string' ? new Date(offerEndsAt) : offerEndsAt;
+
     this.volumes = volumes;
   }
 
- isOnSale(): boolean {
-  return this.discountPercentage! > 0 &&
-         (!this.offerEndsAt || this.offerEndsAt.getTime() > Date.now());
-}
+  /** واش البرودوي فالتخفيض؟ */
+  isOnSale(): boolean {
+    return (
+      this.discountPercentage > 0 &&
+      (!this.offerEndsAt || this.offerEndsAt.getTime() > Date.now())
+    );
+  }
 
-
+  /** الثمن من بعد التخفيض (مقرب) */
   getDiscountedPrice(): number {
-    return this.isOnSale() 
-      ? Math.round(this.price * (1 - this.discountPercentage! / 100))
+    return this.isOnSale()
+      ? Math.round(this.price * (1 - this.discountPercentage / 100))
       : this.price;
   }
 
-   isLowQuantity(): boolean {
+  /** واش الكمية قليلة */
+  isLowQuantity(): boolean {
     return this.quantity < 10;
   }
 }
-
-

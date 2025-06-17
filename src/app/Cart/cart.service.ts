@@ -17,6 +17,8 @@ export class CartService {
     quantity: number;
   }[] = [];
 
+  
+
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
@@ -63,15 +65,22 @@ export class CartService {
     );
   }
 
-  addToCart(product: Product, quantity: number = 1) {
-    const existingItem = this.items.find(item => item.product.id === product.id && !item.volume);
+  addToCart(product: Product, quantity: number = 1, volume?: { label: string; price: number; imageUrl?: string }) {
+    // Trouver item existant selon product.id + volume.label (si volume)
+    const existingItem = this.items.find(item =>
+      item.product.id === product.id && (volume ? item.volume?.label === volume.label : !item.volume)
+    );
+
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      this.items.push({ product, quantity });
+      this.items.push({ product, quantity, volume });
     }
+
+    // Deduct stock
     product.quantity -= quantity;
   }
+
 
   addToCartWithVolume(product: Product, volume: { label: string; price: number; imageUrl?: string }, quantity: number = 1) {
     const existingItem = this.items.find(item =>

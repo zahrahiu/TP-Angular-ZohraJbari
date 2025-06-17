@@ -1,3 +1,5 @@
+/* src/product-details/product-details.component.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
 body {font-family:'Playfair Display',serif;background:#f8f5f7;margin:0}
 
@@ -9,7 +11,6 @@ body {font-family:'Playfair Display',serif;background:#f8f5f7;margin:0}
 .right-section button:hover{color:#7a5d7b}
 
 .product-page-container{max-width:1200px;margin:30px auto;padding:0 20px}
-.product-name{font-size:2rem;color:#5a4a5a;margin:0 0 25px;border-bottom:3px solid #e0d0e0;padding-bottom:15px;text-align:center}
 
 .product-main-section{display:flex;flex-direction:column;gap:30px;margin-bottom:40px}
 @media(min-width:768px){.product-main-section{flex-direction:row}}
@@ -46,15 +47,69 @@ body {font-family:'Playfair Display',serif;background:#f8f5f7;margin:0}
 .description-text{line-height:1.8;text-align:center;color:#120f0f}
 .section-title{font-size:1.5rem;text-align:center;color:#6a5a6a;margin:0 0 10px}
 
-.similar-products-section{margin:50px 0}
-.similar-products-title{font-size:1.4rem;text-align:center;color:#5a4a5a;margin-bottom:20px;border-bottom:1px solid #e0d0e0;padding-bottom:10px}
-.similar-products-scroller{display:flex;gap:20px;overflow-x:auto;padding:10px 5px}
-.similar-product-card{min-width:180px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.08);transition:transform .3s;cursor:pointer}
-.similar-product-card:hover{transform:translateY(-5px)}
-.similar-product-card img{width:100%;height:180px;object-fit:cover}
-.similar-product-card .product-info{padding:15px}
-.similar-product-card h3{font-size:1rem;margin:0 0 5px;color:#5a4a5a}
-.product-price{font-size:.9rem;color:#8a6d8b;font-weight:600;margin:0}
+.similar{
+  margin:50px 0;
+  padding:10px 0;
+}
+
+/* titre */
+.similar h3{
+  font-size:1.4rem;
+  text-align:center;
+  color:#5a4a5a;
+  margin-bottom:20px;
+  border-bottom:1px solid #e0d0e0;
+  padding-bottom:10px;
+}
+
+/* conteneur horizontal défilable */
+.similar-list{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  padding:10px 5px;
+  scrollbar-width:none;      /* 🔒 cache scrollbar FireFox */
+}
+.similar-list::-webkit-scrollbar{display:none;} /* 🔒 cache scrollbar Chrome */
+
+/* carte produit */
+.sim-card{
+  min-width:180px;
+  background:#fff;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 4px 8px rgba(0,0,0,.08);
+  transition:transform .3s;
+  cursor:pointer;
+}
+.sim-card:hover{transform:translateY(-5px);}
+
+/* image */
+.sim-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.sim-card span{
+  display:block;
+  padding:10px;
+  font-size:1rem;
+  color:#5a4a5a;
+  text-align:center;
+}
+
+.sim-card .old-price{
+  text-decoration:line-through;
+  color:#999;
+  font-size:.9rem;
+}
+.sim-card .new-price{
+  color:#e53935;
+  font-weight:700;
+  font-size:.9rem;
+}
+
 
 .loading-container{display:flex;justify-content:center;align-items:center;height:300px;font-size:1.2rem;color:#8a7a8a}
 .nav-logo {
@@ -105,3 +160,51 @@ body {font-family:'Playfair Display',serif;background:#f8f5f7;margin:0}
 .thumb-vertical.selected {
   border-color: #b2929e;
 }
+
+
+/* Badge de promo pour le pourcentage */
+.offer-badge {
+  display: inline-block;
+  background-color: #e53935; /* Rouge vif */
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 7px 12px;
+  border-radius: 20px;
+  margin-left: 150px;
+  font-family: 'Playfair Display', serif;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(229, 57, 53, 0.5);
+  vertical-align: middle;
+  margin-bottom: 20px;
+}
+
+/* Timer de l'offre */
+.offer-timer {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #b92f2f; /* rouge foncé */
+  background-color: #fdecea; /* fond très clair rouge */
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-family: 'Playfair Display', serif;
+  box-shadow: 0 1px 4px rgba(185, 47, 47, 0.3);
+  user-select: none;
+  vertical-align: middle;
+    margin-bottom: 20px;
+
+}
+
+
+
+
+.product-name{font-size:2rem;color:#5a4a5a;margin:0 0 25px;border-bottom:3px solid #e0d0e0;padding-bottom:15px;text-align: center;}
+
+/* ----- PRICES ----- */
+.old-price{ text-decoration:line-through; color:#999; margin-right:8px; }
+.new-price{ color:#e53935; font-weight:700; }
+.single-price{ color:#b2929e; font-weight:700; }
+
+

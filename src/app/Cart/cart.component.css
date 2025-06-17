@@ -1,280 +1,295 @@
-/* Navbar */
-.parfum-navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background-color: var(--blanc);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
+/* ---------------------------------------------------
+   Palette & Fonts
+--------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+:root{
+  /* couleurs principales */
+  --rose: #d81b60;          /* Rose chaud luxueux */
+  --rose‑clair: #fce4ec;     /* Rose pastel */
+  --or:   #f5c518;           /* Détail doré */
+  --gris: #4f4f4f;          /* Texte principal */
+  --gris‑clair: #9e9e9e;     /* Texte secondaire */
+  --blanc: #fff;
+  --ombre: 0 4px 16px rgba(0,0,0,.12);
 }
 
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--rose);
+/* Manière rapide d’appliquer le même fond partout */
+html,body{
+  height:100%;
+}
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(165deg,#fff 0%,#fff 40%,#fef7fb 70%,#fdeaf6 100%);
+  color:var(--gris);
+  -webkit-font-smoothing:antialiased;
 }
 
-.nav-menu {
-  display: flex;
-  gap: 20px;
+/* ---------------------------------------------------
+   Barre de navigation
+--------------------------------------------------- */
+.parfum-navbar{
+  position:sticky;
+  top:0;
+  width:100%;
+  z-index:1000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1.6rem;
+  padding:1rem 2rem;
+  background:linear-gradient(90deg,var(--rose) 0%,#b01753 100%);
+  color:var(--blanc);
+  box-shadow:var(--ombre);
 }
 
-.nav-menu a {
-  text-decoration: none;
-  color: var(--gris-moyen);
-  font-weight: 500;
-  transition: color 0.3s;
-  white-space: nowrap;
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;
+  letter-spacing:2px;
+  user-select:none;
 }
 
-.nav-menu a:hover {
-  color: var(--rose);
+/* ---------------------------------------------------
+   Conteneur Panier
+--------------------------------------------------- */
+.cart-container{
+  max-width:720px;
+  margin:6.5rem auto 3rem;
+  background:var(--blanc);
+  border-radius:18px;
+  padding:2.2rem 2.5rem;
+  box-shadow:var(--ombre);
 }
 
-
-/* Container Panier */
-.cart-container {
-    
-  max-width: 900px;
-  margin: 5rem auto;
-  padding: 2rem;
-  background-color: #fdfdfd;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(180, 180, 180, 0.3);
-}
-
-.cart-container h2 {
-  color: #444;
-  margin-bottom: 2rem;
-  text-align: center;
+.cart-container h2{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-size:2rem;
+  margin-top:0;
+  color:var(--rose);
 }
 
 /* Panier vide */
-.empty-cart {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #999;
-  padding: 2rem;
+.empty-cart{
+  text-align:center;
+  font-size:1.2rem;
+  color:var(--gris‑clair);
+  padding:2.5rem 1rem;
 }
 
-/* Item */
-.cart-item {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  border-bottom: 1px solid #eee;
-  padding: 1rem 0;
+/* ---------------------------------------------------
+   Liste d’articles
+--------------------------------------------------- */
+.cart-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  max-height:370px;          /* scroll si trop long */
+  overflow-y:auto;
 }
 
-.cart-item-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 12px;
-  object-fit: cover;
-  border: 2px solid #e3d5dd;
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1.1rem 0;
+  border-bottom:1px solid #f4f4f4;
 }
 
-.cart-item-details h3 {
-  margin: 0;
-  color: #333;
+.item-info{
+  flex:2 1 55%;
+  font-weight:600;
 }
 
-.cart-item-details p {
-  margin: 0.5rem 0;
-  color: #555;
+.quantity-control{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
 }
 
-.quantity-control {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
+.quantity-control button{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  border:none;
+  background:var(--rose);
+  color:var(--blanc);
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .15s;
+}
+.quantity-control button:disabled{
+  background:#e5e5e5;
+  cursor:not-allowed;
+}
+.quantity-control button:hover:not(:disabled){
+  transform:scale(1.1);
+}
+.quantity-control span{
+  min-width:28px;
+  text-align:center;
+  font-weight:600;
 }
 
-.quantity-control button {
-  background-color: #d16ba5;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  width: 30px;
-  height: 30px;
-  font-weight: bold;
-  cursor: pointer;
+.remove-btn{
+  border:none;
+  background:#ffebe6;
+  color:#d7373f;
+  font-weight:600;
+  border-radius:8px;
+  padding:6px 10px;
+  cursor:pointer;
+  transition:background .25s;
+}
+.remove-btn:hover{
+  background:#ffd4cd;
 }
 
-.quantity-control span {
-  font-weight: bold;
-  color: #333;
+/* ---------------------------------------------------
+   Total & bouton commande
+--------------------------------------------------- */
+.total{
+  text-align:right;
+  font-size:1.4rem;
+  font-weight:700;
+  color:var(--gris);
+  margin:1.8rem 0 .7rem;
 }
 
-/* Remove button */
-.remove-btn {
-  background-color: transparent;
-  border: none;
-  font-size: 1.5rem;
-  color: #d16ba5;
-  cursor: pointer;
-  margin-left: auto;
+.confirm-btn{
+  display:block;
+  width:100%;
+  padding:1rem 0;
+  font-size:1.1rem;
+  font-weight:700;
+  border:none;
+  border-radius:12px;
+  background:var(--rose);
+  color:var(--blanc);
+  cursor:pointer;
+  box-shadow:0 3px 8px rgba(216,27,96,.3);
+  transition:background .25s,transform .15s;
+}
+.confirm-btn:hover{
+  background:#b01753;
+  transform:translateY(-2px);
 }
 
-/* Résumé panier */
-.cart-summary {
-  margin-top: 2rem;
-  text-align: center;
-  background-color: #f6f0f5;
-  padding: 1.5rem;
-  border-radius: 12px;
+/* ---------------------------------------------------
+   Formulaire de confirmation
+--------------------------------------------------- */
+.confirmation-form{
+  margin-top:2.5rem;
+  padding:2rem 1.8rem 2.5rem;
+  background:var(--rose‑clair);
+  border-radius:14px;
+  box-shadow:inset 0 0 6px rgba(0,0,0,.05);
 }
 
-.checkout-btn {
-  background-color: #d16ba5;
-  color: white;
-  border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background-color 0.3s ease;
+.confirmation-form h3{
+  margin-top:0;
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  color:var(--rose);
+  margin-bottom:1.6rem;
 }
 
-.checkout-btn:hover {
-  background-color: #c04b8b;
+.confirmation-form label{
+  display:block;
+  margin-bottom:1.1rem;
+  font-weight:600;
 }
 
-/* Fond semi-transparent qui couvre toute la page */
-.confirm-order-form {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* noir semi-transparent */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* devant tout le reste */
+.confirmation-form input[type="text"]{
+  width:100%;
+  padding:.75rem 1rem;
+  border:1px solid #e1e1e1;
+  border-radius:10px;
+  font-size:1rem;
+  margin-top:.35rem;
+  transition:border-color .25s,box-shadow .25s;
+}
+.confirmation-form input[type="text"]:focus{
+  border-color:var(--rose);
+  box-shadow:0 0 0 3px rgba(216,27,96,.15);
+  outline:none;
 }
 
-/* Contenu de la fenêtre modale */
-.confirm-order-form form {
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 10px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-  width: 350px;
-  max-width: 90%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Méthode de paiement */
+.payment-methods{
+  border:none;
+  margin:1.8rem 0 1.2rem;
+  padding:0;
+}
+.payment-methods legend{
+  font-weight:700;
+  margin-bottom:.4rem;
+  color:var(--gris);
+}
+.payment-methods label{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  margin-bottom:.8rem;
+  cursor:pointer;
+}
+.payment-methods input[type="radio"]{
+  accent-color:var(--rose);
 }
 
-.confirm-order-form h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #333;
+/* Code carte */
+.card-code-container input{
+  margin-top:.4rem;
 }
 
-.confirm-order-form label {
-  display: block;
-  margin-bottom: 12px;
-  font-weight: 600;
-  color: #555;
+/* Localisation */
+.location-info, .location-error{
+  font-size:.9rem;
+  margin-top:1rem;
+  font-style:italic;
+  color:var(--gris‑clair);
 }
 
-.confirm-order-form input[type="text"] {
-  width: 100%;
-  padding: 8px 10px;
-  margin-top: 5px;
-  border: 1.5px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border-color 0.3s ease;
+/* Boutons valider / annuler */
+.submit-btn, .cancel-btn{
+  width:48%;
+  padding:.9rem 0;
+  font-size:1rem;
+  font-weight:700;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  transition:background .25s,transform .15s;
+  box-shadow:0 3px 6px rgba(0,0,0,.08);
+}
+.submit-btn{
+  background:var(--rose);
+  color:var(--blanc);
+}
+.submit-btn:hover{
+  background:#b01753;
+  transform:translateY(-1px);
+}
+.cancel-btn{
+  background:#ececec;
+}
+.cancel-btn:hover{
+  background:#d5d5d5;
+  transform:translateY(-1px);
 }
 
-.confirm-order-form input[type="text"]:focus {
-  border-color: #c0392b;
-  outline: none;
-}
-
-.confirm-order-form button {
-  padding: 10px 15px;
-  margin-top: 15px;
-  margin-right: 10px;
-  font-weight: 600;
-  font-size: 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.confirm-order-form button[type="submit"] {
-  background-color: #c0392b;
-  color: white;
-}
-
-.confirm-order-form button[type="submit"]:disabled {
-  background-color: #e0a9a4;
-  cursor: not-allowed;
-}
-
-.confirm-order-form button[type="submit"]:hover:not(:disabled) {
-  background-color: #a92b21;
-}
-
-.confirm-order-form button[type="button"] {
-  background-color: #bdc3c7;
-  color: #333;
-}
-
-.confirm-order-form button[type="button"]:hover {
-  background-color: #95a5a6;
-}
-
-.payment-modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1001;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.payment-content {
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-}
-
-.payment-methods button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  background-color: #e67e22;
-  color: white;
-  font-weight: bold;
-}
-
-.payment-methods button:hover {
-  background-color: #d35400;
-}
-
-.close-btn {
-  margin-top: 15px;
-  background-color: #95a5a6;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+/* ---------------------------------------------------
+   Responsive
+--------------------------------------------------- */
+@media(max-width:540px){
+  .cart-container{
+    margin:6rem 1rem 2rem;
+    padding:1.4rem 1.2rem;
+  }
+  .quantity-control span{
+    min-width:22px;
+  }
 }

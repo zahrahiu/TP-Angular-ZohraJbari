@@ -24,7 +24,8 @@ export class CatalogComponent implements OnInit {
  countdowns: { [id: string]: string } = {};
   private timerSub?: Subscription;  searchTerm = '';
   private isBrowser: boolean;
-  stars = Array(5);
+  stars: number[] = [1, 2, 3, 4, 5];
+
   constructor(
     private cartService: CartService,
     private route: ActivatedRoute,

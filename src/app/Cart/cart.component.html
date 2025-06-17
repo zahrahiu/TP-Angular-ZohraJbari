@@ -2,25 +2,16 @@
   <div class="nav-logo">PARFUMS LUXE</div>
   <div class="nav-menu"></div>
 </nav>
-
 <div class="cart-container">
-  <h2>🛒 Votre Panier</h2>
+  <h2>Panier</h2>
+  <div *ngIf="cartItems.length === 0" class="empty-cart">Votre panier est vide.</div>
 
-  <div *ngIf="cartItems.length === 0" class="empty-cart">
-    Votre panier est vide 
-  </div>
-
-  <div *ngIf="cartItems.length > 0">
-    <div class="cart-item" *ngFor="let item of cartItems; let i = index">
-      <img [src]="item.product.imageUrl || '/assets/images/default-product.jpg'" 
-           [alt]="item.product.name"
-           class="cart-item-image">
-
-      <div class="cart-item-details">
-        <h3>{{ item.product.name }}</h3>
-        <p>Prix: {{ item.product.price | currency:'MAD':'symbol':'1.2-2' }}</p>
-
-        <div class="quantity-control">
+  <ul *ngIf="cartItems.length > 0" class="cart-list">
+    <li *ngFor="let item of cartItems; index as i" class="cart-item">
+      <div class="item-info">
+        <strong>{{ item.product.name }}</strong> — Prix: {{ item.product.price }} MAD
+      </div>
+     <div class="quantity-control">
           <button (click)="updateQuantity(i, item.quantity - 1)">-</button>
           <span>{{ item.quantity }}</span>
           <button 
@@ -28,55 +19,63 @@
             [disabled]="item.product.quantity === 0">+
           </button>
         </div>
+      <button class="remove-btn" (click)="removeItem(i)">Supprimer</button>
+    </li>
+  </ul>
 
-        <p>Quantité restante en stock: {{ item.product.quantity }}</p>
-      </div>
-
-      <button class="remove-btn" (click)="removeItem(i)">×</button>
-    </div>
-
-    <div class="cart-summary">
-      <h3>Total du panier: {{ total | currency:'MAD':'symbol':'1.2-2' }}</h3>
-      <button class="checkout-btn" (click)="showConfirmForm = true">Passer la commande</button>
-    </div>
+  <div class="total">
+    <strong>Total: {{ total }} MAD</strong>
   </div>
-</div>
 
-<!-- Formulaire confirmation -->
-<div *ngIf="showConfirmForm" class="confirm-order-form">
-  <h3>Confirmer la commande</h3>
-  
-  <form (ngSubmit)="confirmerCommande()" #orderForm="ngForm">
-    <label>
-      Nom d'utilisateur:
-      <input type="text" [(ngModel)]="userName" name="userName" required />
-    </label>
-    <br/>
-    <label>
-      Numéro d'utilisateur:
-      <input type="text" [(ngModel)]="userNumber" name="userNumber" required />
-    </label>
-    <br/>
-    <label>
-      Total:
-      <input type="text" [value]="total | currency:'MAD':'symbol':'1.2-2'" readonly />
-    </label>
-    <br/>
-    <button type="submit" [disabled]="orderForm.invalid">Confirmer la commande</button>
-    <button type="button" (click)="showConfirmForm = false">Annuler</button>
-  </form>
-</div>
-<!-- Modal de paiement -->
-<div *ngIf="showPaymentOptions" class="payment-modal">
-  <div class="payment-content">
-    <h3>Choisissez une méthode de paiement</h3>
+  <button *ngIf="cartItems.length > 0 && !showConfirmForm" class="confirm-btn" (click)="toggleConfirmForm()">
+    Confirmer la commande
+  </button>
 
-    <div class="payment-methods">
-      <button (click)="payerAvec('paypal')">💳 PayPal</button>
-      <button (click)="payerAvec('carte')">💳 Carte Bancaire</button>
-      <button (click)="payerAvec('espece')">💵 Paiement à la livraison</button>
+  <div *ngIf="showConfirmForm" class="confirmation-form">
+    <h3>Formulaire de confirmation</h3>
+
+    <label>
+      Nom:
+      <input type="text" [(ngModel)]="userName" placeholder="Votre nom" />
+    </label>
+
+    <label>
+      Numéro:
+      <input type="text" [(ngModel)]="userNumber" placeholder="Votre numéro de téléphone" />
+    </label>
+
+    <fieldset class="payment-methods">
+      <legend>Méthode de paiement:</legend>
+
+      <label>
+        <input type="radio" name="paymentMethod" (change)="selectPaymentMethod('cash')" [checked]="paymentMethod === 'cash'" />
+        Paiement à la livraison (Cash)
+      </label>
+
+      <label>
+        <input type="radio" name="paymentMethod" (change)="selectPaymentMethod('card')" [checked]="paymentMethod === 'card'" />
+        Carte bancaire
+      </label>
+    </fieldset>
+
+    <div *ngIf="paymentMethod === 'card'" class="card-code-container">
+      <label>
+        Code de la carte:
+        <input type="text" [(ngModel)]="cardCode" placeholder="Entrez votre code de carte" />
+      </label>
     </div>
 
-    <button class="close-btn" (click)="showPaymentOptions = false">Annuler</button>
+    <div class="location-info" *ngIf="latitude !== null && longitude !== null">
+      <p>Localisation actuelle :</p>
+      <p>Latitude: {{ latitude }}</p>
+      <p>Longitude: {{ longitude }}</p>
+    </div>
+
+    <div class="location-error" *ngIf="locationError">
+      <p>{{ locationError }}</p>
+    </div>
+
+    <button class="submit-btn" (click)="confirmerCommande()">Valider la commande</button>
+    <button class="cancel-btn" (click)="toggleConfirmForm()">Annuler</button>
   </div>
 </div>

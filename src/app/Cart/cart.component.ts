@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CartService } from '../Cart/cart.service';
 import { Product } from '../models/product.model';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -14,10 +14,19 @@ import { FormsModule } from '@angular/forms';
 export class CartComponent {
   cartItems: { product: Product, quantity: number }[] = [];
   total = 0;
+
   showConfirmForm = false;
   showPaymentOptions = false;
+
   userName = '';
   userNumber = '';
+
+  paymentMethod: 'cash' | 'card' | '' = '';
+  cardCode = '';
+
+  latitude: number | null = null;
+  longitude: number | null = null;
+  locationError: string | null = null;
 
   constructor(private cartService: CartService) {
     this.cartItems = this.cartService.getItems();
@@ -32,7 +41,7 @@ export class CartComponent {
 
   removeItem(index: number) {
     const productId = this.cartItems[index].product.id;
-    this.cartService.removeItem(productId); // Envoie l'ID string
+    this.cartService.removeItem(productId);
     this.cartItems = this.cartService.getItems();
     this.calculateTotal();
   }
@@ -53,19 +62,73 @@ export class CartComponent {
     }
   }
 
+  toggleConfirmForm() {
+    this.showConfirmForm = !this.showConfirmForm;
+    this.showPaymentOptions = false;
+  }
+
+  selectPaymentMethod(method: 'cash' | 'card') {
+    this.paymentMethod = method;
+  }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.latitude = position.coords.latitude;
+          this.longitude = position.coords.longitude;
+          this.locationError = null;
+        },
+        (error) => {
+          this.locationError = "Impossible d'obtenir la localisation.";
+          this.latitude = null;
+          this.longitude = null;
+        }
+      );
+    } else {
+      this.locationError = "La géolocalisation n'est pas supportée par ce navigateur.";
+    }
+  }
+
   confirmerCommande() {
-    alert(`Commande confirmée pour ${this.userName} (ID: ${this.userNumber}) avec un total de ${this.total} MAD.`);
+    if (!this.userName.trim() || !this.userNumber.trim() || this.total <= 0) {
+      alert('Veuillez remplir tous les champs obligatoires.');
+      return;
+    }
+
+    if (!this.paymentMethod) {
+      alert('Veuillez choisir une méthode de paiement.');
+      return;
+    }
+
+    if (this.paymentMethod === 'card' && this.cardCode.trim().length < 4) {
+      alert('Veuillez saisir un code de carte valide (au moins 4 caractères).');
+      return;
+    }
+
+    this.getLocation();
+
+    alert(`Commande confirmée pour ${this.userName} (ID: ${this.userNumber})
+Total: ${this.total} MAD
+Méthode paiement: ${this.paymentMethod}
+Localisation: ${this.latitude ?? 'non disponible'}, ${this.longitude ?? 'non disponible'}`);
+
     this.showConfirmForm = false;
     this.cartService.clearCart();
     this.cartItems = [];
     this.calculateTotal();
-    this.showPaymentOptions = true;
+
+    // Reset formulaire
     this.userName = '';
     this.userNumber = '';
+    this.paymentMethod = '';
+    this.cardCode = '';
+    this.latitude = null;
+    this.longitude = null;
+    this.locationError = null;
   }
 
   payerAvec(methode: string) {
-    this.showPaymentOptions = false;
-    alert('Méthode choisie: ' + methode); 
+    alert('Méthode choisie: ' + methode);
   }
 }
