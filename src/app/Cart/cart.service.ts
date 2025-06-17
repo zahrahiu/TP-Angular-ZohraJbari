@@ -40,7 +40,8 @@ export class CartService {
             : undefined,
           apiProduct.genre,
           apiProduct.marque,
-          apiProduct.volumes // volumes ici
+          apiProduct.volumes,
+          apiProduct.ingredientsImageUrl
         ));
       }),
       catchError(error => {

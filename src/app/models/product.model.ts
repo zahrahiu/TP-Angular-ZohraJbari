@@ -15,8 +15,8 @@ export class Product {
     offerEndsAt?: Date,
     public genre?: string,  
     public marque?: string,
-     volumes?: { label: string; price: number; imageUrl?: string }[]   // <-- nouveau
-
+     volumes?: { label: string; price: number; imageUrl?: string }[] ,  // <-- nouveau
+    public ingredientsImageUrl?: string
   ) {
     this.offerEndsAt = offerEndsAt;
     this.volumes = volumes;

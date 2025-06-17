@@ -76,7 +76,12 @@ body {
   color: #a0848c;
   font-size: 24px;
 }
-
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--rose);
+}
 /* Filters */
 .filters {
   display: flex;

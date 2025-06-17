@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgIf, NgFor, CurrencyPipe } from '@angular/common';
+import {  RouterModule } from '@angular/router';
 
 import { Product } from '../app/models/product.model';
 import { CartService } from '../app/Cart/cart.service';
@@ -9,7 +10,9 @@ import { RatingService } from '../app/rating.service';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [NgIf, NgFor, CurrencyPipe],
+
+
+  imports: [NgIf, NgFor, CurrencyPipe, RouterModule],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
@@ -24,11 +27,13 @@ export class ProductDetailsComponent implements OnInit {
   currentRating = 0;
   clickedIndex: number | null = null;
   selectedVolumeIndex = 0;
+  currentImg = '/assets/images/default-product.jpg';
 
   constructor(
     private cartService: CartService,
     private ratingSvc: RatingService,
     private router: Router,
+    
     private route: ActivatedRoute
   ) {}
 
@@ -40,7 +45,7 @@ export class ProductDetailsComponent implements OnInit {
       this.cartService.getProductById(id).subscribe(prod => {
         this.product = prod;
         if (!prod) return;
-
+ this.currentImg = prod.imageUrl || this.currentImg;        if (prod.volumes?.length) this.currentImg = prod.volumes[0].imageUrl || this.currentImg;
         this.currentRating = this.ratingSvc.get(prod.id);
 
         this.cartService.getProducts().subscribe(all => {
@@ -80,6 +85,13 @@ export class ProductDetailsComponent implements OnInit {
     return this.product.volumes[this.selectedVolumeIndex];
   }
 
+  
+
+  selectVolume(i: number, img?: string) {
+    this.selectedVolumeIndex = i;
+    if (img) this.currentImg = img;
+  }
+
   rateProduct(stars: number) {
     if (!this.product) return;
 
@@ -89,4 +101,12 @@ export class ProductDetailsComponent implements OnInit {
 
     this.ratingSvc.set(this.product.id, stars);
   }
+  
+  setCurrentImage(imgUrl: string) {
+    this.currentImg = imgUrl;
+  }
 }
+
+
+
+

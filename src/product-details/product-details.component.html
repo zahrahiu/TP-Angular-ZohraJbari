@@ -1,89 +1,150 @@
-<div *ngIf="product; else loading">
-  <h2 class="product-title">{{ product.name }}</h2>
+<!-- product-details.component.html -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
 
-  <!-- Bloc Étoiles -->
-  <div class="rating">
-    <span
-      *ngFor="let _ of stars; let i = index"
-      class="star"
-      (click)="rateProduct(i + 1)"
-      [class.filled]="i < currentRating"
-      [class.pop]="clickedIndex === i">
-      ★
-    </span>
+<div class="top-bar">
+  <div class="left-section">
+    <div class="menu">&#8942;</div>
+    <div class="nav-logo">PARFUMS LUXE</div>
   </div>
-
-  <!-- Infos produit -->
-  <div class="product-details-container">
-    <div class="product-image">
-      <img 
-        [src]="selectedVolume?.imageUrl || product.imageUrl || '/assets/images/default-product.jpg'"
-        [alt]="product.name" 
-        class="image" />
-    </div>
-
-    <div *ngIf="product?.volumes?.length">
-  <label>Choisir le volume :</label>
-  <div class="volume-options">
-    <button 
-      *ngFor="let vol of product.volumes; let i = index"
-      (click)="selectedVolumeIndex = i"
-      [class.selected]="selectedVolumeIndex === i"
-      type="button"
-    >
-      <img 
-        *ngIf="vol.imageUrl" 
-        [src]="vol.imageUrl" 
-        alt="{{ vol.label }}" 
-        class="volume-img"
-      />
-      {{ vol.label }}
-    </button>
+  <div class="search-container"></div>
+  <div class="right-section">
+    <button title="Mon compte">👤</button>
+    <button title="Favoris" [routerLink]="['/favoris']">❤</button>
+    <button title="Panier" [routerLink]="['/cart']">🛒</button>
   </div>
 </div>
 
+<div *ngIf="product; else loading" class="product-page-container">
+  <h1 class="product-name">{{ product.name }}</h1>
 
-    <div class="product-info">
-      <p class="description">{{ product.description }}</p>
+  <div class="product-main-section">
+    <!-- IMAGES -->
+ <div class="product-image-container">
+  <div class="image-layout">
+    <!-- Main image -->
+    <img
+      [src]="currentImg"
+      [alt]="product.name"
+      class="main-product-image"
+    />
 
-      <p class="price">
-        <strong>Prix&nbsp;:</strong>
-        {{ selectedVolume?.price || product.price | currency:'MAD':'symbol':'1.2-2' }}
-      </p>
-
-      <p class="quantity" [style.color]="product.quantity < 10 ? 'red' : 'green'">
-        Quantité&nbsp;: {{ product.quantity }}
-      </p>
-
-      <button class="add-to-cart-btn" (click)="addToCart(product)">
-        Ajouter au panier
-      </button>
+    <!-- Thumbnails vertical -->
+    <div class="thumbnails-vertical">
+      <img
+        *ngIf="product.imageUrl"
+        [src]="product.imageUrl"
+        alt="Image principale"
+        class="thumb-vertical"
+        [class.selected]="currentImg === product.imageUrl"
+        (click)="setCurrentImage(product.imageUrl)"
+        title="Image principale"
+      />
+      <img
+        *ngIf="product.ingredientsImageUrl"
+        [src]="product.ingredientsImageUrl"
+        alt="Ingrédients"
+        class="thumb-vertical"
+        [class.selected]="currentImg === product.ingredientsImageUrl"
+        (click)="setCurrentImage(product.ingredientsImageUrl)"
+        title="Ingrédients"
+      />
+      <img
+        *ngIf="product.hoverImageUrl"
+        [src]="product.hoverImageUrl"
+        alt="Hover"
+        class="thumb-vertical"
+        [class.selected]="currentImg === product.hoverImageUrl"
+        (click)="setCurrentImage(product.hoverImageUrl)"
+        title="Hover"
+      />
     </div>
   </div>
 
-  <!-- Produits même marque -->
-  <section *ngIf="similarByMarque.length" class="similar">
-    <h3>Produits de la même marque ({{ product.marque }})</h3>
-    <div class="similar-list">
-      <div class="sim-card" *ngFor="let p of similarByMarque" (click)="goTo(p)">
-        <img [src]="p.imageUrl || '/assets/images/default-product.jpg'" [alt]="p.name" />
-        <span>{{ p.name }}</span>
-      </div>
-    </div>
-  </section>
 
-  <!-- Produits même genre -->
-  <section *ngIf="similarByGenre.length" class="similar">
-    <h3>Parfums avec un style similaire ({{ product.genre }})</h3>
-    <div class="similar-list">
-      <div class="sim-card" *ngFor="let p of similarByGenre" (click)="goTo(p)">
-        <img [src]="p.imageUrl || '/assets/images/default-product.jpg'" [alt]="p.name" />
-        <span>{{ p.name }}</span>
+
+
+      <div class="compact-rating">
+        <span
+          *ngFor="let _ of stars; let i = index"
+          class="star"
+          (click)="rateProduct(i + 1)"
+          [class.filled]="i < currentRating"
+        >★</span>
       </div>
     </div>
-  </section>
+
+    <!-- INFO -->
+    <div class="product-info-section">
+      <div *ngIf="product?.volumes?.length" class="volume-selection">
+        <div class="volume-options-grid">
+          <div
+            *ngFor="let vol of product.volumes; let i = index"
+            (click)="selectVolume(i, vol.imageUrl)"
+            [class.selected]="selectedVolumeIndex === i"
+            class="volume-option"
+          >
+            <img *ngIf="vol.imageUrl" [src]="vol.imageUrl" alt="{{ vol.label }}" />
+            <span>{{ vol.label }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-quantity-row">
+        <div class="price-box">
+          <span class="price-label">Prix :</span>
+          <span class="price-value">
+            {{ selectedVolume?.price || product.price | currency:'MAD':'symbol':'1.2-2' }}
+          </span>
+        </div>
+        <div class="quantity-box" [class.low-stock]="product.quantity < 10">
+          <span class="quantity-label">Quantité :</span>
+          <span class="quantity-value">{{ product.quantity }}</span>
+        </div>
+      </div>
+
+      <button class="add-to-cart-button"  (click)="addToCart(product)">Ajouter au panier</button>
+    </div>
+  </div>
+
+  <div class="product-description-section">
+    <h2 class="section-title">Description</h2>
+    <p class="description-text">{{ product.description }}</p>
+  </div>
+
+  <!-- SIMILAIRES -->
+  <div class="similar-products-section">
+    <div *ngIf="similarByMarque.length" class="similar-products-group">
+      <h2 class="similar-products-title">
+        Produits de la même marque ({{ product.marque }})
+      </h2>
+      <div class="similar-products-scroller">
+        <div *ngFor="let p of similarByMarque" class="similar-product-card">
+          <img [src]="p.imageUrl || '/assets/images/default-product.jpg'" [alt]="p.name" />
+          <div class="product-info">
+            <h3>{{ p.name }}</h3>
+            <p class="product-price">{{ p.price | currency:'MAD':'symbol':'1.2-2' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="similarByGenre.length" class="similar-products-group">
+      <h2 class="similar-products-title">
+        Parfums avec un style similaire ({{ product.genre }})
+      </h2>
+      <div class="similar-products-scroller">
+        <div *ngFor="let p of similarByGenre" class="similar-product-card">
+          <img [src]="p.imageUrl || '/assets/images/default-product.jpg'" [alt]="p.name" />
+          <div class="product-info">
+            <h3>{{ p.name }}</h3>
+            <p class="product-price">{{ p.price | currency:'MAD':'symbol':'1.2-2' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <ng-template #loading>
-  <p>Chargement des détails du produit...</p>
+  <div class="loading-container"><p>Chargement des détails du produit…</p></div>
 </ng-template>
