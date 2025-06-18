@@ -250,6 +250,45 @@
   border-color: var(--pink-cold);
 }
 
+.order-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.order-actions button {
+  background-color: var(--pink-cold);
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(216,161,180,0.5);
+}
+
+.order-actions button:hover {
+  background-color: #bf7f91;
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .order-details, .order-details * {
+    visibility: visible;
+  }
+  .order-details {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+
 /* الخط العمودي (tube) بين الحالات */
 .tube-vertical {
   width: 6px;

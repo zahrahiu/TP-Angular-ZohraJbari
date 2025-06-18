@@ -14,13 +14,22 @@
     <button title="Panier" [routerLink]="['/cart']">🛒</button>
   </div>
 </div>
-<div class="order-details" *ngIf="order">
+ <div class="order-actions">
+      <button (click)="printOrder()" title="Imprimer la commande">🖨 Imprimer</button>
+      <button (click)="downloadInvoice()" title="Télécharger la facture">📥 Télécharger la facture</button>
+    </div>
+
+<div class="order-details" *ngIf="order" id="order-details-for-pdf">
+  
 
   <h2 class="greeting">Merci, {{ order.userInfo.name }} !</h2>
 
   <div class="container-vertical">
-    <!-- العمود الأيسر: معلومات المستخدم + تفاصيل الطلب -->
+
+   
+
     <div class="left-vertical">
+
       <div class="user-info">
         <h3>Informations utilisateur</h3>
         <p><strong>Adresse:</strong> {{ order.userInfo.address }}</p>
@@ -31,25 +40,27 @@
       <div class="order-info">
         <h3>Détails de la commande</h3>
         <p><strong>Date:</strong> {{ order.createdAt | date:'short' }}</p>
+
         <h4>Produits commandés :</h4>
         <ul class="order-items">
-          <li *ngFor="let item of order.items">
+          <li *ngFor="let item of order.items" class="order-item">
             <img [src]="item.imageUrl" alt="{{ item.name }}" class="product-img" />
             <div class="product-desc">
               <p>{{ item.name }} - {{ item.volumeLabel || 'Standard' }} x {{ item.quantity }}</p>
-              <p class="price">{{ item.unitPrice * item.quantity | currency: 'MAD':'symbol' }}</p>
+              <p class="price">{{ (item.unitPrice * item.quantity) | currency:'MAD':'symbol':'1.2-2' }}</p>
             </div>
           </li>
         </ul>
-        <h4 class="total">Total : {{ order.total | currency: 'MAD' : 'symbol' }}</h4>
+
+        <h4 class="total">Total : {{ order.total | currency:'MAD':'symbol':'1.2-2' }}</h4>
       </div>
 
       <div *ngIf="statusText === 'Commande livrée'" class="delivery-msg">
         <p>Votre commande est arrivée. Merci ! 😊</p>
       </div>
+
     </div>
 
-    <!-- العمود الأيمن: شريط الحالة عمودي -->
     <div class="right-vertical">
       <h3>Statut de la commande</h3>
       <div class="status-bar-vertical">
@@ -69,6 +80,10 @@
         </div>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
+
+<ng-template #noOrder>
+  <p>Aucune commande trouvée.</p>
+</ng-template>

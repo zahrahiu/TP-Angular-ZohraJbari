@@ -24,7 +24,7 @@ type OrderInfo = {
   cardNumber?: string;
   cardExpiry?: string;
   cardCvc?: string;
-  address?: string;        // غير العنوان لي كيكتبه المستخدم
+  address?: string;       
 };
 
 @Component({
@@ -54,10 +54,9 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // ما بقات حتى حاجة تتنظف
+ 
   }
 
-  /* ----------------- Cart helpers ----------------- */
   inc(l: CartItem) {
     this.cartSvc.incrementQuantity(l.key);
   }
@@ -108,8 +107,7 @@ export class CartComponent implements OnInit, OnDestroy {
   this.cartSvc.finalizeOrder();
   this.showOrderForm = false;
 
-  // 🆕 التوجيه نحو صفحة تفاصيل الطلب
-  window.location.href = '/order-details'; // حسب المسار ديال routing عندك
+  window.location.href = '/order-details';
 }
 
 
