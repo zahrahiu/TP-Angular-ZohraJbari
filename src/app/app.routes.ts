@@ -5,7 +5,7 @@ import { CartComponent } from './Cart/cart.component';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
-
+import {OrderDetailsComponent} from './order-details/order-details.component';
 export const routes: Routes = [
       { path: 'product/:id', component: ProductDetailsComponent },
 
@@ -17,9 +17,10 @@ export const routes: Routes = [
         {path : 'signup', component : SignupComponent, title: 'My signup page'},
     {path : '', redirectTo : '/home', pathMatch : 'full'},
     { path: 'favoris',loadComponent: () => import('./favorites/favorites.component').then(m => m.FavoritesComponent)
-}
+ 
+    },
 
     
-    
+    { path: 'order-details', component: OrderDetailsComponent }
 
 ];

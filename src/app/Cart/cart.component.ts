@@ -95,18 +95,22 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   submitOrder() {
-  console.log('Commande soumise:', {
-    ...this.orderInfo,
+  const fullOrder = {
+    userInfo: this.orderInfo,
     total: this.getTotal(),
     items: this.cartGroups.flatMap(g => g.lines),
-  });
+    status: 'en cours', // الحالة المبدئية
+    createdAt: new Date()
+  };
 
-  alert('Commande passée avec succès!');
+  localStorage.setItem('lastOrder', JSON.stringify(fullOrder));
 
-  // 🆕 ne RESTOCKE pas
   this.cartSvc.finalizeOrder();
-
   this.showOrderForm = false;
+
+  // 🆕 التوجيه نحو صفحة تفاصيل الطلب
+  window.location.href = '/order-details'; // حسب المسار ديال routing عندك
 }
+
 
 }

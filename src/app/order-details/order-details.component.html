@@ -1,0 +1,74 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+
+<div class="top-bar">
+  <div class="left-section">
+    <div class="menu">&#8942;</div>
+    <div class="nav-logo">PARFUMS LUXE</div>
+  </div>
+
+  <div class="search-container"></div>
+
+  <div class="right-section">
+    <button title="Mon compte">👤</button>
+    <button title="Favoris" [routerLink]="['/favoris']">❤</button>
+    <button title="Panier" [routerLink]="['/cart']">🛒</button>
+  </div>
+</div>
+<div class="order-details" *ngIf="order">
+
+  <h2 class="greeting">Merci, {{ order.userInfo.name }} !</h2>
+
+  <div class="container-vertical">
+    <!-- العمود الأيسر: معلومات المستخدم + تفاصيل الطلب -->
+    <div class="left-vertical">
+      <div class="user-info">
+        <h3>Informations utilisateur</h3>
+        <p><strong>Adresse:</strong> {{ order.userInfo.address }}</p>
+        <p><strong>Téléphone:</strong> {{ order.userInfo.phone }}</p>
+        <p><strong>Paiement:</strong> {{ order.userInfo.paymentMethod === 'cash' ? 'Espèces' : 'Carte' }}</p>
+      </div>
+
+      <div class="order-info">
+        <h3>Détails de la commande</h3>
+        <p><strong>Date:</strong> {{ order.createdAt | date:'short' }}</p>
+        <h4>Produits commandés :</h4>
+        <ul class="order-items">
+          <li *ngFor="let item of order.items">
+            <img [src]="item.imageUrl" alt="{{ item.name }}" class="product-img" />
+            <div class="product-desc">
+              <p>{{ item.name }} - {{ item.volumeLabel || 'Standard' }} x {{ item.quantity }}</p>
+              <p class="price">{{ item.unitPrice * item.quantity | currency: 'MAD':'symbol' }}</p>
+            </div>
+          </li>
+        </ul>
+        <h4 class="total">Total : {{ order.total | currency: 'MAD' : 'symbol' }}</h4>
+      </div>
+
+      <div *ngIf="statusText === 'Commande livrée'" class="delivery-msg">
+        <p>Votre commande est arrivée. Merci ! 😊</p>
+      </div>
+    </div>
+
+    <!-- العمود الأيمن: شريط الحالة عمودي -->
+    <div class="right-vertical">
+      <h3>Statut de la commande</h3>
+      <div class="status-bar-vertical">
+        <div class="status-item" [class.active]="statusText === 'Commande en cours'">
+          <img src="assets/images/en-cours.svg" alt="En cours" />
+          <span>En cours</span>
+        </div>
+        <div class="tube-vertical"></div>
+        <div class="status-item" [class.active]="statusText === 'Commande expédiée'">
+          <img src="assets/images/expediee.svg" alt="Expédiée" />
+          <span>Expédiée</span>
+        </div>
+        <div class="tube-vertical"></div>
+        <div class="status-item" [class.active]="statusText === 'Commande livrée'">
+          <img src="assets/images/livree.svg" alt="Livrée" />
+          <span>Livrée</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
