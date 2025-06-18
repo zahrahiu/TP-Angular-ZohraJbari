@@ -75,6 +75,7 @@
             </span>
             <span class="new-price">
               {{
+
                 selectedVolume
                   ? (selectedVolume.price * (1 - p.discountPercentage / 100))
                   : p.getDiscountedPrice()
@@ -91,12 +92,18 @@
         </div>
 
         <div class="quantity-box" [class.low-stock]="p.isLowQuantity()">
-          <span class="quantity-label">Quantité :</span>
+          <span class="quantity-label">Quantité disponible :</span>
           <span class="quantity-value">{{ p.quantity }}</span>
         </div>
       </div>
 
-      <button class="add-to-cart-button" (click)="addToCart(p)">
+      
+
+      <button
+        class="add-to-cart-button"
+        (click)="addToCart(p)"
+        [disabled]="p.quantity === 0"
+      >
         Ajouter au panier
       </button>
     </div>

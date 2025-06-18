@@ -1,81 +1,167 @@
-<nav class="parfum-navbar">
-  <div class="nav-logo">PARFUMS LUXE</div>
-  <div class="nav-menu"></div>
-</nav>
-<div class="cart-container">
-  <h2>Panier</h2>
-  <div *ngIf="cartItems.length === 0" class="empty-cart">Votre panier est vide.</div>
+<div class="cart-container" *ngIf="cartGroups.length; else empty">
+  <!-- Affichage du panier -->
+  <div *ngIf="!showOrderForm">
+    <div class="cart-card" *ngFor="let g of cartGroups">
+      <img
+        [src]="g.imageUrl || '/assets/images/default-product.jpg'"
+        class="card-img"
+      />
 
-  <ul *ngIf="cartItems.length > 0" class="cart-list">
-    <li *ngFor="let item of cartItems; index as i" class="cart-item">
-      <div class="item-info">
-        <strong>{{ item.product.name }}</strong> — Prix: {{ item.product.price }} MAD
-      </div>
-     <div class="quantity-control">
-          <button (click)="updateQuantity(i, item.quantity - 1)">-</button>
-          <span>{{ item.quantity }}</span>
-          <button 
-            (click)="updateQuantity(i, item.quantity + 1)" 
-            [disabled]="item.product.quantity === 0">+
-          </button>
+      <div class="card-body">
+        <h3>{{ g.name }}</h3>
+
+        <table class="line-table">
+          <tr *ngFor="let l of g.lines">
+            <td class="vol">{{ l.volumeLabel || 'Standard' }}</td>
+            <td class="price">{{ l.unitPrice | currency: 'MAD' : 'symbol' }}</td>
+            <td class="qty">
+              <button (click)="dec(l)">−</button>
+              <span>{{ l.quantity }}</span>
+              <button
+                (click)="inc(l)"
+                [disabled]="(getStock(l.productId) | async) === 0"
+              >
+                +
+              </button>
+              <small
+                class="error-inline"
+                *ngIf="(getStock(l.productId) | async) === 0"
+              >
+                Stock insuffisant
+              </small>
+            </td>
+            <td class="line-total">
+              {{ l.unitPrice * l.quantity | currency: 'MAD' : 'symbol' }}
+            </td>
+            <td class="del"><button (click)="remove(l)">🗑</button></td>
+          </tr>
+        </table>
+
+        <div class="card-sub">
+          Sous‑total: {{ getGroupTotal(g) | currency: 'MAD' : 'symbol' }}
         </div>
-      <button class="remove-btn" (click)="removeItem(i)">Supprimer</button>
-    </li>
-  </ul>
+      </div>
+    </div>
 
-  <div class="total">
-    <strong>Total: {{ total }} MAD</strong>
+    <div class="grand-total">
+      Total: {{ getTotal() | currency: 'MAD' : 'symbol' }}
+    </div>
+
+    <button class="order-btn" (click)="showOrderForm = true">
+      Passer la commande
+    </button>
   </div>
 
-  <button *ngIf="cartItems.length > 0 && !showConfirmForm" class="confirm-btn" (click)="toggleConfirmForm()">
-    Confirmer la commande
-  </button>
+  <!-- Formulaire de commande -->
+  <div *ngIf="showOrderForm" class="order-form-container">
+    <button class="back-btn" (click)="showOrderForm = false">
+      ← Retour au panier
+    </button>
 
-  <div *ngIf="showConfirmForm" class="confirmation-form">
-    <h3>Formulaire de confirmation</h3>
+    <h2>Passer la commande</h2>
 
-    <label>
-      Nom:
-      <input type="text" [(ngModel)]="userName" placeholder="Votre nom" />
-    </label>
+    <form class="order-form" (ngSubmit)="submitOrder()" #orderForm="ngForm">
+      <div class="form-group">
+        <label for="name">Nom complet</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="orderInfo.name"
+          required
+        />
+      </div>
 
-    <label>
-      Numéro:
-      <input type="text" [(ngModel)]="userNumber" placeholder="Votre numéro de téléphone" />
-    </label>
+      <div class="form-group">
+        <label for="phone">Numéro de téléphone</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          [(ngModel)]="orderInfo.phone"
+          required
+        />
+      </div>
 
-    <fieldset class="payment-methods">
-      <legend>Méthode de paiement:</legend>
+      <div class="form-group">
+        <label>Méthode de paiement</label>
+        <div class="payment-options">
+          <label>
+            <input
+              type="radio"
+              name="payment"
+              [(ngModel)]="orderInfo.paymentMethod"
+              value="cash"
+              required
+            />
+            Paiement en espèces (Cash)
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="payment"
+              [(ngModel)]="orderInfo.paymentMethod"
+              value="card"
+            />
+            Paiement par carte
+          </label>
+        </div>
+      </div>
 
-      <label>
-        <input type="radio" name="paymentMethod" (change)="selectPaymentMethod('cash')" [checked]="paymentMethod === 'cash'" />
-        Paiement à la livraison (Cash)
-      </label>
+      <div class="form-group" *ngIf="orderInfo.paymentMethod === 'card'">
+        <label for="cardNumber">Numéro de carte</label>
+        <input
+          type="text"
+          id="cardNumber"
+          name="cardNumber"
+          [(ngModel)]="orderInfo.cardNumber"
+          required
+        />
 
-      <label>
-        <input type="radio" name="paymentMethod" (change)="selectPaymentMethod('card')" [checked]="paymentMethod === 'card'" />
-        Carte bancaire
-      </label>
-    </fieldset>
+        <label for="cardExpiry">Date d'expiration</label>
+        <input
+          type="text"
+          id="cardExpiry"
+          name="cardExpiry"
+          [(ngModel)]="orderInfo.cardExpiry"
+          placeholder="MM/AA"
+          required
+        />
 
-    <div *ngIf="paymentMethod === 'card'" class="card-code-container">
-      <label>
-        Code de la carte:
-        <input type="text" [(ngModel)]="cardCode" placeholder="Entrez votre code de carte" />
-      </label>
-    </div>
+        <label for="cardCvc">CVC</label>
+        <input
+          type="text"
+          id="cardCvc"
+          name="cardCvc"
+          [(ngModel)]="orderInfo.cardCvc"
+          required
+        />
+      </div>
 
-    <div class="location-info" *ngIf="latitude !== null && longitude !== null">
-      <p>Localisation actuelle :</p>
-      <p>Latitude: {{ latitude }}</p>
-      <p>Longitude: {{ longitude }}</p>
-    </div>
+      <!-- 🠗🠗🠗 فقط input ديال العنوان 🠗🠗🠗 -->
+      <div class="form-group">
+        <label for="address">Adresse de livraison</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          [(ngModel)]="orderInfo.address"
+          placeholder="Ex: Larache, Douar Ichara"
+          required
+        />
+      </div>
 
-    <div class="location-error" *ngIf="locationError">
-      <p>{{ locationError }}</p>
-    </div>
+      <button
+        type="submit"
+        class="submit-btn"
+      >
+        Confirmer la commande ({{ getTotal() | currency: 'MAD' : 'symbol' }})
+      </button>
 
-    <button class="submit-btn" (click)="confirmerCommande()">Valider la commande</button>
-    <button class="cancel-btn" (click)="toggleConfirmForm()">Annuler</button>
+    </form>
   </div>
 </div>
+
+<ng-template #empty>
+  <p class="empty-msg">Votre panier est vide.</p>
+</ng-template>

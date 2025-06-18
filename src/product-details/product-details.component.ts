@@ -7,6 +7,7 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgIf, NgFor, CurrencyPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { Product } from '../app/models/product.model';
 import { CartService } from '../app/Cart/cart.service';
@@ -16,24 +17,27 @@ import { interval, Subscription } from 'rxjs';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [NgIf, NgFor, CurrencyPipe, RouterModule],
+  imports: [NgIf, NgFor, CurrencyPipe, RouterModule, FormsModule],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css'],
+  
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
   @Input() productId: string = '';
-
   product?: Product;
   similarByMarque: Product[] = [];
   similarByGenre: Product[] = [];
-
   currentImg = '/assets/images/default-product.jpg';
   selectedVolumeIndex = 0;
   stars = Array(5);
   currentRating = 0;
-
   countdown: string | null = null;
+  selectedQuantity = 1;
+  cartQuantity = 0;
+
   private timerSub?: Subscription;
+  private cartSub?: Subscription;
+  private stockSub?: Subscription;
 
   constructor(
     private cartSvc: CartService,
@@ -47,7 +51,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     if (idFromInput) {
       this.loadProduct(idFromInput);
     } else {
-      this.route.paramMap.subscribe((params) => {
+      this.route.paramMap.subscribe(params => {
         const id = params.get('id');
         if (id) this.loadProduct(id);
       });
@@ -55,7 +59,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   private loadProduct(id: string) {
-    this.cartSvc.getProductById(id).subscribe((prod) => {
+    this.cartSvc.getProductById(id).subscribe(prod => {
       this.product = prod;
       if (!prod) return;
 
@@ -73,15 +77,35 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       }
       this.currentRating = this.ratingSvc.get(prod.id);
 
-      this.cartSvc.getProducts().subscribe((all) => {
+      // S'abonner aux changements de stock
+      this.stockSub = this.cartSvc.getProductStock$(id).subscribe(qty => {
+        if (this.product) {
+          this.product.quantity = qty;
+        }
+      });
+
+      this.cartSvc.getProducts().subscribe(all => {
         this.similarByMarque = all
-          .filter((p) => p.id !== prod.id && p.marque === prod.marque)
+          .filter(p => p.id !== prod.id && p.marque === prod.marque)
           .slice(0, 8);
 
         this.similarByGenre = all
-          .filter((p) => p.id !== prod.id && p.genre === prod.genre && p.marque !== prod.marque)
+          .filter(p => p.id !== prod.id && p.genre === prod.genre && p.marque !== prod.marque)
           .slice(0, 8);
       });
+
+      this.updateCartQuantity(prod);
+    });
+  }
+
+  private updateCartQuantity(prod: Product) {
+    this.cartSub?.unsubscribe();
+    this.cartSub = this.cartSvc.getItems().subscribe(items => {
+      const key = this.selectedVolume 
+        ? `${prod.id}_${this.selectedVolume.label}` 
+        : prod.id;
+      const item = items.find(i => i.key === key);
+      this.cartQuantity = item ? item.quantity : 0;
     });
   }
 
@@ -98,25 +122,25 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       const h = Math.floor(diff / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
-      this.countdown =
-        `${h.toString().padStart(2, '0')}:` +
-        `${m.toString().padStart(2, '0')}:` +
-        `${s.toString().padStart(2, '0')}`;
+      this.countdown = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     });
   }
 
   get selectedVolume() {
-    return this.product?.volumes?.length
-      ? this.product.volumes[this.selectedVolumeIndex]
+    return this.product?.volumes?.length 
+      ? this.product.volumes[this.selectedVolumeIndex] 
       : null;
   }
 
   selectVolume(i: number, img?: string) {
     this.selectedVolumeIndex = i;
     if (img) this.currentImg = img;
+    if (this.product) this.updateCartQuantity(this.product);
   }
 
-  setCurrentImage(url: string) { this.currentImg = url; }
+  setCurrentImage(url: string) {
+    this.currentImg = url;
+  }
 
   rateProduct(stars: number) {
     if (!this.product) return;
@@ -125,11 +149,23 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   addToCart(p: Product) {
-    if (this.selectedVolume) {
-      this.cartSvc.addToCartWithVolume(p, this.selectedVolume, 1);
-    } else {
-      this.cartSvc.addToCart(p, 1);
+    if (!p || this.selectedQuantity <= 0) {
+      alert('Veuillez sélectionner une quantité valide.');
+      return;
     }
+
+    if (p.quantity < this.selectedQuantity) {
+      alert('Quantité insuffisante en stock.');
+      return;
+    }
+
+    if (this.selectedVolume) {
+      this.cartSvc.addToCartWithVolume(p, this.selectedVolume, this.selectedQuantity);
+    } else {
+      this.cartSvc.addToCart(p, this.selectedQuantity);
+    }
+
+    this.selectedQuantity = 1;
     this.router.navigate(['/cart']);
   }
 
@@ -139,5 +175,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.timerSub?.unsubscribe();
+    this.cartSub?.unsubscribe();
+    this.stockSub?.unsubscribe();
   }
 }

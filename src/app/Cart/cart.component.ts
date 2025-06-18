@@ -1,134 +1,112 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CartService } from '../Cart/cart.service';
-import { Product } from '../models/product.model';
+import { CartService } from './cart.service';
+import { CartItem } from './cart-item.model';
+
+type CartGroup = {
+  productId: string;
+  name: string;
+  imageUrl?: string;
+  lines: CartItem[];
+};
+
+type OrderInfo = {
+  name: string;
+  phone: string;
+  paymentMethod: string;
+  cardNumber?: string;
+  cardExpiry?: string;
+  cardCvc?: string;
+  address?: string;        // غير العنوان لي كيكتبه المستخدم
+};
 
 @Component({
   selector: 'app-cart',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
-export class CartComponent {
-  cartItems: { product: Product, quantity: number }[] = [];
-  total = 0;
+export class CartComponent implements OnInit, OnDestroy {
+  cartGroups: CartGroup[] = [];
+  showOrderForm = false;
 
-  showConfirmForm = false;
-  showPaymentOptions = false;
+  orderInfo: OrderInfo = {
+    name: '',
+    phone: '',
+    paymentMethod: 'cash',
+  };
 
-  userName = '';
-  userNumber = '';
+  constructor(private cartSvc: CartService) {}
 
-  paymentMethod: 'cash' | 'card' | '' = '';
-  cardCode = '';
-
-  latitude: number | null = null;
-  longitude: number | null = null;
-  locationError: string | null = null;
-
-  constructor(private cartService: CartService) {
-    this.cartItems = this.cartService.getItems();
-    this.calculateTotal();
+  /* ----------------- life‑cycle ----------------- */
+  ngOnInit() {
+    this.cartSvc.getItems().subscribe((items) => {
+      this.cartGroups = this.groupByProduct(items);
+    });
   }
 
-  calculateTotal() {
-    this.total = this.cartItems.reduce(
-      (sum, item) => sum + (item.product.price * item.quantity), 0
-    );
+  ngOnDestroy() {
+    // ما بقات حتى حاجة تتنظف
   }
 
-  removeItem(index: number) {
-    const productId = this.cartItems[index].product.id;
-    this.cartService.removeItem(productId);
-    this.cartItems = this.cartService.getItems();
-    this.calculateTotal();
+  /* ----------------- Cart helpers ----------------- */
+  inc(l: CartItem) {
+    this.cartSvc.incrementQuantity(l.key);
+  }
+  dec(l: CartItem) {
+    this.cartSvc.decreaseQuantity(l.key);
+  }
+  remove(l: CartItem) {
+    this.cartSvc.removeItem(l.key);
+  }
+  getStock(id: string) {
+    return this.cartSvc.getProductStock$(id);
   }
 
-  updateQuantity(index: number, newQuantity: number) {
-    if (newQuantity > 0) {
-      const currentItem = this.cartItems[index];
-      const availableStock = currentItem.product.quantity;
-      const quantityDiff = newQuantity - currentItem.quantity;
-
-      if (quantityDiff > 0 && availableStock >= quantityDiff) {
-        this.cartService.updateQuantity(index, newQuantity);
-        this.calculateTotal();
-      } else if (quantityDiff < 0) {
-        this.cartService.updateQuantity(index, newQuantity);
-        this.calculateTotal();
+  private groupByProduct(items: CartItem[]) {
+    const map = new Map<string, CartGroup>();
+    items.forEach((it) => {
+      if (!map.has(it.productId)) {
+        map.set(it.productId, {
+          productId: it.productId,
+          name: it.name,
+          imageUrl: it.imageUrl,
+          lines: [],
+        });
       }
-    }
+      map.get(it.productId)!.lines.push(it);
+    });
+    return Array.from(map.values());
   }
 
-  toggleConfirmForm() {
-    this.showConfirmForm = !this.showConfirmForm;
-    this.showPaymentOptions = false;
+  getGroupTotal(g: CartGroup) {
+    return g.lines.reduce((s, l) => s + l.unitPrice * l.quantity, 0);
+  }
+  getTotal() {
+    return this.cartGroups.reduce((s, g) => s + this.getGroupTotal(g), 0);
   }
 
-  selectPaymentMethod(method: 'cash' | 'card') {
-    this.paymentMethod = method;
-  }
+  submitOrder() {
+  console.log('Commande soumise:', {
+    ...this.orderInfo,
+    total: this.getTotal(),
+    items: this.cartGroups.flatMap(g => g.lines),
+  });
 
-  getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.latitude = position.coords.latitude;
-          this.longitude = position.coords.longitude;
-          this.locationError = null;
-        },
-        (error) => {
-          this.locationError = "Impossible d'obtenir la localisation.";
-          this.latitude = null;
-          this.longitude = null;
-        }
-      );
-    } else {
-      this.locationError = "La géolocalisation n'est pas supportée par ce navigateur.";
-    }
-  }
+  alert('Commande passée avec succès!');
 
-  confirmerCommande() {
-    if (!this.userName.trim() || !this.userNumber.trim() || this.total <= 0) {
-      alert('Veuillez remplir tous les champs obligatoires.');
-      return;
-    }
+  // 🆕 ne RESTOCKE pas
+  this.cartSvc.finalizeOrder();
 
-    if (!this.paymentMethod) {
-      alert('Veuillez choisir une méthode de paiement.');
-      return;
-    }
+  this.showOrderForm = false;
+}
 
-    if (this.paymentMethod === 'card' && this.cardCode.trim().length < 4) {
-      alert('Veuillez saisir un code de carte valide (au moins 4 caractères).');
-      return;
-    }
-
-    this.getLocation();
-
-    alert(`Commande confirmée pour ${this.userName} (ID: ${this.userNumber})
-Total: ${this.total} MAD
-Méthode paiement: ${this.paymentMethod}
-Localisation: ${this.latitude ?? 'non disponible'}, ${this.longitude ?? 'non disponible'}`);
-
-    this.showConfirmForm = false;
-    this.cartService.clearCart();
-    this.cartItems = [];
-    this.calculateTotal();
-
-    // Reset formulaire
-    this.userName = '';
-    this.userNumber = '';
-    this.paymentMethod = '';
-    this.cardCode = '';
-    this.latitude = null;
-    this.longitude = null;
-    this.locationError = null;
-  }
-
-  payerAvec(methode: string) {
-    alert('Méthode choisie: ' + methode);
-  }
 }

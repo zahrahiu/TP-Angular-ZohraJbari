@@ -76,6 +76,7 @@ body {
   color: #a0848c;
   font-size: 24px;
 }
+
 .nav-logo {
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
@@ -345,3 +346,50 @@ body {
 
 
 
+/* Hna ndir position relative bach badge ::after yb9a f l'image */
+.image-wrapper {
+  position: relative;
+}
+
+/* Style produit rupture stock */
+.insufficient-stock {
+  position: relative;
+  border: 2px solid #ff5252;
+  background-color: rgba(255, 82, 82, 0.05);
+  box-shadow: 0 0 10px rgba(255, 82, 82, 0.3);
+}
+
+/* Textes en rouge dans la carte */
+.insufficient-stock .product-info h3,
+.insufficient-stock .price {
+  color: #ff5252;
+}
+
+/* Badge rouge en haut à droite */
+.insufficient-stock .image-wrapper::after {
+  content: "STOCK INSUFFISANT";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff5252;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 10px;
+  z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Image un peu grisée */
+.insufficient-stock .product-image {
+  opacity: 0.7;
+  filter: grayscale(20%);
+}
+
+/* Bouton détails en rouge */
+.insufficient-stock .detail-btn {
+  background-color: #ff5252;
+  color: white;
+}

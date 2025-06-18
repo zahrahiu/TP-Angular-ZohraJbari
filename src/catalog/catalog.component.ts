@@ -25,6 +25,7 @@ export class CatalogComponent implements OnInit {
   private timerSub?: Subscription;  searchTerm = '';
   private isBrowser: boolean;
   stars: number[] = [1, 2, 3, 4, 5];
+  productStocksMap: { [productId: string]: number } = {};
 
   constructor(
     private cartService: CartService,
@@ -43,23 +44,26 @@ export class CatalogComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-    this.cartService.getProducts().subscribe(data => {
-      this.products = data;
-      
-      this.filteredProducts = [...this.products];
-      this.loadFavorites();
-      this.startCountdown(); 
-      this.filteredProducts = this.sortByRating([...this.products]); // tri initial
+ ngOnInit(): void {
+  this.cartService.getProducts().subscribe(data => {
+    this.products = data;
+    this.filteredProducts = [...this.products];
+    this.loadFavorites();
+    this.startCountdown();
+    this.filteredProducts = this.sortByRating([...this.products]);
 
-
-      
+    this.products.forEach(p => {
+      this.cartService.getProductStock$(p.id).subscribe(stock => {
+        this.productStocksMap[p.id] = stock;
+      });
     });
+  });
 
-    this.route.queryParams.subscribe(params => {
-      this.applyFilter(params['filter'] || 'all');
-    });
-  }
+  this.route.queryParams.subscribe(params => {
+    this.applyFilter(params['filter'] || 'all');
+  });
+}
+
 
   private startCountdown() {
     this.timerSub = interval(1000).subscribe(() => {
@@ -109,18 +113,19 @@ ngOnDestroy() {
 
   switch (filter) {
     case 'all':
-      this.filteredProducts = [...this.products];
+      this.filteredProducts = this.products.filter(p => (this.productStocksMap[p.id] || p.quantity) > 0);
       break;
 
     case 'promo':
-      this.filteredProducts = this.products.filter(p => p.isOnSale());
+      this.filteredProducts = this.products.filter(p => p.isOnSale() && (this.productStocksMap[p.id] || p.quantity) > 0);
       break;
 
     default:
-      this.filteredProducts = this.products.filter(p => p.category === filter);
+      this.filteredProducts = this.products.filter(p => p.category === filter && (this.productStocksMap[p.id] || p.quantity) > 0);
   }
   this.filteredProducts = this.sortByRating(this.filteredProducts);
 }
+
 
 
 
@@ -162,4 +167,7 @@ ngOnDestroy() {
     const img = event.target as HTMLImageElement;
     img.src = '/assets/images/default-product.jpg';
   }
+
+  
+
 }
