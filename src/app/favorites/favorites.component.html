@@ -3,9 +3,9 @@
   rel="stylesheet"
 />
 
-<h2 class="title">Mes Produits Favoris</h2>
+<h2 class="title" i18n>Mes Produits Favoris</h2>
 
-<div *ngIf="favoriteProducts.length === 0" class="empty-message">
+<div *ngIf="favoriteProducts.length === 0" class="empty-message" i18n>
   Aucun produit en favoris.
 </div>
 
@@ -55,7 +55,7 @@
             <button
               class="cta btn-remove"
               (click)="removeFromFavorites(product)"
-            >
+             i18n>
               Supprimer
             </button>
           </div>

@@ -16,6 +16,7 @@ import { RatingService } from '../app/rating.service';
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent implements OnInit {
+  showLangMenu = false;
   products: Product[] = [];
   filteredProducts: Product[] = [];
   hoveredProductId: string | null = null;
@@ -37,6 +38,14 @@ export class CatalogComponent implements OnInit {
   }
   getRating(id: string): number {
     return this.ratingSvc.get(id);         // 0 → 5
+  }
+  toggleLangMenu() {
+    this.showLangMenu = !this.showLangMenu;
+  }
+  
+goToLang(lang: 'fr-FR' | 'en-US') {
+    this.showLangMenu = false;
+    window.location.href = `http://localhost:8085/${lang}/catalog`;
   }
 
   private sortByRating(arr: Product[]): Product[] {

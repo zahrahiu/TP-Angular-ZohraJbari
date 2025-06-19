@@ -68,7 +68,7 @@
 
       <div class="price-quantity-row">
         <div class="price-box">
-          <span class="price-label">Prix :</span>
+          <span class="price-label" i18n>Prix :</span>
           <ng-container *ngIf="p.isOnSale(); else normalPrice">
             <span class="old-price">
               {{ selectedVolume?.price || p.price | currency:'MAD':'symbol':'1.2-2' }}
@@ -92,7 +92,7 @@
         </div>
 
         <div class="quantity-box" [class.low-stock]="p.isLowQuantity()">
-          <span class="quantity-label">Quantité disponible :</span>
+          <span class="quantity-label" i18n>Quantité disponible :</span>
           <span class="quantity-value">{{ p.quantity }}</span>
         </div>
       </div>
@@ -103,19 +103,19 @@
         class="add-to-cart-button"
         (click)="addToCart(p)"
         [disabled]="p.quantity === 0"
-      >
+       i18n>
         Ajouter au panier
       </button>
     </div>
   </div>
 
   <div class="product-description-section">
-    <h2 class="section-title">Description</h2>
+    <h2 class="section-title" i18n>Description</h2>
     <p class="description-text">{{ p.description }}</p>
   </div>
 
   <section *ngIf="similarByMarque.length" class="similar">
-    <h3>Produits de la même marque ({{ p.marque }})</h3>
+    <h3 i18n>Produits de la même marque ({{ p.marque }})</h3>
     <div class="similar-list">
       <div class="sim-card"
            *ngFor="let sp of similarByMarque"
@@ -128,7 +128,7 @@
   </section>
 
   <section *ngIf="similarByGenre.length" class="similar">
-    <h3>Parfums avec un style similaire ({{ p.genre }})</h3>
+    <h3 i18n>Parfums avec un style similaire ({{ p.genre }})</h3>
     <div class="similar-list">
       <div class="sim-card"
            *ngFor="let sp of similarByGenre"
@@ -142,5 +142,5 @@
 </div>
 
 <ng-template #loading>
-  <div class="loading-container"><p>Chargement des détails du produit…</p></div>
+  <div class="loading-container" i18n><p>Chargement des détails du produit…</p></div>
 </ng-template>

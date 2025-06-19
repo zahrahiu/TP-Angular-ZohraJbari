@@ -2,7 +2,15 @@
 
 <div class="top-bar">
   <div class="left-section">
-    <div class="menu">&#8942;</div>  
+<div class="menu-wrapper" style="position: relative; display: inline-block;">
+  <div class="menu" (click)="toggleLangMenu()" style="cursor: pointer;">&#8942;</div>
+  
+  <ul class="lang-menu" *ngIf="showLangMenu">
+  <li (click)="goToLang('fr-FR')">Français 🇫🇷</li>
+  <li (click)="goToLang('en-US')">English 🇺🇸</li>
+</ul>
+
+</div>
 <div class="nav-logo">PARFUMS LUXE</div>
   </div>
   <div class="search-container">
@@ -21,17 +29,17 @@
   </div>
 </div>
 
-<h2 class="slogan">La beauté invisible : votre parfum</h2>
+<h2 class="slogan" i18n>La beauté invisible : votre parfum</h2>
 <div class="filters">
 <button (click)="applyFilter('promo')"
         [class.active]="activeFilter === 'promo'"
-        class="button">
+        class="button" >
   🔥 Promo
 </button>
-  <button (click)="applyFilter('homme')" [class.active]="activeFilter === 'homme'" class="button">Homme</button>
-  <button (click)="applyFilter('femme')" [class.active]="activeFilter === 'femme'" class="button">Femme</button>
-  <button (click)="applyFilter('enfants')" [class.active]="activeFilter === 'enfants'" class="button">Enfants</button>
-  <button (click)="applyFilter('all')" [class.active]="activeFilter === 'all'" class="button">Tous</button>
+  <button (click)="applyFilter('homme')" [class.active]="activeFilter === 'homme'" class="button" i18n>Homme</button>
+  <button (click)="applyFilter('femme')" [class.active]="activeFilter === 'femme'" class="button" i18n>Femme</button>
+  <button (click)="applyFilter('enfants')" [class.active]="activeFilter === 'enfants'" class="button" i18n>Enfants</button>
+  <button (click)="applyFilter('all')" [class.active]="activeFilter === 'all'" class="button" i18n>Tous</button>
 </div>
 
 <div class="catalog">
@@ -81,7 +89,7 @@
             <button class="cta acheter-btn" (click)="toggleFavorite(product)">
               {{ isFavorite(product.id) ? '♥' : '♡' }}
             </button>
-<button class="cta detail-btn" [routerLink]="['/product', product.id]">Voir détails</button>
+<button class="cta detail-btn" [routerLink]="['/product', product.id]" i18n>Voir détails</button>
           </div>
         </div>
       </div>

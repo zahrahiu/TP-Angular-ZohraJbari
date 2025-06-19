@@ -393,3 +393,39 @@ body {
   background-color: #ff5252;
   color: white;
 }
+.menu-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.menu {
+  cursor: pointer;
+  font-size: 24px;
+  user-select: none;
+}
+
+/* المنيو ديال اللغة: نبدلو من right:0 لـ left:0 باش تبان على اليسار */
+.lang-menu {
+  position: absolute;
+  top: 100%;      /* تحت الـ3 نقط */
+  left: 0;        /* بدل right:0 */
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  width: 130px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+.lang-menu li {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lang-menu li:hover {
+  background: #f0f0f0;
+}

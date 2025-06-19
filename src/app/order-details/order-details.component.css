@@ -262,7 +262,7 @@
   border: none;
   padding: 10px 20px;
   font-weight: 600;
-  color: white;
+  color: rgb(108, 56, 56);
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
@@ -304,4 +304,61 @@
   border: 3px solid #28a745; /* border vert */
   box-sizing: border-box; /* bach border ma tkhl3ch l-size */
   border-radius: 50%; /* bash tb9a doura */
+}
+.packaging-summary {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff7f9;
+}
+
+.selected-pack {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.selected-pack img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.menu-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.menu {
+  cursor: pointer;
+  font-size: 24px;
+  user-select: none;
+}
+
+/* المنيو ديال اللغة: نبدلو من right:0 لـ left:0 باش تبان على اليسار */
+.lang-menu {
+  position: absolute;
+  top: 100%;      /* تحت الـ3 نقط */
+  left: 0;        /* بدل right:0 */
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  width: 130px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+.lang-menu li {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lang-menu li:hover {
+  background: #f0f0f0;
 }

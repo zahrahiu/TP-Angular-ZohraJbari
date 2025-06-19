@@ -3,7 +3,7 @@
   <nav class="parfum-navbar">
     <div class="nav-logo">PARFUMS LUXE</div>
     <div class="nav-menu">
-      <a href="#">ABOUT</a>
+      <a href="#" >ABOUT</a>
       <a href="#">COLLECTIONS</a>
       <a href="#">SHOP</a>
       <a href="#" class="contact-link">CONTACT</a>
@@ -16,8 +16,8 @@
         <img class="logo" src="assets/images/parfuma.jpg" alt="Parfum Logo" />
       </div>
       
-      <h2>Bienvenue Chez Parfums Luxe</h2>
-      <p>Accédez à votre espace privilégié</p>
+      <h2 i18n>Bienvenue Chez Parfums Luxe</h2>
+      <p i18n>Accédez à votre espace privilégié</p>
 
       <div class="form-group">
         <input 
@@ -31,8 +31,8 @@
           class="form-input" />
         
         <div class="error-messages">
-          <em class="error" *ngIf="email.errors?.['required'] && email.touched">Email requis</em>
-          <em class="error" *ngIf="email.errors?.['email'] && email.touched">Format invalide</em>
+          <em class="error" *ngIf="email.errors?.['required'] && email.touched" >Email requis</em>
+          <em class="error" *ngIf="email.errors?.['email'] && email.touched" >Format invalide</em>
         </div>
       </div>
 
@@ -47,12 +47,12 @@
           class="form-input" />
         
         <div class="error-messages">
-          <em class="error" *ngIf="password.invalid && password.touched">Mot de passe requis</em>
+          <em class="error" *ngIf="password.invalid && password.touched" >Mot de passe requis</em>
         </div>
       </div>
 
       <button type="submit" class="submit-btn" [disabled]="signInForm.form.invalid">
-        <span>Se connecter</span>
+        <span i18n>Se connecter</span>
         <svg class="arrow-icon" viewBox="0 0 24 24">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>

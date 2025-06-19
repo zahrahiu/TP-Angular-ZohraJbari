@@ -1,158 +1,292 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="fr-FR" datatype="plaintext" original="ng2.template" target-language="en-US">
+  <file source-language="fr-FR" target-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="1079473388564179028" datatype="html">
+        <source> Stock insuffisant </source>
+        <target>Insufficient stock</target>
+      </trans-unit>
+      <trans-unit id="4220291100458131468" datatype="html">
+        <source> Passer la commande </source>
+        <target>Place order</target>
+      </trans-unit>
+      <trans-unit id="8128874822520478370" datatype="html">
+        <source> ← Retour au panier </source>
+        <target>← Back to cart</target>
+      </trans-unit>
+      <trans-unit id="7479362629372600343" datatype="html">
+        <source>Passer la commande</source>
+        <target>Place order</target>
+      </trans-unit>
+      <trans-unit id="313442685208834764" datatype="html">
+        <source>Nom complet</source>
+        <target>Full name</target>
+      </trans-unit>
+      <trans-unit id="7542094483332182245" datatype="html">
+        <source>Numéro de téléphone</source>
+        <target>Phone number</target>
+      </trans-unit>
+      <trans-unit id="4887354675923578379" datatype="html">
+        <source>Méthode de paiement</source>
+        <target>Payment method</target>
+      </trans-unit>
+      <trans-unit id="931317677781696800" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input
+              type=&quot;radio&quot;
+              name=&quot;payment&quot;
+              [(ngModel)]=&quot;orderInfo.paymentMethod&quot;
+              value=&quot;cash&quot;
+              required
+             /&gt;"/> Paiement en espèces (Cash) </source>
+        <target><x id="TAG_INPUT"/> Cash payment</target>
+      </trans-unit>
+      <trans-unit id="7021385378708157967" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input
+              type=&quot;radio&quot;
+              name=&quot;payment&quot;
+              [(ngModel)]=&quot;orderInfo.paymentMethod&quot;
+              value=&quot;card&quot;
+             /&gt;"/> Paiement par carte </source>
+        <target><x id="TAG_INPUT"/> Card payment</target>
+      </trans-unit>
+      <trans-unit id="6667358011904710533" datatype="html">
+        <source>Numéro de carte</source>
+        <target>Card number</target>
+      </trans-unit>
+      <trans-unit id="2963934740536408350" datatype="html">
+        <source>Date d&apos;expiration</source>
+        <target>Expiration date</target>
+      </trans-unit>
+      <trans-unit id="63152309955144057" datatype="html">
+        <source><x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;checkbox&quot; [(ngModel)]=&quot;orderInfo.withPackaging&quot; name=&quot;withPackaging&quot; class=&quot;submit-btn&quot; /&gt;"/> Choisissez votre emballage préféré
+</source>
+        <target><x id="TAG_INPUT"/> Choose your preferred packaging</target>
+      </trans-unit>
+      <trans-unit id="2552621761162832350" datatype="html">
+        <source>Adresse de livraison</source>
+        <target>Shipping address</target>
+      </trans-unit>
+      <trans-unit id="8095616024561336152" datatype="html">
+        <source> Confirmer la commande (<x id="INTERPOLATION" equiv-text="{{ getTotal() | currency: &apos;MAD&apos; : &apos;symbol&apos; }}"/>)
+</source>
+        <target> Confirm order (<x id="INTERPOLATION"/>)</target>
+      </trans-unit>
+      <trans-unit id="6403075650144550602" datatype="html">
+        <source>Votre panier est vide.</source>
+        <target>Your cart is empty.</target>
+      </trans-unit>
+      <trans-unit id="3493999403224574304" datatype="html">
+        <source>Mes Produits Favoris</source>
+        <target>My Favorite Products</target>
+      </trans-unit>
+      <trans-unit id="2004912266085247711" datatype="html">
+        <source> Aucun produit en favoris.
+</source>
+        <target> No favorite products.</target>
+      </trans-unit>
+      <trans-unit id="1646484352418161980" datatype="html">
+        <source> Supprimer </source>
+        <target> Delete </target>
+      </trans-unit>
       <trans-unit id="6498160973547574000" datatype="html">
         <source>Des Fragrances<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/>pour des Moments Mémorables</source>
-        <target>Fragrances<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/>for Memorable Moments</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">23,24</context>
-        </context-group>
+        <target>Fragrances<x id="LINE_BREAK"/>for Memorable Moments</target>
       </trans-unit>
       <trans-unit id="2946039097219309065" datatype="html">
         <source>Découvrez des parfums uniques qui captent l&apos;essence de votre personnalité</source>
-        <target>Discover unique perfumes that capture the essence of your personality</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">24,25</context>
-        </context-group>
+        <target>Discover unique fragrances that capture the essence of your personality</target>
       </trans-unit>
       <trans-unit id="944737834535752055" datatype="html">
         <source>EXPLORER</source>
         <target>EXPLORE</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">25,26</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="9139827223203170781" datatype="html">
         <source>Parfums Floraux</source>
-        <target>Floral Perfumes</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">37,38</context>
-        </context-group>
+        <target>Floral Fragrances</target>
       </trans-unit>
       <trans-unit id="6989786992378401415" datatype="html">
         <source>Des notes délicates de fleurs fraîches pour une journée printanière</source>
         <target>Delicate notes of fresh flowers for a spring day</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">38,39</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="1001573357508294422" datatype="html">
         <source>DÉCOUVRIR</source>
         <target>DISCOVER</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">39,40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">46,47</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">53,54</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="4973304697457550649" datatype="html">
         <source>Parfums Boisés</source>
-        <target>Woody Perfumes</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">44,45</context>
-        </context-group>
+        <target>Woody Fragrances</target>
       </trans-unit>
       <trans-unit id="9013122244098851643" datatype="html">
         <source>Des essences chaudes et enveloppantes pour les soirées d&apos;hiver</source>
-        <target>Warm and enveloping essences for winter evenings</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">45,46</context>
-        </context-group>
+        <target>Warm and enveloping scents for winter evenings</target>
       </trans-unit>
       <trans-unit id="5215372628689113520" datatype="html">
         <source>Parfums Orientaux</source>
-        <target>Oriental Perfumes</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">51,52</context>
-        </context-group>
+        <target>Oriental Fragrances</target>
       </trans-unit>
       <trans-unit id="3442049139967723321" datatype="html">
         <source>Des fragrances mystérieuses et sensuelles pour les occasions spéciales</source>
         <target>Mysterious and sensual fragrances for special occasions</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">52,53</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="665235021054022478" datatype="html">
         <source>FAITES BRILLER VOTRE PERSONNALITÉ</source>
         <target>LET YOUR PERSONALITY SHINE</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">61,62</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="7013449506757326244" datatype="html">
         <source>Choisissez Votre Signature Olfactive</source>
         <target>Choose Your Olfactory Signature</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">62,63</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="6758718222399411863" datatype="html">
         <source> Chaque parfum est une histoire que vous racontez au monde. Nos créations uniques sont conçues pour s&apos;adapter à votre humeur, votre style et vos moments précieux. </source>
-        <target> Each perfume is a story you tell the world. Our unique creations are designed to match your mood, your style, and your precious moments. </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">64,65</context>
-        </context-group>
+        <target> Every fragrance is a story you tell the world. Our unique creations are designed to match your mood, your style, and your precious moments. </target>
       </trans-unit>
       <trans-unit id="43749032302526463" datatype="html">
         <source>Des ingrédients naturels et de qualité supérieure</source>
-        <target>Natural and premium quality ingredients</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">68,69</context>
-        </context-group>
+        <target>Natural and high-quality ingredients</target>
       </trans-unit>
       <trans-unit id="5488941256530755673" datatype="html">
         <source>Des flacons élégants conçus par des artisans</source>
-        <target>Elegant bottles crafted by artisans</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">69,70</context>
-        </context-group>
+        <target>Elegant bottles designed by artisans</target>
       </trans-unit>
       <trans-unit id="1988727735443792403" datatype="html">
         <source>Des fragrances qui évoluent avec vous tout au long de la journée</source>
         <target>Fragrances that evolve with you throughout the day</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">70,71</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="1527286103535787741" datatype="html">
         <source>FRAIS, ÉLÉGANT, INOUBLIABLE</source>
         <target>FRESH, ELEGANT, UNFORGETTABLE</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">78,79</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="7066173957195624709" datatype="html">
         <source>Parfumez votre journée</source>
         <target>Perfume your day</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/home/home.component.html</context>
-          <context context-type="linenumber">79,80</context>
-        </context-group>
+      </trans-unit>
+      <trans-unit id="7734585690937798539" datatype="html">
+        <source>🖨 Imprimer</source>
+        <target>🖨 Print</target>
+      </trans-unit>
+      <trans-unit id="622583366791953796" datatype="html">
+        <source>📥 Télécharger la facture</source>
+        <target>📥 Download invoice</target>
+      </trans-unit>
+      <trans-unit id="8391979602285276941" datatype="html">
+        <source>Merci, <x id="INTERPOLATION" equiv-text="{{ order.userInfo.name }}"/> !</source>
+        <target>Thank you, <x id="INTERPOLATION"/>!</target>
+      </trans-unit>
+      <trans-unit id="2577635269175625804" datatype="html">
+        <source> Informations utilisateur</source>
+        <target> User information</target>
+      </trans-unit>
+      <trans-unit id="5927375884002377040" datatype="html">
+        <source>Détails de la commande</source>
+        <target>Order details</target>
+      </trans-unit>
+      <trans-unit id="1294253129229943438" datatype="html">
+        <source>Produits commandés :</source>
+        <target>Ordered products:</target>
+      </trans-unit>
+      <trans-unit id="3029508262196203618" datatype="html">
+        <source>Emballage sélectionné :</source>
+        <target>Selected packaging:</target>
+      </trans-unit>
+      <trans-unit id="2906090989469681696" datatype="html">
+        <source>Votre commande est arrivée. Merci ! 😊</source>
+        <target>Your order has arrived. Thank you! 😊</target>
+      </trans-unit>
+      <trans-unit id="4370836324834309762" datatype="html">
+        <source>Statut de la commande</source>
+        <target>Order status</target>
+      </trans-unit>
+      <trans-unit id="5136231281217932237" datatype="html">
+        <source>En cours</source>
+        <target>In progress</target>
+      </trans-unit>
+      <trans-unit id="7472799127286500071" datatype="html">
+        <source>Expédiée</source>
+        <target>Shipped</target>
+      </trans-unit>
+      <trans-unit id="3419334483554293800" datatype="html">
+        <source>Livrée</source>
+        <target>Delivered</target>
+      </trans-unit>
+      <trans-unit id="7302900683266317818" datatype="html">
+        <source>Aucune commande trouvée.</source>
+        <target>No order found.</target>
+      </trans-unit>
+      <trans-unit id="4583421467645692091" datatype="html">
+        <source>Bienvenue Chez Parfums Luxe</source>
+        <target>Welcome to Luxe Fragrances</target>
+      </trans-unit>
+      <trans-unit id="5106267181546571248" datatype="html">
+        <source>Accédez à votre espace privilégié</source>
+        <target>Access your privileged space</target>
+      </trans-unit>
+      <trans-unit id="6020343263129682538" datatype="html">
+        <source>Email requis</source>
+        <target>Email required</target>
+      </trans-unit>
+      <trans-unit id="554743013530210043" datatype="html">
+        <source>Format invalide</source>
+        <target>Invalid format</target>
+      </trans-unit>
+      <trans-unit id="448970485515181822" datatype="html">
+        <source>Mot de passe requis</source>
+        <target>Password required</target>
+      </trans-unit>
+      <trans-unit id="7919452934138804929" datatype="html">
+        <source>Se connecter</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="4143708201797888956" datatype="html">
+        <source>La beauté invisible : votre parfum</source>
+        <target>Invisible beauty: your fragrance</target>
+      </trans-unit>
+      <trans-unit id="4090726585356228916" datatype="html">
+        <source>Homme</source>
+        <target>Men</target>
+      </trans-unit>
+      <trans-unit id="5249045253885936777" datatype="html">
+        <source>Femme</source>
+        <target>Women</target>
+      </trans-unit>
+      <trans-unit id="7349393105450035216" datatype="html">
+        <source>Enfants</source>
+        <target>Kids</target>
+      </trans-unit>
+      <trans-unit id="720759605352885451" datatype="html">
+        <source>Tous</source>
+        <target>All</target>
+      </trans-unit>
+      <trans-unit id="661532228868612650" datatype="html">
+        <source>Voir détails</source>
+        <target>View details</target>
+      </trans-unit>
+      <trans-unit id="5820568975182018280" datatype="html">
+        <source>Prix :</source>
+        <target>Price:</target>
+      </trans-unit>
+      <trans-unit id="2923925524930470022" datatype="html">
+        <source>Quantité disponible :</source>
+        <target>Available quantity:</target>
+      </trans-unit>
+      <trans-unit id="6706862731871926527" datatype="html">
+        <source> Ajouter au panier </source>
+        <target> Add to cart </target>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="5182489495774086123" datatype="html">
+        <source>Produits de la même marque (<x id="INTERPOLATION" equiv-text="{{ p.marque }}"/>)</source>
+        <target>Products from the same brand (<x id="INTERPOLATION"/>)</target>
+      </trans-unit>
+      <trans-unit id="5828884471523045728" datatype="html">
+        <source>Parfums avec un style similaire (<x id="INTERPOLATION" equiv-text="{{ p.genre }}"/>)</source>
+        <target>Fragrances with similar style (<x id="INTERPOLATION"/>)</target>
+      </trans-unit>
+      <trans-unit id="8630304937877558050" datatype="html">
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>Chargement des détails du produit…<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
+        <target><x id="START_PARAGRAPH"/>Loading product details…<x id="CLOSE_PARAGRAPH"/></target>
       </trans-unit>
     </body>
   </file>

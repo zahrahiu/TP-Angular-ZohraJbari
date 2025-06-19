@@ -44,7 +44,7 @@
               <small
                 class="error-inline"
                 *ngIf="(getStock(l.productId) | async) === 0"
-              >
+               i18n>
                 Stock insuffisant
               </small>
             </td>
@@ -65,22 +65,22 @@
       Total: {{ getTotal() | currency: 'MAD' : 'symbol' }}
     </div>
 
-    <button class="order-btn" (click)="showOrderForm = true">
+    <button class="order-btn" (click)="showOrderForm = true" i18n>
       Passer la commande
     </button>
   </div>
 
   <!-- Formulaire de commande -->
   <div *ngIf="showOrderForm" class="order-form-container">
-    <button class="back-btn" (click)="showOrderForm = false">
+    <button class="back-btn" (click)="showOrderForm = false" i18n>
       ← Retour au panier
     </button>
 
-    <h2>Passer la commande</h2>
+    <h2 i18n>Passer la commande</h2>
 
     <form class="order-form" (ngSubmit)="submitOrder()" #orderForm="ngForm">
       <div class="form-group">
-        <label for="name">Nom complet</label>
+        <label for="name" i18n>Nom complet</label>
         <input
           type="text"
           id="name"
@@ -91,7 +91,7 @@
       </div>
 
       <div class="form-group">
-        <label for="phone">Numéro de téléphone</label>
+        <label for="phone" i18n>Numéro de téléphone</label>
         <input
           type="tel"
           id="phone"
@@ -102,32 +102,32 @@
       </div>
 
       <div class="form-group">
-        <label>Méthode de paiement</label>
+        <label i18n>Méthode de paiement</label>
         <div class="payment-options">
-          <label>
+          <label i18n>
             <input
               type="radio"
               name="payment"
               [(ngModel)]="orderInfo.paymentMethod"
               value="cash"
               required
-            />
+             />
             Paiement en espèces (Cash)
           </label>
-          <label>
+          <label i18n>
             <input
               type="radio"
               name="payment"
               [(ngModel)]="orderInfo.paymentMethod"
               value="card"
-            />
+             />
             Paiement par carte
           </label>
         </div>
       </div>
 
       <div class="form-group" *ngIf="orderInfo.paymentMethod === 'card'">
-        <label for="cardNumber">Numéro de carte</label>
+        <label for="cardNumber" i18n>Numéro de carte</label>
         <input
           type="text"
           id="cardNumber"
@@ -136,7 +136,7 @@
           required
         />
 
-        <label for="cardExpiry">Date d'expiration</label>
+        <label for="cardExpiry" i18n>Date d'expiration</label>
         <input
           type="text"
           id="cardExpiry"
@@ -157,14 +157,12 @@
       </div>
 
        <div class="form-group">
-        <!-- checkbox pour afficher/masquer la galerie -->
-        <label class="pack-toggle">
-  <input type="checkbox" [(ngModel)]="orderInfo.withPackaging" name="withPackaging" class="submit-btn"  />
+        <label class="pack-toggle"  i18n>
+  <input type="checkbox" [(ngModel)]="orderInfo.withPackaging" name="withPackaging" class="submit-btn" />
   Choisissez votre emballage préféré
 </label>
 
 
-        <!-- gallery si cochée -->
         <div class="pack-gallery" *ngIf="orderInfo.withPackaging">
           <label *ngFor="let p of packagingOptions"
                  class="pack-card"
@@ -187,7 +185,7 @@
 
 
       <div class="form-group">
-        <label for="address">Adresse de livraison</label>
+        <label for="address" i18n>Adresse de livraison</label>
         <input
           type="text"
           id="address"
@@ -198,7 +196,7 @@
         />
       </div>
 
-     <button type="submit" class="submit-btn">
+     <button type="submit" class="submit-btn" i18n>
   Confirmer la commande ({{ getTotal() | currency: 'MAD' : 'symbol' }})
 </button>
 
@@ -208,5 +206,5 @@
 </div>
 
 <ng-template #empty>
-  <p class="empty-msg">Votre panier est vide.</p>
+  <p class="empty-msg" i18n>Votre panier est vide.</p>
 </ng-template>

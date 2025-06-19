@@ -2,7 +2,15 @@
 
 <div class="top-bar">
   <div class="left-section">
-    <div class="menu">&#8942;</div>
+   <div class="menu-wrapper" style="position: relative; display: inline-block;">
+  <div class="menu" (click)="toggleLangMenu()" style="cursor: pointer;">&#8942;</div>
+  
+  <ul class="lang-menu" *ngIf="showLangMenu">
+  <li (click)="goToLang('fr-FR')">Français 🇫🇷</li>
+  <li (click)="goToLang('en-US')">English 🇺🇸</li>
+</ul>
+
+</div>
     <div class="nav-logo">PARFUMS LUXE</div>
   </div>
 
@@ -15,14 +23,14 @@
   </div>
 </div>
  <div class="order-actions">
-      <button (click)="printOrder()" title="Imprimer la commande">🖨 Imprimer</button>
-      <button (click)="downloadInvoice()" title="Télécharger la facture">📥 Télécharger la facture</button>
+      <button (click)="printOrder()" title="Imprimer la commande" i18n>🖨 Imprimer</button>
+      <button (click)="downloadInvoice()" title="Télécharger la facture" i18n>📥 Télécharger la facture</button>
     </div>
 
 <div class="order-details" *ngIf="order" id="order-details-for-pdf">
   
 
-  <h2 class="greeting">Merci, {{ order.userInfo.name }} !</h2>
+  <h2 class="greeting" i18n>Merci, {{ order.userInfo.name }} !</h2>
 
   <div class="container-vertical">
 
@@ -31,17 +39,17 @@
     <div class="left-vertical">
 
       <div class="user-info">
-        <h3>Informations utilisateur</h3>
-        <p><strong>Adresse:</strong> {{ order.userInfo.address }}</p>
-        <p><strong>Téléphone:</strong> {{ order.userInfo.phone }}</p>
-        <p><strong>Paiement:</strong> {{ order.userInfo.paymentMethod === 'cash' ? 'Espèces' : 'Carte' }}</p>
+        <h3 i18n> Informations utilisateur</h3>
+        <p ><strong >Adresse:</strong> {{ order.userInfo.address }}</p>
+        <p><strong >Téléphone:</strong> {{ order.userInfo.phone }}</p>
+        <p><strong >Paiement:</strong> {{ order.userInfo.paymentMethod === 'cash' ? 'Espèces' : 'Carte' }}</p>
       </div>
 
       <div class="order-info">
-        <h3>Détails de la commande</h3>
+        <h3 i18n>Détails de la commande</h3>
         <p><strong>Date:</strong> {{ order.createdAt | date:'short' }}</p>
 
-        <h4>Produits commandés :</h4>
+        <h4 i18n>Produits commandés :</h4>
         <ul class="order-items">
           <li *ngFor="let item of order.items" class="order-item">
             <img [src]="item.imageUrl" alt="{{ item.name }}" class="product-img" />
@@ -51,32 +59,44 @@
             </div>
           </li>
         </ul>
+        <!-- ... dans .left-vertical après le total -->
+<div *ngIf="order.userInfo.withPackaging && getSelectedPackaging() as pack" class="packaging-summary">
+  <h4 i18n>Emballage sélectionné :</h4>
+  <div class="selected-pack">
+    <img [src]="pack.imageUrl" [alt]="pack.name" />
+    <div>
+      <p><strong>{{ pack.name }}</strong></p>
+      <p>{{ pack.price | currency:'MAD':'symbol' }}</p>
+    </div>
+  </div>
+</div>
+
 
         <h4 class="total">Total : {{ order.total | currency:'MAD':'symbol':'1.2-2' }}</h4>
       </div>
 
       <div *ngIf="statusText === 'Commande livrée'" class="delivery-msg">
-        <p>Votre commande est arrivée. Merci ! 😊</p>
+        <p i18n>Votre commande est arrivée. Merci ! 😊</p>
       </div>
 
     </div>
 
     <div class="right-vertical">
-      <h3>Statut de la commande</h3>
+      <h3 i18n>Statut de la commande</h3>
       <div class="status-bar-vertical">
         <div class="status-item" [class.active]="statusText === 'Commande en cours'">
           <img src="assets/images/en-cours.svg" alt="En cours" />
-          <span>En cours</span>
+          <span i18n>En cours</span>
         </div>
         <div class="tube-vertical"></div>
         <div class="status-item" [class.active]="statusText === 'Commande expédiée'">
           <img src="assets/images/expediee.svg" alt="Expédiée" />
-          <span>Expédiée</span>
+          <span i18n>Expédiée</span>
         </div>
         <div class="tube-vertical"></div>
         <div class="status-item" [class.active]="statusText === 'Commande livrée'">
           <img src="assets/images/livree.svg" alt="Livrée" />
-          <span>Livrée</span>
+          <span i18n>Livrée</span>
         </div>
       </div>
     </div>
@@ -85,5 +105,5 @@
 </div>
 
 <ng-template #noOrder>
-  <p>Aucune commande trouvée.</p>
+  <p i18n>Aucune commande trouvée.</p>
 </ng-template>
