@@ -27,6 +27,9 @@ C-Lancer le projet
 1 - Dans un autre terminal  
 2 - Lancer avec commande "ng serve"  
 
+
+---
+
 # page d'Accueil  
 La page d’accueil de l’application PARFUMS LUXE affiche un design élégant et structuré autour d’un menu simple (ABOUT, COLLECTIONS, SHOP, CONTACT). Elle met en valeur la philosophie de la marque via un slogan évocateur et présente trois univers de parfums (Floraux, Boisés, Orientaux), chacun associé à une ambiance et à un bouton “DÉCOUVRIR”. Une section dédiée souligne la qualité artisanale et l’authenticité des parfums, dans une atmosphère raffinée et immersive. 
   
@@ -34,14 +37,14 @@ La page d’accueil de l’application PARFUMS LUXE affiche un design élégant 
 ![image](https://github.com/user-attachments/assets/580b0c37-06cb-48e7-8cd6-71043495b4e8)
 ![image](https://github.com/user-attachments/assets/7bcce635-c910-488c-b888-ff37bdba499f)
 ![image](https://github.com/user-attachments/assets/04e1d8f3-875a-4b83-be1c-33d34369a170)
-
+---
 # page d'Accueil en anglais
 ![image](https://github.com/user-attachments/assets/b6f4d67b-ceef-4363-a837-b6ae5e9b205e)
 ![image](https://github.com/user-attachments/assets/0627fc51-b8ab-490b-8880-d4998a041e4e)
 ![image](https://github.com/user-attachments/assets/b73e1a56-fac3-4e3c-bb35-c9720abc234f)
 ![image](https://github.com/user-attachments/assets/c9c660fc-79c7-4284-ab77-8facd4a6c312)
 
-
+---
 # Page de connexion
 ![image](https://github.com/user-attachments/assets/04b45f74-75ef-4995-b9c9-9260ff4acced)  
 . Une validation côté client garantit que les champs obligatoires (email et mot de passe) sont remplis avant envoi, avec des messages d’erreur contextuels.  
@@ -49,7 +52,7 @@ La page d’accueil de l’application PARFUMS LUXE affiche un design élégant 
 Si le mot de passe n'est pas confirmé, un message d'erreur s'affichera  
 ![image](https://github.com/user-attachments/assets/682d8838-3fb7-4765-8afe-750297e68c72)  
 
-
+---
 # Page des listes des produits 
 la réduction appliquée, un timer indiquant le temps restant de l’offre, une note en étoiles, et des boutons pour voir les détails ou ajouter le produit aux favoris. Des filtres permettent aussi de trier les parfums par catégorie (Promo, Homme, Femme, Enfants).  
 
@@ -58,16 +61,17 @@ l’utilisateur peut rechercher un parfum par nom via une barre dédiée.
 
 ![image](https://github.com/user-attachments/assets/5655f6b7-86ea-4734-9c4f-b6f9e724b598)
 
-
+---
 # Affiichage de choix de language
 ![image](https://github.com/user-attachments/assets/f2691be4-1ae5-4e32-8ef6-d805e327272e)
 
+---
 # Page de produits favoris
 
 Cette interface interactive permet à l'utilisateur de consulter et gérer sa liste de parfums favoris pour sauvegarder ses préférences  
 ![image](https://github.com/user-attachments/assets/9161629a-a67e-4892-9dea-6f0ee6a11726)
 
-
+---
 
 # détails des produits,affichage de la quantité
 La page de détails d’un parfum sur la plateforme PARFUMS LUXE permet à l’utilisateur de consulter toutes les informations essentielles sur un produit. Elle affiche l’image du flacon, le prix actuel avec éventuelle promotion, la quantité disponible, ainsi qu’un compte à rebours indiquant la fin de la réduction.  
@@ -84,7 +88,7 @@ La page recommande d'autres parfums de la même marque ou au style similaire, en
 ![image](https://github.com/user-attachments/assets/6d01e19f-7b01-4439-a2e8-cdc39e0e41a4)
 
 
-
+---
 # Page de panier 
 Cette page permet à l’utilisateur de voir tous les produits ajoutés à son panier, avec l’image, le nom, le format sélectionné, le prix unitaire et la quantité. Il peut modifier la quantité avec des boutons +/− ou supprimer un article. Le sous-total de chaque produit et le total général s’affichent automatiquement. Un bouton en bas permet de passer à la page de commande.  
  
@@ -105,7 +109,7 @@ Formulaire de paiement par cart
 L'utilisateur peut sélectionner un seul emballage parmi les options proposées, chacune affichant clairement son nom et son prix supplémentaire.  
 ![image](https://github.com/user-attachments/assets/b749a626-ae71-45c0-88b2-ad792fa39660)
 
-  
+  ---
 # Page de Suivi des commandes
  Cette page permet à l’utilisateur de suivre l’état de sa commande une fois celle-ci confirmée. Elle affiche de manière claire les produits achetés, le montant total payé ainsi que le mode de paiement sélectionné.  
    
@@ -128,7 +132,7 @@ Il est également possible pour l’utilisateur de télécharger la facture au f
 ![image](https://github.com/user-attachments/assets/0bacf220-0173-4ebd-a44a-1030798e7a59)
 
 
-
+---
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
 
 ## Development server
