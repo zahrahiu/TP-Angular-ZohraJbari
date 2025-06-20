@@ -6,7 +6,7 @@ Angular – Framework principal
 TypeScript – Langage principal  
 HTML/CSS – Pour le design des composants  
 @angular/localize – Pour l'internationalisation (i18n)  
-Node.js / Express.js  
+Node.js / Express.js  – Pour l’API et le serveur
 jsPDF  - génération de PDF
 
 # Instalation
