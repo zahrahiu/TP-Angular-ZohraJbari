@@ -63,6 +63,8 @@ la réduction appliquée, un timer indiquant le temps restant de l’offre, une 
 l’utilisateur peut rechercher un parfum par nom via une barre dédiée.  
 
 ![image](https://github.com/user-attachments/assets/5655f6b7-86ea-4734-9c4f-b6f9e724b598)
+![image](https://github.com/user-attachments/assets/ba2dccde-8eb5-4382-a470-219d4a4a78e3)
+
 
 ---
 # Affiichage de choix de language
