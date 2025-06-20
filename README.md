@@ -19,7 +19,20 @@ jsPDF  - génération de PDF
 $ npm install jspdf  
 $ npm install jspdf html2canvas
  ```
-
+## Internationalisation (i18n)
+-Installation des dépendances
+ ```bash
+ng add @angular/localize
+ ```
+-Localiser l’application
+ ```bash
+ng extract-i18n --output-path src/locale
+ ```
+-Compilation localisée  
+Cette commande génère une version traduite de l'application dans le dossier dist.  
+ ```bash
+ng build --localize
+ ```
 
 #  Lancement
 A-Pour lancer Api-server  
