@@ -89,7 +89,8 @@ La page de détails d’un parfum sur la plateforme PARFUMS LUXE permet à l’u
 La page recommande d'autres parfums de la même marque ou au style similaire, enrichissant ainsi l’expérience de navigation et d’achat.  
   
  ![image](https://github.com/user-attachments/assets/ada7ac8c-7776-4976-9a15-87c58ca26084)
-![image](https://github.com/user-attachments/assets/6d01e19f-7b01-4439-a2e8-cdc39e0e41a4)
+![image](https://github.com/user-attachments/assets/fe681888-13b7-4b39-8b43-03298e8f389e)
+
 
 
 ---
