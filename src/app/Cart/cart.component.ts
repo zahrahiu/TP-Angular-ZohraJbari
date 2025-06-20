@@ -5,6 +5,8 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CartService } from './cart.service';
@@ -48,15 +50,15 @@ export class CartComponent implements OnInit, OnDestroy {
   showOrderForm = false;
 
    packagingOptions: PackagingOption[] = [
-    { id: 'pk40', name: 'Écrin Ruban Rouge', price: 40, imageUrl: '/assets/images/emb1.jpg' },
-    { id: 'pk35', name: 'Boîte Florale',     price: 35, imageUrl: '/assets/images/emb2.jpg' },
-    { id: 'pk27', name: 'Tissu Velours',     price: 27, imageUrl: '/assets/images/emb3.jpg' },
-    { id: 'pk25', name: 'Coffret Luxe Or',   price: 25, imageUrl: '/assets/images/emb4.jpg' },
-    { id: 'pk20', name: 'Coffret Luxe Or',   price: 20, imageUrl: '/assets/images/emb5.jpg' },
-    { id: 'pk30', name: 'Coffret Luxe Or',   price: 30, imageUrl: '/assets/images/emb6.jpg' },
-    { id: 'pk10', name: 'Coffret Luxe Or',   price: 10, imageUrl: '/assets/images/emb7.jpg' },
-    { id: 'pk15', name: 'Coffret Luxe Or',   price: 15, imageUrl: '/assets/images/emb8.jpg' },
-    { id: 'pk05', name: 'Coffret Luxe Or',   price: 5, imageUrl: '/assets/images/emb9.jpg' },
+    { id: 'pk40', name: 'Écrin Ruban Rouge', price: 40, imageUrl: 'assets/images/emb1.jpg' },
+    { id: 'pk35', name: 'Boîte Florale',     price: 35, imageUrl: 'assets/images/emb2.jpg' },
+    { id: 'pk27', name: 'Tissu Velours',     price: 27, imageUrl: 'assets/images/emb3.jpg' },
+    { id: 'pk25', name: 'Coffret Luxe Or',   price: 25, imageUrl: 'assets/images/emb4.jpg' },
+    { id: 'pk20', name: 'Coffret Luxe Or',   price: 20, imageUrl: 'assets/images/emb5.jpg' },
+    { id: 'pk30', name: 'Coffret Luxe Or',   price: 30, imageUrl: 'assets/images/emb6.jpg' },
+    { id: 'pk10', name: 'Coffret Luxe Or',   price: 10, imageUrl: 'assets/images/emb7.jpg' },
+    { id: 'pk15', name: 'Coffret Luxe Or',   price: 15, imageUrl: 'assets/images/emb8.jpg' },
+    { id: 'pk05', name: 'Coffret Luxe Or',   price: 5, imageUrl: 'assets/images/emb9.jpg' },
 
   ];
 
@@ -67,7 +69,10 @@ export class CartComponent implements OnInit, OnDestroy {
     withPackaging: false,
   };
 
-  constructor(private cartSvc: CartService) {}
+  constructor(
+    private cartSvc: CartService,
+    private router: Router
+  ) {}
 
   /* ----------------- life‑cycle ----------------- */
   ngOnInit() {
@@ -140,7 +145,8 @@ export class CartComponent implements OnInit, OnDestroy {
   this.cartSvc.finalizeOrder();
   this.showOrderForm = false;
 
-  window.location.href = '/order-details';
+ 
+  this.router.navigate(['/order-details']);
 }
 
 
