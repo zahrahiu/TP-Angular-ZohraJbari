@@ -14,7 +14,7 @@ A-Pour lancer Api-server
 2-  
 ![image](https://github.com/user-attachments/assets/0b848ac8-94af-4ce3-9d24-5927ac3473c2)  
 3-Lancer avec commande npm start  
-![image](https://github.com/user-attachments/assets/77e664eb-cc1d-4288-a457-8fd8eda03efc)
+![image](https://github.com/user-attachments/assets/77e664eb-cc1d-4288-a457-8fd8eda03efc)  
 B-Lancer le serveur Angular  
 1- Dans un autre terminal  
 2-  Lancer avec commande "node server.js"
