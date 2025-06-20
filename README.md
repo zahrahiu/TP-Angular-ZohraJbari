@@ -23,7 +23,8 @@ C-Lancer le projet
 1 - Dans un autre terminal  
 2 - Lancer avec commande "ng serve"  
 
-# page d'Accueil
+# page d'Accueil  
+La page d’accueil de l’application PARFUMS LUXE affiche un design élégant et structuré autour d’un menu simple (ABOUT, COLLECTIONS, SHOP, CONTACT). Elle met en valeur la philosophie de la marque via un slogan évocateur et présente trois univers de parfums (Floraux, Boisés, Orientaux), chacun associé à une ambiance et à un bouton “DÉCOUVRIR”. Une section dédiée souligne la qualité artisanale et l’authenticité des parfums, dans une atmosphère raffinée et immersive.  
 ![image](https://github.com/user-attachments/assets/9adcc9f1-276f-4743-a5d3-8aacd0ad0e42)
 ![image](https://github.com/user-attachments/assets/580b0c37-06cb-48e7-8cd6-71043495b4e8)
 ![image](https://github.com/user-attachments/assets/7bcce635-c910-488c-b888-ff37bdba499f)
@@ -37,11 +38,11 @@ C-Lancer le projet
 
 
 # Page de connexion
-![image](https://github.com/user-attachments/assets/04b45f74-75ef-4995-b9c9-9260ff4acced)
-. Une validation côté client garantit que les champs obligatoires (email et mot de passe) sont remplis avant envoi, avec des messages d’erreur contextuels.
-![image](https://github.com/user-attachments/assets/451f0bd4-4145-42d7-8cb6-59f3e837cfbd)
-Si le mot de passe n'est pas confirmé, un message d'erreur s'affichera
-![image](https://github.com/user-attachments/assets/682d8838-3fb7-4765-8afe-750297e68c72)
+![image](https://github.com/user-attachments/assets/04b45f74-75ef-4995-b9c9-9260ff4acced)  
+. Une validation côté client garantit que les champs obligatoires (email et mot de passe) sont remplis avant envoi, avec des messages d’erreur contextuels.  
+![image](https://github.com/user-attachments/assets/451f0bd4-4145-42d7-8cb6-59f3e837cfbd)  
+Si le mot de passe n'est pas confirmé, un message d'erreur s'affichera  
+![image](https://github.com/user-attachments/assets/682d8838-3fb7-4765-8afe-750297e68c72)  
 
 
 # Page des listes des produits 
