@@ -15,10 +15,9 @@ $ npm install jspdf html2canvas
 A-Pour lancer Api-server  
   
 1-Ouvrez terminal  
-2-  
-![image](https://github.com/user-attachments/assets/0b848ac8-94af-4ce3-9d24-5927ac3473c2)  
-3-Lancer avec commande npm start  
-![image](https://github.com/user-attachments/assets/77e664eb-cc1d-4288-a457-8fd8eda03efc)  
+2- Lancer avec commande node index.js
+![image](https://github.com/user-attachments/assets/ca5d3933-2854-4fe1-9641-d9dedf9f741a)
+
 B-Lancer le serveur Angular  
 1- Dans un autre terminal  
 2-  Lancer avec commande "node server.js"
