@@ -37,6 +37,7 @@ La page d’accueil de l’application PARFUMS LUXE affiche un design élégant 
 ![image](https://github.com/user-attachments/assets/580b0c37-06cb-48e7-8cd6-71043495b4e8)
 ![image](https://github.com/user-attachments/assets/7bcce635-c910-488c-b888-ff37bdba499f)
 ![image](https://github.com/user-attachments/assets/04e1d8f3-875a-4b83-be1c-33d34369a170)
+
 ---
 # page d'Accueil en anglais
 ![image](https://github.com/user-attachments/assets/b6f4d67b-ceef-4363-a837-b6ae5e9b205e)
