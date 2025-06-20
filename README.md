@@ -3,10 +3,14 @@
 Parfums Luxe est une application Angular qui permet de visualiser un catalogue de parfums (liste, détails) et de gérer un panier. Elle utilise une API Express qui fournit les données au format JSON, ainsi qu’un serveur Node (server.js) pour héberger le projet ou pour un déploiement en production.
 # Instalation
  ## Installer les dépendances du workspace  
-$ npm install  
+ ```bash
+ npm install
+ ```
 ## jsPDF  
+ ```bash
 $ npm install jspdf  
-$ npm install jspdf html2canvas  
+$ npm install jspdf html2canvas
+ ```
 #  Lancement
 A-Pour lancer Api-server  
   
