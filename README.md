@@ -38,15 +38,24 @@ C-Lancer le projet
 
 # Page de connexion
 ![image](https://github.com/user-attachments/assets/04b45f74-75ef-4995-b9c9-9260ff4acced)
+. Une validation côté client garantit que les champs obligatoires (email et mot de passe) sont remplis avant envoi, avec des messages d’erreur contextuels.
+![image](https://github.com/user-attachments/assets/451f0bd4-4145-42d7-8cb6-59f3e837cfbd)
+Si le mot de passe n'est pas confirmé, un message d'erreur s'affichera
+![image](https://github.com/user-attachments/assets/682d8838-3fb7-4765-8afe-750297e68c72)
 
 
 # Page des listes des produits 
-![image](https://github.com/user-attachments/assets/c2a01ca6-ce8a-4068-b3dd-84f860e61308)
-![image](https://github.com/user-attachments/assets/e2b719ec-2283-46e3-b3d3-05f09478563e)
-![image](https://github.com/user-attachments/assets/e61d47e3-d236-4a86-8bbe-bd07e93a238e)
+![image](https://github.com/user-attachments/assets/b9eaae2a-c9ff-4bf2-8629-2c6461b53f25)
+
+# Affiichage de choix de language
+![image](https://github.com/user-attachments/assets/f2691be4-1ae5-4e32-8ef6-d805e327272e)
+
+
 
 # détails des produits,affichage de la quantité
-![image](https://github.com/user-attachments/assets/df9cfd2c-946b-4415-ac9e-362100c8be5d)
+
+![image](https://github.com/user-attachments/assets/6511bcdf-7cf5-44e0-9372-a64186cdb985)
+![image](https://github.com/user-attachments/assets/d7e5ef10-f84b-4422-8d4d-b43128fafa71)
 
 
 # Page de panier
