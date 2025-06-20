@@ -26,6 +26,8 @@ B-Lancer le serveur Angular
 C-Lancer le projet  
 1 - Dans un autre terminal  
 2 - Lancer avec commande "ng serve"  
+![image](https://github.com/user-attachments/assets/c0676dbb-8271-4f65-86be-c7498dea0d2c)
+
 
 
 ---
