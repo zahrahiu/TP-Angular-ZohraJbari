@@ -94,7 +94,7 @@ description: "J’adore de Dior incarne la beauté radieuse et la féminité abs
 
     hoverImageUrl: "assets/images/la vie est belle package.png",
     category: "femme",
-    genre: "floral gourmand",
+    genre: "aromatique fougère",
     marque: "Lancôme",
     price: 2300,
     quantity: 7,
@@ -136,7 +136,7 @@ description: "J’adore de Dior incarne la beauté radieuse et la féminité abs
 
     hoverImageUrl: "assets/images/So scandal package.png",
     category: "femme",
-    genre: "floral tubéreuse",
+    genre: "aromatique fougère",
     marque: "Jean Paul Gaultier",
     price: 2100,
     quantity: 4,
@@ -228,7 +228,7 @@ app.post("/api/signin", (req, res) => {
   }
 });
 
-const port = 3001;
+const port = 3000;
 app.listen(port, () => console.log(`API Server listening on port ${port}`));
 
 
