@@ -58,6 +58,11 @@ l’utilisateur peut rechercher un parfum par nom via une barre dédiée.
 # Affiichage de choix de language
 ![image](https://github.com/user-attachments/assets/f2691be4-1ae5-4e32-8ef6-d805e327272e)
 
+# Page de produits favoris
+
+Cette interface interactive permet à l'utilisateur de consulter et gérer sa liste de parfums favoris pour sauvegarder ses préférences  
+![image](https://github.com/user-attachments/assets/9161629a-a67e-4892-9dea-6f0ee6a11726)
+
 
 
 # détails des produits,affichage de la quantité
@@ -76,11 +81,47 @@ La page recommande d'autres parfums de la même marque ou au style similaire, en
 
 
 
-# Page de panier
-![image](https://github.com/user-attachments/assets/f7f5e01e-d0fc-44f7-a796-7fae883983ae)
+# Page de panier 
+Cette page permet à l’utilisateur de voir tous les produits ajoutés à son panier, avec l’image, le nom, le format sélectionné, le prix unitaire et la quantité. Il peut modifier la quantité avec des boutons +/− ou supprimer un article. Le sous-total de chaque produit et le total général s’affichent automatiquement. Un bouton en bas permet de passer à la page de commande.  
+ 
+![image](https://github.com/user-attachments/assets/43b84e3f-33c5-409b-b3b1-2854cfb98fab)  
+
+Lorsque la quantité sélectionnée dépasse le stock disponible, le système affiche immédiatement un message d'erreur rouge 'Stock insuffisant' pour prévenir l'utilisateur et empêcher l'ajout au panier.  
+
+![image](https://github.com/user-attachments/assets/903184e2-afd8-4850-a892-820be614ffd8)
+
+Sur cette page, l’utilisateur saisit ses informations personnelles : nom, numéro de téléphone et adresse de livraison. Il choisit le mode de paiement (en espèces ou par carte) et peut sélectionner un emballage cadeau avec image et prix. Le bouton final permet de confirmer la commande avec le montant total clairement affiché. 
+
+![image](https://github.com/user-attachments/assets/94036714-370f-470d-83be-20d411927d7d)
+
+Formulaire de paiement par cart   
+
+![image](https://github.com/user-attachments/assets/49e9ecfe-a2e9-42b4-b0af-f24a473a422d)  
+
+L'utilisateur peut sélectionner un seul emballage parmi les options proposées, chacune affichant clairement son nom et son prix supplémentaire.  
+![image](https://github.com/user-attachments/assets/b749a626-ae71-45c0-88b2-ad792fa39660)
+
+  
+# Page de Suivi des commandes
+ Cette page permet à l’utilisateur de suivre l’état de sa commande une fois celle-ci confirmée. Elle affiche de manière claire les produits achetés, le montant total payé ainsi que le mode de paiement sélectionné.  
+   
+ ![image](https://github.com/user-attachments/assets/d68f4638-68e8-4103-95cf-91cafb81d750)
+
+![image](https://github.com/user-attachments/assets/5550217a-7e46-4972-ac72-899c33176787)
+
+Sur le côté droit de la page, une timeline verticale permet à l’utilisateur de suivre l’avancement de sa commande. Elle affiche les différentes étapes du traitement : "En cours", "Expédiée", et "Livrée", avec un indicateur visuel sur l’étape atteinte. Lorsque la commande est livrée, cette dernière étape est mise en surbrillance avec une icône entourée d’un cercle vert.
+
+![image](https://github.com/user-attachments/assets/0115dab4-f68c-4407-a90f-7ff15473c342)
+
+
+un message de remerciement apparaît en bas de page pour informer le client que sa commande est bien arrivée  
+![image](https://github.com/user-attachments/assets/66922999-99b5-4e6d-9505-d8209963d0af)
+
+Il est également possible pour l’utilisateur de télécharger la facture au format PDF ou d’imprimer directement les détails de la commande grâce à des boutons prévus à cet effet  
 
 
 
+![image](https://github.com/user-attachments/assets/0bacf220-0173-4ebd-a44a-1030798e7a59)
 
 
 
