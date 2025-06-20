@@ -24,7 +24,8 @@ C-Lancer le projet
 2 - Lancer avec commande "ng serve"  
 
 # page d'Accueil  
-La page d’accueil de l’application PARFUMS LUXE affiche un design élégant et structuré autour d’un menu simple (ABOUT, COLLECTIONS, SHOP, CONTACT). Elle met en valeur la philosophie de la marque via un slogan évocateur et présente trois univers de parfums (Floraux, Boisés, Orientaux), chacun associé à une ambiance et à un bouton “DÉCOUVRIR”. Une section dédiée souligne la qualité artisanale et l’authenticité des parfums, dans une atmosphère raffinée et immersive.  
+La page d’accueil de l’application PARFUMS LUXE affiche un design élégant et structuré autour d’un menu simple (ABOUT, COLLECTIONS, SHOP, CONTACT). Elle met en valeur la philosophie de la marque via un slogan évocateur et présente trois univers de parfums (Floraux, Boisés, Orientaux), chacun associé à une ambiance et à un bouton “DÉCOUVRIR”. Une section dédiée souligne la qualité artisanale et l’authenticité des parfums, dans une atmosphère raffinée et immersive. 
+  
 ![image](https://github.com/user-attachments/assets/9adcc9f1-276f-4743-a5d3-8aacd0ad0e42)
 ![image](https://github.com/user-attachments/assets/580b0c37-06cb-48e7-8cd6-71043495b4e8)
 ![image](https://github.com/user-attachments/assets/7bcce635-c910-488c-b888-ff37bdba499f)
@@ -46,7 +47,13 @@ Si le mot de passe n'est pas confirmé, un message d'erreur s'affichera
 
 
 # Page des listes des produits 
-![image](https://github.com/user-attachments/assets/b9eaae2a-c9ff-4bf2-8629-2c6461b53f25)
+la réduction appliquée, un timer indiquant le temps restant de l’offre, une note en étoiles, et des boutons pour voir les détails ou ajouter le produit aux favoris. Des filtres permettent aussi de trier les parfums par catégorie (Promo, Homme, Femme, Enfants).  
+
+![image](https://github.com/user-attachments/assets/b9eaae2a-c9ff-4bf2-8629-2c6461b53f25)  
+l’utilisateur peut rechercher un parfum par nom via une barre dédiée.  
+
+![image](https://github.com/user-attachments/assets/5655f6b7-86ea-4734-9c4f-b6f9e724b598)
+
 
 # Affiichage de choix de language
 ![image](https://github.com/user-attachments/assets/f2691be4-1ae5-4e32-8ef6-d805e327272e)
@@ -54,9 +61,19 @@ Si le mot de passe n'est pas confirmé, un message d'erreur s'affichera
 
 
 # détails des produits,affichage de la quantité
+La page de détails d’un parfum sur la plateforme PARFUMS LUXE permet à l’utilisateur de consulter toutes les informations essentielles sur un produit. Elle affiche l’image du flacon, le prix actuel avec éventuelle promotion, la quantité disponible, ainsi qu’un compte à rebours indiquant la fin de la réduction.  
 
 ![image](https://github.com/user-attachments/assets/6511bcdf-7cf5-44e0-9372-a64186cdb985)
+
+ L’utilisateur peut lire une description complète du parfum, connaître ses ingrédients (comme le poivre rose, le jasmin ou le musc blanc), noter le produit, l’ajouter aux favoris ou au panier.    
+   
 ![image](https://github.com/user-attachments/assets/d7e5ef10-f84b-4422-8d4d-b43128fafa71)
+
+La page recommande d'autres parfums de la même marque ou au style similaire, enrichissant ainsi l’expérience de navigation et d’achat.  
+  
+ ![image](https://github.com/user-attachments/assets/ada7ac8c-7776-4976-9a15-87c58ca26084)
+![image](https://github.com/user-attachments/assets/6d01e19f-7b01-4439-a2e8-cdc39e0e41a4)
+
 
 
 # Page de panier
